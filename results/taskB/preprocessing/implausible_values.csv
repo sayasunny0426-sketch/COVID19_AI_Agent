@@ -1,4 +1,4 @@
-column,subject_id,value,plausible_low,plausible_high,action,reason
+﻿column,subject_id,value,plausible_low,plausible_high,action,reason
 9279-1_Respiratory rate,A792369,88.0,4.0,60.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する
 9279-1_Respiratory rate,A142433,95.0,4.0,60.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する
 9279-1_Respiratory rate,A596625,67.0,4.0,60.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する

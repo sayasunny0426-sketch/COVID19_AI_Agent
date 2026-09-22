@@ -1,4 +1,4 @@
-arm,description,indicator_in_model,n_variables,n_coefficients,selected_variables,comorbidity_retained,cv_mean_auroc,cv_sd_auroc,val_auroc,val_auprc,val_brier
+﻿arm,description,indicator_in_model,n_variables,n_coefficients,selected_variables,comorbidity_retained,cv_mean_auroc,cv_sd_auroc,val_auroc,val_auprc,val_brier
 A_forced_in,指示変数を lymph 変数群に含め、選択の対象外とする（D-070 の規則どおり）,True,10,12,"age, sex, spo2, sbp, crp, lymph, ddimer, lactate, egfr, troponin",False,0.889049,0.037311,0.895072,0.634584,0.116927
 B_selectable,指示変数を独立した選択単位とし、AIC が落とせるようにする,False,10,11,"age, sex, spo2, sbp, crp, lymph, ddimer, lactate, egfr, troponin",False,0.8894,0.038188,0.892952,0.652742,0.117247
 C_no_indicator,欠測指示変数を一切作らない,False,10,11,"age, sex, spo2, sbp, crp, lymph, ddimer, lactate, egfr, troponin",False,0.8894,0.038188,0.892952,0.652742,0.117247

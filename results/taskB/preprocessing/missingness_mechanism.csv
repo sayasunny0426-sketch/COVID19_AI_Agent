@@ -1,4 +1,4 @@
-variable,domain,missing_rate_train,missing_rate_inpatient,missing_rate_ER,share_of_missing_that_is_ER,all_n_missing,all_n_observed,all_death_rate_missing,all_death_rate_observed,all_risk_difference,all_odds_ratio_missing_vs_observed,all_fisher_p,inpat_n_missing,inpat_n_observed,inpat_death_rate_missing,inpat_death_rate_observed,inpat_risk_difference,inpat_odds_ratio_missing_vs_observed,inpat_fisher_p
+﻿variable,domain,missing_rate_train,missing_rate_inpatient,missing_rate_ER,share_of_missing_that_is_ER,all_n_missing,all_n_observed,all_death_rate_missing,all_death_rate_observed,all_risk_difference,all_odds_ratio_missing_vs_observed,all_fisher_p,inpat_n_missing,inpat_n_observed,inpat_death_rate_missing,inpat_death_rate_observed,inpat_risk_difference,inpat_odds_ratio_missing_vs_observed,inpat_fisher_p
 sex,人口統計,0.0186,0.025,0.0,0.0,19,1002,0.9474,0.1168,0.8306,136.154,9.161e-16,19,740,0.9474,0.1568,0.7906,96.828,1.667e-13
 spo2,呼吸,0.0029,0.0026,0.0038,0.3333,3,1018,0.0,0.1326,-0.1326,0.0,1.000e+00,2,757,0.0,0.177,-0.177,0.0,1.000e+00
 rr,呼吸,0.002,0.0,0.0076,1.0,2,1019,0.0,0.1325,-0.1325,0.0,1.000e+00,0,759,,0.1765,,,1.000e+00

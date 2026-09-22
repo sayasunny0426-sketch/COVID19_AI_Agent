@@ -1,0 +1,38 @@
+{
+  "generated": "2026-09-23T00:51:08+09:00",
+  "script": "34_taskB_harmonized_ece.py",
+  "purpose": "post hoc descriptive comparison of calibration under one common definition; the official Test metrics of both pipelines are unchanged",
+  "definitions_found": {
+    "human_guided": {
+      "n_bins": 10,
+      "scheme": "equal-width over [0,1]",
+      "evidence": "Notebook/TaskB_03_ClinicalModeling.ipynb cell 10: def expected_calibration_error(y_true, y_prob, n_bins=10) with bins = np.linspace(0.0, 1.0, n_bins + 1)"
+    },
+    "ai_agent": {
+      "n_bins": 5,
+      "scheme": "equal-count (quantile)",
+      "evidence": "scripts/27_taskB_select_and_freeze.py and scripts/30_taskB_test_evaluation.py, calibration_table(): edges = np.quantile(p, np.linspace(0, 1, n_bins + 1)) with n_bins = 5"
+    },
+    "identical": false,
+    "aggregation_identical": "both weight each bin by its share of patients and sum |mean predicted - observed rate|"
+  },
+  "harmonized_definition": {
+    "n_bins": 10,
+    "scheme": "equal-width over [0,1]",
+    "rationale": "matches the current manuscript"
+  },
+  "reproduction_check": {
+    "all_reproduced": true,
+    "failures": []
+  },
+  "not_used_for": [
+    "model selection",
+    "retraining",
+    "threshold change",
+    "any change to the official Test metrics"
+  ],
+  "outputs": [
+    "results/taskB/comparison/harmonized_ece.csv",
+    "results/taskB/comparison/harmonized_ece_bins.csv"
+  ]
+}

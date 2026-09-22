@@ -1,4 +1,4 @@
-subject_id,true_label,prob_clinical_lr,pred_clinical_lr,prob_clinical_xgboost,pred_clinical_xgboost,prob_clinical_mlp,pred_clinical_mlp,prob_clinical_xgboost_native,pred_clinical_xgboost_native
+﻿subject_id,true_label,prob_clinical_lr,pred_clinical_lr,prob_clinical_xgboost,pred_clinical_xgboost,prob_clinical_mlp,pred_clinical_mlp,prob_clinical_xgboost_native,pred_clinical_xgboost_native
 A507869,1,0.9572005948346834,1,0.6270103,1,0.9444659,1,0.6364857,1
 A590353,0,0.1703876771913313,0,0.08130273,0,0.48296013,0,0.10070204,1
 A292777,1,0.7143035941796406,1,0.325678,1,0.7547602,1,0.26472795,1

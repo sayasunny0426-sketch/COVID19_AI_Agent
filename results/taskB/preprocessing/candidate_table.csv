@@ -1,4 +1,4 @@
-variable,raw_column,domain,kind,estimated_parameters,missing_rate_train,n_unique_train,levels_or_example,rationale,evidence,evidence_source,caveat,dataset_used_for_decision,status
+﻿variable,raw_column,domain,kind,estimated_parameters,missing_rate_train,n_unique_train,levels_or_example,rationale,evidence,evidence_source,caveat,dataset_used_for_decision,status
 age,age.splits,人口統計,categorical,2,0.0,3,"(59,74]; (74,90]; [18,59]",年齢は COVID-19 院内死亡の最も強い予後因子で、ほぼすべての既存スコアに含まれる,"4C Mortality Score, CURB-65, COVID-GRAM, OpenSAFELY",established risk score,3 階級のみで 90 歳超は最上位階級に統合。既存スコアの年齢区分を再現できない（L-4）,Training（欠測率のみ）／根拠は臨床知識・文献,provisional（Test 使用前は変更可）
 sex,gender_concept_name,人口統計,binary,1,0.0186,2,FEMALE; MALE,男性で死亡リスクが高いことが一貫して報告されている,"4C Mortality Score, OpenSAFELY",established risk score,匿名化のため一部で欠測（Train 1.9%）,Training（欠測率のみ）／根拠は臨床知識・文献,provisional（Test 使用前は変更可）
 spo2,59408-5_Oxygen saturation in Arterial blood by Pulse oximetry,呼吸,continuous,1,0.0029,34,100; 61; 64; 67; 68; 71,低酸素血症は COVID-19 重症度の中心的指標で、呼吸不全の直接の所見,"4C Mortality Score, NEWS2",established risk score,酸素投与の有無が記録されておらず、同じ値でも臨床的意味が異なりうる（Q-B7）,Training（欠測率のみ）／根拠は臨床知識・文献,provisional（Test 使用前は変更可）

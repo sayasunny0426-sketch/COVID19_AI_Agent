@@ -1,4 +1,4 @@
-column,role,reason,dict_type,chart_abstracted,n_unique_train,missing_rate_train,description
+﻿column,role,reason,dict_type,chart_abstracted,n_unique_train,missing_rate_train,description
 to_patient_id,ADMIN,患者 ID（管理列）,string,False,1021,0.0,TCIA patient identifier
 covid19_statuses,ADMIN,Training set で positive のみの定数列（情報量ゼロ）,string,False,1,0.0,COVID-19 status as determined through either positive PCR test or outside documentation reviewed by clinician
 last.status,EXCLUDE_post_T0,アウトカムそのもの（院内死亡）,string,False,2,0.0,For the selected visit the status of the patient

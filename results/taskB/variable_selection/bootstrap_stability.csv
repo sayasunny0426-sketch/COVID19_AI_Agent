@@ -1,4 +1,4 @@
-variable,in_primary_selection,bootstrap_retention_rate,n_retained,n_resamples
+﻿variable,in_primary_selection,bootstrap_retention_rate,n_retained,n_resamples
 age,True,1.0,500,500
 lactate,True,0.99,495,500
 spo2,True,0.988,494,500

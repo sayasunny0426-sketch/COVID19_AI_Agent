@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-23T00:36:31+09:00",
+  "generated": "2026-09-23T00:58:23+09:00",
   "script": "31_taskB_prepare_commit.py",
-  "files_copied": 98,
+  "files_copied": 109,
   "copied": [
     "src/covid_mortality/features/taskB_clinical.py",
     "src/covid_mortality/features/taskB_preprocess.py",
@@ -19,9 +19,13 @@
     "scripts/30_taskB_test_evaluation.py",
     "scripts/31_taskB_prepare_commit.py",
     "scripts/32_taskB_post_test_qc.py",
+    "scripts/33_taskB_human_vs_agent_comparison.py",
+    "scripts/34_taskB_harmonized_ece.py",
+    "src/covid_mortality/evaluation/metrics.py",
     "docs/decision_log.md",
     "docs/change_log.csv",
     "docs/open_questions.md",
+    "docs/taskB_human_vs_ai_agent_comparison.md",
     "results/taskB/README.md",
     "results/comparison/README.md",
     "results/comparison/delong_plan.json",
@@ -100,10 +104,19 @@
     "results/taskB/evaluation/test_roc_points_mlp.csv",
     "results/taskB/evaluation/test_roc_points_xgb.csv",
     "results/taskB/evaluation/test_roc_points_xgb_native.csv",
-    "results/taskB/evaluation/test_run_meta.json"
+    "results/taskB/evaluation/test_run_meta.json",
+    "results/taskB/comparison/comparison_meta.json",
+    "results/taskB/comparison/harmonized_ece.csv",
+    "results/taskB/comparison/harmonized_ece_bins.csv",
+    "results/taskB/comparison/harmonized_ece_meta.json",
+    "results/taskB/comparison/human_vs_ai_agent_model_spec.csv",
+    "results/taskB/comparison/human_vs_ai_agent_performance.csv",
+    "results/taskB/comparison/source_discrepancies.csv"
   ],
   "redactions": {
     "scripts/31_taskB_prepare_commit.py": 1,
+    "scripts/33_taskB_human_vs_agent_comparison.py": 1,
+    "scripts/34_taskB_harmonized_ece.py": 1,
     "docs/decision_log.md": 2
   },
   "stale_removed": [],

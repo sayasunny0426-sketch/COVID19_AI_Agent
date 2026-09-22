@@ -158,3 +158,51 @@ def bootstrap_ci(y_true, y_score, metric=roc_auc, n_boot: int = 2000, alpha: flo
             "ci_low": float(np.percentile(stats, 100 * alpha / 2)),
             "ci_high": float(np.percentile(stats, 100 * (1 - alpha / 2))),
             "n_boot": int(len(stats)), "stratified": bool(stratified), "seed": int(seed)}
+
+
+def calibration_bins(y_true, y_prob, n_bins: int = 10,
+                     scheme: str = "equal_width") -> list[dict]:
+    """Bin predicted probabilities and report the gap between prediction and outcome.
+
+    `scheme` must be stated, because the two are not interchangeable:
+
+      "equal_width"  edges at np.linspace(0, 1, n_bins + 1). Bins cover the probability
+                     scale evenly, so a bin can hold very few patients -- or none, in which
+                     case it contributes nothing.
+      "equal_count"  edges at the quantiles of y_prob. Every bin holds roughly the same
+                     number of patients, but the bins are narrow where predictions cluster.
+
+    Reporting an ECE without its scheme and bin count makes it incomparable across studies.
+    """
+    y_true, y_prob = _check(y_true, y_prob)
+    if scheme == "equal_width":
+        edges = np.linspace(0.0, 1.0, n_bins + 1)
+    elif scheme == "equal_count":
+        edges = np.quantile(y_prob, np.linspace(0, 1, n_bins + 1))
+        edges[0], edges[-1] = -np.inf, np.inf
+    else:
+        raise ValueError(f"unknown binning scheme: {scheme!r}")
+    ids = np.digitize(y_prob, edges[1:-1], right=True)
+    out = []
+    for b in range(n_bins):
+        m = ids == b
+        if not m.sum():
+            continue
+        out.append({"bin": b, "n": int(m.sum()),
+                    "mean_predicted": float(y_prob[m].mean()),
+                    "observed_rate": float(y_true[m].mean()),
+                    "events": int(y_true[m].sum())})
+    return out
+
+
+def expected_calibration_error(y_true, y_prob, n_bins: int = 10,
+                               scheme: str = "equal_width") -> float:
+    """Sum over bins of (bin share) x |mean predicted - observed rate|.
+
+    The aggregation is the standard one; the result depends on `n_bins` and `scheme`, which
+    is why both are explicit arguments with no silent default change.
+    """
+    y_true, y_prob = _check(y_true, y_prob)
+    bins = calibration_bins(y_true, y_prob, n_bins=n_bins, scheme=scheme)
+    n = len(y_true)
+    return float(sum(b["n"] / n * abs(b["mean_predicted"] - b["observed_rate"]) for b in bins))

@@ -1,0 +1,20 @@
+{
+  "generated": "2026-09-23T00:54:22+09:00",
+  "script": "33_taskB_human_vs_agent_comparison.py",
+  "nature": "post hoc descriptive comparison; no refit, no retuning, no statistical test",
+  "human_guided_sources": [
+    "02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv",
+    "02_TaskB_臨床データ/04_Modeling/TaskB_LR_8条件_Validation比較.csv",
+    "02_TaskB_臨床データ/04_Modeling/TaskB_XGBoost_Stage2_16条件比較.csv",
+    "02_TaskB_臨床データ/04_Modeling/TaskB_MLP_限定再評価_4条件比較.csv",
+    "02_TaskB_臨床データ/04_Modeling/TaskB_LR_bestmodel_係数_OR.csv",
+    "04_全モデル比較・統計解析/全5モデル_最終Test評価比較.csv"
+  ],
+  "ai_agent_sources": [
+    "results/taskB/modeling/final_selection_taskB.json",
+    "results/taskB/modeling/validation_comparison.csv",
+    "results/taskB/evaluation/test_metrics_table.csv"
+  ],
+  "discrepancies_found": 2,
+  "paired_delong_run": false
+}

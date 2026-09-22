@@ -1,4 +1,4 @@
-stage,condition,subsample,colsample_bytree,scale_pos_weight,reg_lambda,max_depth,learning_rate,min_child_weight,cv_mean_auroc,cv_sd_auroc,cv_mean_auprc,val_auroc,val_auprc,seconds
+﻿stage,condition,subsample,colsample_bytree,scale_pos_weight,reg_lambda,max_depth,learning_rate,min_child_weight,cv_mean_auroc,cv_sd_auroc,cv_mean_auprc,val_auroc,val_auprc,seconds
 2,max_depth=3_learning_rate=0.03_min_child_weight=10_subsample=1.0_colsample_bytree=0.8_scale_pos_weight=1.0_reg_lambda=10.0,1.0,0.8,1.0,10.0,3,0.03,10,0.884318,0.038048,0.571145,0.878643,0.593184,7.6
 1,subsample=0.8_colsample_bytree=0.8_scale_pos_weight=1.0_reg_lambda=1.0_max_depth=3_learning_rate=0.03_min_child_weight=10,0.8,0.8,1.0,1.0,3,0.03,10,0.883665,0.03715,0.567962,0.883413,0.559201,7.2
 2,max_depth=3_learning_rate=0.03_min_child_weight=10_subsample=0.8_colsample_bytree=0.8_scale_pos_weight=1.0_reg_lambda=1.0,0.8,0.8,1.0,1.0,3,0.03,10,0.883665,0.03715,0.567962,0.883413,0.559201,7.4

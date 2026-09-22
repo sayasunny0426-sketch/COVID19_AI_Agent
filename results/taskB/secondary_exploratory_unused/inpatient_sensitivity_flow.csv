@@ -1,4 +1,4 @@
-step,n,deaths,note
+﻿step,n,deaths,note
 1. 臨床ファイルの全患者,1384,,患者データファイル.csv（ID 重複なし）
 2. うち visit_concept_name = Inpatient Visit,1025,,受診形態の内訳（臨床ファイル全体）
 2. うち visit_concept_name = Emergency Room Visit,357,,受診形態の内訳（臨床ファイル全体）

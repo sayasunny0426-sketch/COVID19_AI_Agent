@@ -1,0 +1,85 @@
+﻿model,pipeline,split,metric,value,source
+LR,Human-guided,Test,roc_auc,0.941176,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,roc_auc,0.946476,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,roc_auc_ci_low,0.887652,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,roc_auc_ci_low,0.895601,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,roc_auc_ci_high,0.983042,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,roc_auc_ci_high,0.984632,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,pr_auc,0.800251,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,pr_auc,0.770898,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,brier,0.057177,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,brier,0.097765,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,ece,0.041302,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,ece,0.161595,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,threshold,0.128797,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,threshold,0.496979,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,sensitivity,0.823529,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,sensitivity,0.8235,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,specificity,0.810811,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+LR,AI-Agent,Test,specificity,0.8649,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+LR,Human-guided,Test,ece_harmonized_10_equal_width,0.041302,Harmonized post hoc recomputation: results/taskB/comparison/harmonized_ece.csv
+LR,AI-Agent,Test,ece_harmonized_10_equal_width,0.161595,Harmonized post hoc recomputation: results/taskB/comparison/harmonized_ece.csv
+LR,Human-guided,Validation,roc_auc,0.896131,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_LR_8条件_Validation比較.csv
+LR,AI-Agent,Validation,roc_auc,0.895072,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+LR,Human-guided,Validation,pr_auc,0.600921,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_LR_8条件_Validation比較.csv
+LR,AI-Agent,Validation,pr_auc,0.634584,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+LR,Human-guided,Validation,brier,0.079211,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_LR_8条件_Validation比較.csv
+LR,AI-Agent,Validation,brier,0.116927,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+LR,Human-guided,Validation,ece,0.075881,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_LR_8条件_Validation比較.csv
+LR,AI-Agent,Validation,ece,0.163569,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+XGBoost,Human-guided,Test,roc_auc,0.935877,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,roc_auc,0.928988,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,roc_auc_ci_low,0.876524,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,roc_auc_ci_low,0.873847,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,roc_auc_ci_high,0.980392,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,roc_auc_ci_high,0.970866,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,pr_auc,0.718188,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,pr_auc,0.657762,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,brier,0.0678,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,brier,0.07321,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,ece,0.090264,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,ece,0.022064,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,threshold,0.131138,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,threshold,0.129078,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,sensitivity,0.941176,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,sensitivity,0.9412,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,specificity,0.783784,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+XGBoost,AI-Agent,Test,specificity,0.8198,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+XGBoost,Human-guided,Test,ece_harmonized_10_equal_width,0.090264,Harmonized post hoc recomputation: results/taskB/comparison/harmonized_ece.csv
+XGBoost,AI-Agent,Test,ece_harmonized_10_equal_width,0.074899,Harmonized post hoc recomputation: results/taskB/comparison/harmonized_ece.csv
+XGBoost,Human-guided,Validation,roc_auc,0.885533,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_XGBoost_Stage2_16条件比較.csv
+XGBoost,AI-Agent,Validation,roc_auc,0.880763,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+XGBoost,Human-guided,Validation,pr_auc,0.53938,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_XGBoost_Stage2_16条件比較.csv
+XGBoost,AI-Agent,Validation,pr_auc,0.549404,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+XGBoost,Human-guided,Validation,brier,0.085551,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_XGBoost_Stage2_16条件比較.csv
+XGBoost,AI-Agent,Validation,brier,0.085876,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+XGBoost,Human-guided,Validation,ece,0.063749,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_XGBoost_Stage2_16条件比較.csv
+XGBoost,AI-Agent,Validation,ece,0.039872,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+MLP,Human-guided,Test,roc_auc,0.879703,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,roc_auc,0.924218,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,roc_auc_ci_low,0.767886,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,roc_auc_ci_low,0.859565,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,roc_auc_ci_high,0.962374,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,roc_auc_ci_high,0.977213,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,pr_auc,0.688972,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,pr_auc,0.74765,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,brier,0.168616,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,brier,0.160305,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,ece,0.308812,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,ece,0.29672,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,threshold,0.494785,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,threshold,0.554057,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,sensitivity,0.764706,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,sensitivity,0.7647,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,specificity,0.810811,Human-guided final result artifact: 02_TaskB_臨床データ/05_Evaluation/TaskB_3モデル_最終Test評価比較.csv
+MLP,AI-Agent,Test,specificity,0.8559,AI-Agent final Test evaluation: results/taskB/evaluation/test_metrics_table.csv
+MLP,Human-guided,Test,ece_harmonized_10_equal_width,0.308812,Harmonized post hoc recomputation: results/taskB/comparison/harmonized_ece.csv
+MLP,AI-Agent,Test,ece_harmonized_10_equal_width,0.300495,Harmonized post hoc recomputation: results/taskB/comparison/harmonized_ece.csv
+MLP,Human-guided,Validation,roc_auc,0.918389,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_MLP_限定再評価_4条件比較.csv
+MLP,AI-Agent,Validation,roc_auc,0.864865,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+MLP,Human-guided,Validation,pr_auc,0.717544,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_MLP_限定再評価_4条件比較.csv
+MLP,AI-Agent,Validation,pr_auc,0.647555,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+MLP,Human-guided,Validation,brier,0.167252,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_MLP_限定再評価_4条件比較.csv
+MLP,AI-Agent,Validation,brier,0.168613,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv
+MLP,Human-guided,Validation,ece,0.304689,Human-guided final result artifact: 02_TaskB_臨床データ/04_Modeling/TaskB_MLP_限定再評価_4条件比較.csv
+MLP,AI-Agent,Validation,ece,0.295272,AI-Agent frozen Task B result: results/taskB/modeling/validation_comparison.csv

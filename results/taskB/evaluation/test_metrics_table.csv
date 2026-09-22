@@ -1,4 +1,4 @@
-model,role,n,events,auroc,auroc_ci_low,auroc_ci_high,auprc,auprc_ci_low,auprc_ci_high,brier,ece_5bin,threshold,tp,tn,fp,fn,sensitivity,specificity,ppv,npv,accuracy
+﻿model,role,n,events,auroc,auroc_ci_low,auroc_ci_high,auprc,auprc_ci_low,auprc_ci_high,brier,ece_5bin,threshold,tp,tn,fp,fn,sensitivity,specificity,ppv,npv,accuracy
 lr,,128,17,0.946476,0.895601,0.984632,0.770898,0.604491,0.927203,0.097765,0.161595,0.49697908296762733,14.0,96.0,15.0,3.0,0.8235,0.8649,0.4828,0.9697,0.8594
 xgb,,128,17,0.928988,0.873847,0.970866,0.657762,0.484684,0.844691,0.07321,0.022064,0.12907762825489044,16.0,91.0,20.0,1.0,0.9412,0.8198,0.4444,0.9891,0.8359
 mlp,,128,17,0.924218,0.859565,0.977213,0.74765,0.574068,0.91556,0.160305,0.29672,0.5540570616722107,13.0,95.0,16.0,4.0,0.7647,0.8559,0.4483,0.9596,0.8438

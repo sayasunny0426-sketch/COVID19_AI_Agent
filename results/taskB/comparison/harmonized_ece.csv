@@ -1,0 +1,7 @@
+﻿model,pipeline,original_ece_reported,original_ece_definition,original_ece_recomputed_here,reproduces_reported,harmonized_ece,harmonized_definition,difference_harmonized_minus_original,n,events,source_predictions
+LR,AI-Agent,0.161595,5 equal-count bins,0.161595,True,0.161595,"10 equal-width bins over [0,1]",-0.0,128,17,results/taskB/evaluation/test_predictions_taskB.csv
+LR,Human-guided,0.041302,10 equal-width bins,0.041302,True,0.041302,"10 equal-width bins over [0,1]",-0.0,128,17,02_TaskB_臨床データ/05_Evaluation/TaskB_LR_Test患者別予測.csv
+MLP,AI-Agent,0.29672,5 equal-count bins,0.29672,True,0.300495,"10 equal-width bins over [0,1]",0.003775,128,17,results/taskB/evaluation/test_predictions_taskB.csv
+MLP,Human-guided,0.308812,10 equal-width bins,0.308812,True,0.308812,"10 equal-width bins over [0,1]",-0.0,128,17,02_TaskB_臨床データ/05_Evaluation/TaskB_MLP_Test患者別予測.csv
+XGBoost,AI-Agent,0.022064,5 equal-count bins,0.022064,True,0.074899,"10 equal-width bins over [0,1]",0.052835,128,17,results/taskB/evaluation/test_predictions_taskB.csv
+XGBoost,Human-guided,0.090264,10 equal-width bins,0.090264,True,0.090264,"10 equal-width bins over [0,1]",0.0,128,17,02_TaskB_臨床データ/05_Evaluation/TaskB_XGBoost_Test患者別予測.csv

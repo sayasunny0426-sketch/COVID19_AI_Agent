@@ -1,4 +1,4 @@
-bin,n,mean_predicted,observed_rate,events
+﻿bin,n,mean_predicted,observed_rate,events
 0,26,0.005871734873076924,0.0,0
 1,25,0.011795470620000002,0.0,0
 2,26,0.025713996000000003,0.0,0

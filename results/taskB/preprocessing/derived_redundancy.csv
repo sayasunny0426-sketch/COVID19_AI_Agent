@@ -1,4 +1,4 @@
-band_column,numeric_source,n_both_present,numeric_missing_band_present,numeric_present_band_missing,identical_missingness,values_identical
+﻿band_column,numeric_source,n_both_present,numeric_missing_band_present,numeric_present_band_missing,identical_missingness,values_identical
 temperature.over38,8331-1_Oral temperature,992,0,0,True,
 pulseOx.under90,59408-5_Oxygen saturation in Arterial blood by Pulse oximetry,1018,0,0,True,
 Respiration.over24,9279-1_Respiratory rate,1019,0,0,True,

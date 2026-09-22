@@ -1,4 +1,4 @@
-condition,C,class_weight,cv_mean_auroc,cv_sd_auroc,cv_mean_auprc,val_auroc,val_auprc,seconds
+﻿condition,C,class_weight,cv_mean_auroc,cv_sd_auroc,cv_mean_auprc,val_auroc,val_auprc,seconds
 C=1.0_cw=balanced,1.0,balanced,0.889049,0.037311,0.587866,0.895072,0.634584,1.4
 C=1.0_cw=None,1.0,None,0.888784,0.03718,0.59435,0.895072,0.653318,1.4
 C=10.0_cw=balanced,10.0,balanced,0.888756,0.037081,0.58604,0.895072,0.630703,1.4

@@ -1,4 +1,4 @@
-variable_or_group,reason_not_selected
+﻿variable_or_group,reason_not_selected
 39156-5_Body mass index (BMI) [Ratio],肥満は死亡リスク因子だが Train 欠測 32%。4C には含まれず、パラメータ予算を優先して見送り
 8331-1_Oral temperature,発熱は重症度と単調に関連せず（低体温も予後不良）、既存スコアでの寄与も小さいため見送り
 76282-3_Heart rate.beat-to-beat by EKG,SBP・呼吸数と重複する循環・代償の指標で、4C には含まれないため見送り

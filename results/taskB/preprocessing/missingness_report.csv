@@ -1,4 +1,4 @@
-column,missing_train,missing_ER,missing_inpatient,ER_minus_inpatient
+﻿column,missing_train,missing_ER,missing_inpatient,ER_minus_inpatient
 to_patient_id,0.0,0.0,0.0,0.0
 covid19_statuses,0.0,0.0,0.0,0.0
 last.status,0.0,0.0,0.0,0.0

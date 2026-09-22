@@ -1,4 +1,4 @@
-check,result,detail
+﻿check,result,detail
 split manifest: Subject ID uniqueness,PASS,1277 unique of 1277
 split manifest: no patient appears in two splits,PASS,0 overlaps
 split manifest: cohort sizes match the frozen split,PASS,"{'train': 1021, 'val': 128, 'test': 128}"

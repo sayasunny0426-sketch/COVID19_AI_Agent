@@ -36,14 +36,22 @@ CODE = [
     "scripts/30_taskB_test_evaluation.py",
     "scripts/31_taskB_prepare_commit.py",
     "scripts/32_taskB_post_test_qc.py",
+    "scripts/33_taskB_human_vs_agent_comparison.py",
+    "scripts/34_taskB_harmonized_ece.py",
+    # shared with Task A and modified for Task B (calibration_bins /
+    # expected_calibration_error); the repository copy must not be left stale
+    "src/covid_mortality/evaluation/metrics.py",
 ]
-DOCS = ["docs/decision_log.md", "docs/change_log.csv", "docs/open_questions.md"]
+DOCS = ["docs/decision_log.md", "docs/change_log.csv", "docs/open_questions.md",
+        "docs/taskB_human_vs_ai_agent_comparison.md"]
 RESULT_DIRS = ["preprocessing", "variable_selection", "modeling", "qc",
                # kept in the repository but clearly separated: an analysis that was NOT
                # performed, so its material must never be read as a result (D-081)
                "secondary_exploratory_unused",
                # populated only after the approved Test evaluation
-               "evaluation", "feature_importance"]
+               "evaluation", "feature_importance",
+               # human-guided vs AI-agent descriptive comparison, incl. harmonised ECE
+               "comparison"]
 TOP_FILES = ["results/taskB/README.md",
              "results/comparison/README.md", "results/comparison/delong_plan.json"]
 # files that moved out of the primary tree and must not linger in the repository
@@ -63,6 +71,20 @@ PATH_PATTERNS = [
 ]
 # raw clinical source data must never be committed
 FORBIDDEN_NAMES = {"患者データファイル.csv", "metadata.csv", "患者データまとめ、定義.csv"}
+
+
+def copy_text(src: Path, dst: Path) -> int:
+    """Copy a text file with path redaction, preserving its bytes when nothing is redacted.
+
+    Reading with read_text and writing with write_text rewrites every line ending on Windows,
+    which turns a two-line change into a whole-file diff and breaks byte-for-byte comparison
+    with the source. Working on bytes avoids both.
+    """
+    raw = src.read_bytes()
+    text, n = redact(raw.decode("utf-8-sig"))
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    dst.write_bytes(raw if n == 0 else text.encode("utf-8"))
+    return n
 
 
 def redact(text: str) -> tuple[str, int]:
@@ -119,10 +141,7 @@ def main() -> int:
         if not src.exists():
             print(f"  (missing, skipped) {rel}")
             continue
-        dst = repo / rel
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        text, n = redact(src.read_text(encoding="utf-8-sig"))
-        dst.write_text(text, encoding="utf-8")
+        n = copy_text(src, repo / rel)
         if n:
             redactions[rel] = n
         copied.append(rel)
@@ -143,8 +162,7 @@ def main() -> int:
             if p.suffix.lower() == ".png":
                 shutil.copy2(p, dst)
             else:
-                text, n = redact(p.read_text(encoding="utf-8-sig"))
-                dst.write_text(text, encoding="utf-8")
+                n = copy_text(p, dst)
                 if n:
                     redactions[rel] = n
             copied.append(rel)
@@ -181,6 +199,24 @@ def main() -> int:
 
     print(f"\ncopied {len(copied)} files into {repo}")
     print(f"redacted paths in {len(redactions)} files")
+
+    # every file this script claims to publish must actually be in the repository, and the
+    # copy must match the source. A stale copy is the failure mode this guards against.
+    stale, absent = [], []
+    for rel in copied:
+        s, d = project / rel, repo / rel
+        if not d.exists():
+            absent.append(rel)
+        elif s.exists() and s.suffix.lower() != ".png":
+            src_txt, _ = redact(s.read_bytes().decode("utf-8-sig"))
+            if src_txt != d.read_bytes().decode("utf-8-sig"):
+                stale.append(rel)
+    if absent or stale:
+        print(f"STOP: {len(absent)} file(s) missing from the repo, {len(stale)} stale")
+        for r in (absent + stale)[:10]:
+            print(f"    {r}")
+        return 1
+    print(f"verified: all {len(copied)} copied files are present and match the source")
     print("\n=== safety audit ===")
     for k, v in problems.items():
         print(f"  [{'OK ' if not v else 'NG '}] {k}: {len(v)}{'' if not v else ' ' + str(v[:4])}")

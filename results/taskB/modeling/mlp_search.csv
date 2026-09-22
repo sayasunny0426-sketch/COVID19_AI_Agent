@@ -1,4 +1,4 @@
-stage,condition,weight_decay,batch_size,pos_weight,hidden,dropout,lr,cv_mean_auroc,cv_sd_auroc,cv_mean_auprc,val_auroc,val_auprc,best_epoch,seconds
+﻿stage,condition,weight_decay,batch_size,pos_weight,hidden,dropout,lr,cv_mean_auroc,cv_sd_auroc,cv_mean_auprc,val_auroc,val_auprc,best_epoch,seconds
 2,"hidden=(32, 16)_dropout=0.3_lr=0.0003_weight_decay=0.001_batch_size=32_pos_weight=6.562962962962963",0.001,32,6.562962962962963,"(32, 16)",0.3,0.0003,0.879615,0.044333,0.563256,0.864865,0.647555,15,85.9
 2,"hidden=(32, 16)_dropout=0.3_lr=0.0003_weight_decay=0.001_batch_size=64_pos_weight=6.562962962962963",0.001,64,6.562962962962963,"(32, 16)",0.3,0.0003,0.879213,0.046559,0.566102,0.864335,0.633618,21,49.6
 2,"hidden=(32, 16)_dropout=0.3_lr=0.0003_weight_decay=0.0001_batch_size=64_pos_weight=6.562962962962963",0.0001,64,6.562962962962963,"(32, 16)",0.3,0.0003,0.879101,0.046195,0.564136,0.864335,0.633618,21,48.4
