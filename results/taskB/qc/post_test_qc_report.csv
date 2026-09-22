@@ -39,3 +39,9 @@ xgb_native: saved Test predictions reproduce from the frozen model,PASS,max |dif
 all saved Test predictions reproduce within 1e-6,PASS,largest difference across models 2.975e-08
 the Test set was evaluated exactly once,PASS,"1 evaluation(s), 3 log entries total"
 paired DeLong has not been run for Task B alone,PASS,DeLong waits for Task C so that CXR and Late Fusion join the same patients
+the authoritative DeLong plan file exists,PASS,
+the DeLong plan defines two comparison families,PASS,"['A_late_fusion_vs_clinical_models', 'B_late_fusion_vs_reference_models']"
+Family A holds the three Late Fusion vs clinical-model comparisons,PASS,
+Family B holds the two Late Fusion vs reference-model comparisons,PASS,
+each family is Holm-corrected separately,PASS,
+"the plan records which frozen file it supersedes, and that file is unchanged",PASS,the frozen Task B specification was not edited by the correction

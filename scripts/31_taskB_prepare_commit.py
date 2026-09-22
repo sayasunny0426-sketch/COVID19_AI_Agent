@@ -44,7 +44,8 @@ RESULT_DIRS = ["preprocessing", "variable_selection", "modeling", "qc",
                "secondary_exploratory_unused",
                # populated only after the approved Test evaluation
                "evaluation", "feature_importance"]
-TOP_FILES = ["results/taskB/README.md"]
+TOP_FILES = ["results/taskB/README.md",
+             "results/comparison/README.md", "results/comparison/delong_plan.json"]
 # files that moved out of the primary tree and must not linger in the repository
 STALE = ["results/taskB/preprocessing/inpatient_sensitivity_flow.csv",
          "results/taskB/preprocessing/visit_type_composition.csv"]

@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-23T00:30:55+09:00",
+  "generated": "2026-09-23T00:36:06+09:00",
   "script": "32_taskB_post_test_qc.py",
-  "n_checks": 40,
+  "n_checks": 46,
   "n_failed": 0,
   "checks": [
     {
@@ -203,6 +203,36 @@
       "check": "paired DeLong has not been run for Task B alone",
       "result": "PASS",
       "detail": "DeLong waits for Task C so that CXR and Late Fusion join the same patients"
+    },
+    {
+      "check": "the authoritative DeLong plan file exists",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the DeLong plan defines two comparison families",
+      "result": "PASS",
+      "detail": "['A_late_fusion_vs_clinical_models', 'B_late_fusion_vs_reference_models']"
+    },
+    {
+      "check": "Family A holds the three Late Fusion vs clinical-model comparisons",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Family B holds the two Late Fusion vs reference-model comparisons",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "each family is Holm-corrected separately",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the plan records which frozen file it supersedes, and that file is unchanged",
+      "result": "PASS",
+      "detail": "the frozen Task B specification was not edited by the correction"
     }
   ]
 }

@@ -165,10 +165,29 @@ def main() -> int:
     q.check("the Test set was evaluated exactly once",
             len(evals) == 1, f"{len(evals)} evaluation(s), {len(entries)} log entries total")
 
-    # ---- paired DeLong not run yet ---------------------------------------------------
+    # ---- paired DeLong plan and its record correction ---------------------------------
     q.check("paired DeLong has not been run for Task B alone",
             not list((project / "results").glob("comparison/delong_results.*")),
             "DeLong waits for Task C so that CXR and Late Fusion join the same patients")
+    plan_path = project / "results/comparison/delong_plan.json"
+    q.check("the authoritative DeLong plan file exists", plan_path.exists())
+    if plan_path.exists():
+        plan = json.loads(plan_path.read_text(encoding="utf-8"))
+        fams = plan.get("families", {})
+        q.check("the DeLong plan defines two comparison families", len(fams) == 2,
+                str(list(fams)))
+        q.check("Family A holds the three Late Fusion vs clinical-model comparisons",
+                len(fams.get("A_late_fusion_vs_clinical_models", {})
+                    .get("comparisons", [])) == 3)
+        q.check("Family B holds the two Late Fusion vs reference-model comparisons",
+                len(fams.get("B_late_fusion_vs_reference_models", {})
+                    .get("comparisons", [])) == 2)
+        q.check("each family is Holm-corrected separately",
+                plan.get("multiplicity_correction", "").endswith("within each family"))
+        q.check("the plan records which frozen file it supersedes, and that file is unchanged",
+                plan["supersedes"]["sha256_of_that_file"]
+                == sha256(modeling / "final_selection_taskB.json"),
+                "the frozen Task B specification was not edited by the correction")
 
     res = pd.DataFrame(q.rows)
     res.to_csv(out / "post_test_qc_report.csv", index=False, encoding="utf-8-sig")

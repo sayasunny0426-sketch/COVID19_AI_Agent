@@ -1,0 +1,64 @@
+{
+  "written": "2026-09-23T00:35:41+09:00",
+  "status": "authoritative plan for the final paired DeLong analysis",
+  "supersedes": {
+    "file": "results/taskB/modeling/final_selection_taskB.json",
+    "key": "delong_plan",
+    "sha256_of_that_file": "27bfa7dccd34318f2c5e76ef8f0775e1687cef94320a8c372e181e5b43b803aa",
+    "why_that_file_was_not_edited": "its SHA256 is recorded in results/taskB/evaluation/test_run_meta.json and is the evidence that the Test evaluation used exactly the frozen specification. Editing it would destroy that evidence, so the correction lives here instead.",
+    "what_it_says": "a single family of four Late Fusion comparisons (incorrect record)"
+  },
+  "correction": {
+    "recorded_on": "2026-09-22 in decision_log D-080",
+    "corrected_on": "2026-09-23 in decision_log D-083",
+    "nature": "record correction, not a design change",
+    "basis": "the researcher states the two-family structure below was the design agreed before the Test evaluation; the earlier entry recorded it incorrectly",
+    "transparency_note": "this correction was written after the Task B Test metrics existed. No DeLong test has been run, on Task B or on any other model, so no adjusted p-value has been seen under either family structure. Nothing about the models, the predictions or the Test metrics changes."
+  },
+  "test": "paired DeLong (DeLong 1988; Sun & Xu 2014 fast algorithm), midranks for ties",
+  "implementation": "src/covid_mortality/evaluation/delong.py (numpy only, shared with Task A)",
+  "pairing": "the same Test patients for every model; predictions are merged on subject_id and the row order is verified before testing. Two-sample AUC comparisons are not used.",
+  "families": {
+    "A_late_fusion_vs_clinical_models": {
+      "comparisons": [
+        "late_fusion vs clinical_lr",
+        "late_fusion vs clinical_xgboost",
+        "late_fusion vs clinical_mlp"
+      ],
+      "n_comparisons": 3,
+      "correction": "Holm, within Family A only",
+      "question": "does multimodal Late Fusion improve on each clinical tabular model"
+    },
+    "B_late_fusion_vs_reference_models": {
+      "comparisons": [
+        "late_fusion vs clinical_lr",
+        "late_fusion vs cxr"
+      ],
+      "n_comparisons": 2,
+      "correction": "Holm, within Family B only",
+      "question": "does multimodal Late Fusion improve on the two single-modality reference models (the clinical reference and the imaging model)"
+    }
+  },
+  "note_on_overlap": "`late_fusion vs clinical_lr` belongs to both families, so it carries two Holm-adjusted p-values, one per family. Report the family alongside every adjusted p-value so the two are not confused; the unadjusted p-value is the same in both.",
+  "exploratory": "comparisons among the single-modality models themselves are exploratory, reported with unadjusted p-values and labelled as such",
+  "multiplicity_correction": "Holm, applied separately within each family",
+  "outputs_per_comparison": [
+    "family",
+    "auc_a",
+    "auc_b",
+    "auc_difference",
+    "se_of_difference",
+    "z",
+    "p_value_unadjusted",
+    "p_value_holm_within_family",
+    "ci95_low",
+    "ci95_high"
+  ],
+  "output_files": [
+    "results/comparison/delong_results.json",
+    "results/comparison/delong_results.csv"
+  ],
+  "plan_file": "results/comparison/delong_plan.json",
+  "fixed_before_test": true,
+  "record_correction": "The family structure recorded in decision_log D-080 on 2026-09-22 was wrong: it described one family of four comparisons. The agreed design is the two families above. Corrected 2026-09-23 (D-083). The correction changes which comparisons share a Holm correction; it does not change any model, prediction or Test metric, and no DeLong test has been run."
+}

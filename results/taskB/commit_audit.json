@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-23T00:31:57+09:00",
+  "generated": "2026-09-23T00:36:31+09:00",
   "script": "31_taskB_prepare_commit.py",
-  "files_copied": 96,
+  "files_copied": 98,
   "copied": [
     "src/covid_mortality/features/taskB_clinical.py",
     "src/covid_mortality/features/taskB_preprocess.py",
@@ -23,6 +23,8 @@
     "docs/change_log.csv",
     "docs/open_questions.md",
     "results/taskB/README.md",
+    "results/comparison/README.md",
+    "results/comparison/delong_plan.json",
     "results/taskB/preprocessing/audit_summary.json",
     "results/taskB/preprocessing/candidate_table.csv",
     "results/taskB/preprocessing/categorical_summary.csv",

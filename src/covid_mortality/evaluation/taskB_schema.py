@@ -45,19 +45,44 @@ DELONG_PLAN = {
     "pairing": ("the same Test patients for every model; predictions are merged on subject_id "
                 "and the row order is verified before testing. Two-sample AUC comparisons are "
                 "not used."),
-    "family": ["late_fusion vs clinical_lr", "late_fusion vs clinical_xgboost",
-               "late_fusion vs clinical_mlp", "late_fusion vs cxr"],
-    "family_rationale": ("the confirmatory question is whether multimodal Late Fusion improves "
-                         "on each single-modality model, so the family is the four Late Fusion "
-                         "comparisons. Comparisons among the single-modality models are "
-                         "exploratory and reported with unadjusted p-values, labelled as such."),
-    "multiplicity_correction": "Holm, applied within the family above",
-    "outputs_per_comparison": ["auc_a", "auc_b", "auc_difference", "se_of_difference",
-                               "z", "p_value_unadjusted", "p_value_holm",
-                               "ci95_low", "ci95_high"],
+    # Two families, each corrected separately. Corrected on 2026-09-23: an earlier record
+    # (decision_log D-080) described a single family of four comparisons, which did not match
+    # the agreed design. See D-083 and results/comparison/delong_plan.json.
+    "families": {
+        "A_late_fusion_vs_clinical_models": {
+            "comparisons": ["late_fusion vs clinical_lr",
+                            "late_fusion vs clinical_xgboost",
+                            "late_fusion vs clinical_mlp"],
+            "n_comparisons": 3,
+            "correction": "Holm, within Family A only",
+            "question": "does multimodal Late Fusion improve on each clinical tabular model"},
+        "B_late_fusion_vs_reference_models": {
+            "comparisons": ["late_fusion vs clinical_lr", "late_fusion vs cxr"],
+            "n_comparisons": 2,
+            "correction": "Holm, within Family B only",
+            "question": "does multimodal Late Fusion improve on the two single-modality "
+                        "reference models (the clinical reference and the imaging model)"},
+    },
+    "note_on_overlap": ("`late_fusion vs clinical_lr` belongs to both families, so it carries "
+                        "two Holm-adjusted p-values, one per family. Report the family "
+                        "alongside every adjusted p-value so the two are not confused; the "
+                        "unadjusted p-value is the same in both."),
+    "exploratory": ("comparisons among the single-modality models themselves are exploratory, "
+                    "reported with unadjusted p-values and labelled as such"),
+    "multiplicity_correction": "Holm, applied separately within each family",
+    "outputs_per_comparison": ["family", "auc_a", "auc_b", "auc_difference",
+                               "se_of_difference", "z", "p_value_unadjusted",
+                               "p_value_holm_within_family", "ci95_low", "ci95_high"],
     "output_files": ["results/comparison/delong_results.json",
                      "results/comparison/delong_results.csv"],
+    "plan_file": "results/comparison/delong_plan.json",
     "fixed_before_test": True,
+    "record_correction": ("The family structure recorded in decision_log D-080 on 2026-09-22 "
+                          "was wrong: it described one family of four comparisons. The agreed "
+                          "design is the two families above. Corrected 2026-09-23 (D-083). "
+                          "The correction changes which comparisons share a Holm correction; "
+                          "it does not change any model, prediction or Test metric, and no "
+                          "DeLong test has been run."),
 }
 
 
