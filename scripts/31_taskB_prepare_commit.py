@@ -35,12 +35,15 @@ CODE = [
     "scripts/29_taskB_indicator_sensitivity.py",
     "scripts/30_taskB_test_evaluation.py",
     "scripts/31_taskB_prepare_commit.py",
+    "scripts/32_taskB_post_test_qc.py",
 ]
 DOCS = ["docs/decision_log.md", "docs/change_log.csv", "docs/open_questions.md"]
 RESULT_DIRS = ["preprocessing", "variable_selection", "modeling", "qc",
                # kept in the repository but clearly separated: an analysis that was NOT
                # performed, so its material must never be read as a result (D-081)
-               "secondary_exploratory_unused"]
+               "secondary_exploratory_unused",
+               # populated only after the approved Test evaluation
+               "evaluation", "feature_importance"]
 TOP_FILES = ["results/taskB/README.md"]
 # files that moved out of the primary tree and must not linger in the repository
 STALE = ["results/taskB/preprocessing/inpatient_sensitivity_flow.csv",
@@ -83,12 +86,22 @@ def main() -> int:
         print(f"STOP: {repo} does not exist")
         return 1
 
-    leaked = list((project / "results/taskB/evaluation").glob("test_*")) if \
-        (project / "results/taskB/evaluation").exists() else []
-    if leaked:
-        print(f"STOP: Test output already exists ({[p.name for p in leaked]}); "
-              f"this commit is for the development phase only")
+    # Before the Test evaluation is approved this refuses to run; afterwards the Test outputs
+    # are expected, so the guard is satisfied by the post-Test QC report existing.
+    ev = project / "results/taskB/evaluation"
+    test_out = list(ev.glob("test_*")) if ev.exists() else []
+    approved = (project / "results/taskB/qc/post_test_qc_report.json").exists()
+    if test_out and not approved:
+        print(f"STOP: Test output exists ({[p.name for p in test_out]}) but the post-Test QC "
+              f"has not been run; refusing to commit an unverified Test result")
         return 1
+    if test_out:
+        qc = json.loads((project / "results/taskB/qc/post_test_qc_report.json")
+                        .read_text(encoding="utf-8"))
+        if qc["n_failed"]:
+            print(f"STOP: post-Test QC has {qc['n_failed']} failing check(s)")
+            return 1
+        print(f"post-Test QC passed ({qc['n_checks']} checks); Test outputs will be committed")
 
     removed = []
     for rel in STALE:
@@ -150,7 +163,8 @@ def main() -> int:
             problems["checkpoints"].append(rel)
         if p.stat().st_size > MAX_MB * 2 ** 20:
             problems["large_files"].append(f"{rel} ({p.stat().st_size / 2**20:.1f} MB)")
-        if rel.startswith("results/taskB/evaluation/test_"):
+        # Test outputs are a defect before approval and expected after it
+        if rel.startswith("results/taskB/evaluation/test_") and not approved:
             problems["test_outputs"].append(rel)
         if p.suffix.lower() in {".py", ".md", ".json", ".jsonl", ".csv", ".toml", ".txt", ".ipynb"}:
             t = p.read_text(encoding="utf-8", errors="ignore")
@@ -175,7 +189,8 @@ def main() -> int:
               "copied": copied, "redactions": redactions, "stale_removed": removed,
               "audit_counts": {k: len(v) for k, v in problems.items()},
               "audit": {k: v[:8] for k, v in problems.items()},
-              "test_outputs_present": False}
+              "test_outputs_present": bool(test_out),
+              "post_test_qc_passed": approved}
     (repo / "results/taskB/commit_audit.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     return 1 if any(problems.values()) else 0

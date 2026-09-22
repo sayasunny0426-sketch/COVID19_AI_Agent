@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-23T00:24:50+09:00",
+  "generated": "2026-09-23T00:31:57+09:00",
   "script": "31_taskB_prepare_commit.py",
-  "files_copied": 77,
+  "files_copied": 96,
   "copied": [
     "src/covid_mortality/features/taskB_clinical.py",
     "src/covid_mortality/features/taskB_preprocess.py",
@@ -18,6 +18,7 @@
     "scripts/29_taskB_indicator_sensitivity.py",
     "scripts/30_taskB_test_evaluation.py",
     "scripts/31_taskB_prepare_commit.py",
+    "scripts/32_taskB_post_test_qc.py",
     "docs/decision_log.md",
     "docs/change_log.csv",
     "docs/open_questions.md",
@@ -74,21 +75,36 @@
     "results/taskB/modeling/validation_predictions.csv",
     "results/taskB/modeling/xgb_native_search.csv",
     "results/taskB/modeling/xgb_search.csv",
+    "results/taskB/qc/post_test_qc_report.csv",
+    "results/taskB/qc/post_test_qc_report.json",
     "results/taskB/qc/pre_test_qc_report.csv",
     "results/taskB/qc/pre_test_qc_report.json",
     "results/taskB/qc/test_access_log.json",
+    "results/taskB/qc/test_access_log.jsonl",
     "results/taskB/secondary_exploratory_unused/inpatient_sensitivity_flow.csv",
     "results/taskB/secondary_exploratory_unused/README.md",
-    "results/taskB/secondary_exploratory_unused/visit_type_composition.csv"
+    "results/taskB/secondary_exploratory_unused/visit_type_composition.csv",
+    "results/taskB/evaluation/test_calibration_lr.csv",
+    "results/taskB/evaluation/test_calibration_mlp.csv",
+    "results/taskB/evaluation/test_calibration_xgb.csv",
+    "results/taskB/evaluation/test_calibration_xgb_native.csv",
+    "results/taskB/evaluation/test_metrics_table.csv",
+    "results/taskB/evaluation/test_pr_points_lr.csv",
+    "results/taskB/evaluation/test_pr_points_mlp.csv",
+    "results/taskB/evaluation/test_pr_points_xgb.csv",
+    "results/taskB/evaluation/test_pr_points_xgb_native.csv",
+    "results/taskB/evaluation/test_predictions_taskB.csv",
+    "results/taskB/evaluation/test_roc_points_lr.csv",
+    "results/taskB/evaluation/test_roc_points_mlp.csv",
+    "results/taskB/evaluation/test_roc_points_xgb.csv",
+    "results/taskB/evaluation/test_roc_points_xgb_native.csv",
+    "results/taskB/evaluation/test_run_meta.json"
   ],
   "redactions": {
     "scripts/31_taskB_prepare_commit.py": 1,
     "docs/decision_log.md": 2
   },
-  "stale_removed": [
-    "results/taskB/preprocessing/inpatient_sensitivity_flow.csv",
-    "results/taskB/preprocessing/visit_type_composition.csv"
-  ],
+  "stale_removed": [],
   "audit_counts": {
     "raw_clinical_source": 0,
     "dicom": 0,
@@ -107,5 +123,6 @@
     "test_outputs": [],
     "local_paths": []
   },
-  "test_outputs_present": false
+  "test_outputs_present": true,
+  "post_test_qc_passed": true
 }

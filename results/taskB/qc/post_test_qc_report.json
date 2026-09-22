@@ -1,0 +1,208 @@
+{
+  "generated": "2026-09-23T00:30:55+09:00",
+  "script": "32_taskB_post_test_qc.py",
+  "n_checks": 40,
+  "n_failed": 0,
+  "checks": [
+    {
+      "check": "Test patient count",
+      "result": "PASS",
+      "detail": "128"
+    },
+    {
+      "check": "Test death count",
+      "result": "PASS",
+      "detail": "17"
+    },
+    {
+      "check": "Test outcome consistency (last.status vs true_label)",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Subject ID uniqueness",
+      "result": "PASS",
+      "detail": "128 unique of 128"
+    },
+    {
+      "check": "prediction row count equals the Test patient count",
+      "result": "PASS",
+      "detail": "128 vs 128"
+    },
+    {
+      "check": "subject set matches the split manifest",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "row order matches the frozen patient order",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "patient-order hash matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "true_label alignment with the fixed split",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Subject ID dtype is str, matching Task A",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "all required DeLong columns are present",
+      "result": "PASS",
+      "detail": "['subject_id', 'true_label', 'prob_clinical_lr', 'prob_clinical_xgboost', 'prob_clinical_mlp']"
+    },
+    {
+      "check": "prob_clinical_lr: no missing prediction",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "prob_clinical_lr: probabilities in [0,1]",
+      "result": "PASS",
+      "detail": "min 0.005126 max 0.996196"
+    },
+    {
+      "check": "prob_clinical_xgboost: no missing prediction",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "prob_clinical_xgboost: probabilities in [0,1]",
+      "result": "PASS",
+      "detail": "min 0.002930 max 0.885084"
+    },
+    {
+      "check": "prob_clinical_mlp: no missing prediction",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "prob_clinical_mlp: probabilities in [0,1]",
+      "result": "PASS",
+      "detail": "min 0.119841 max 0.960177"
+    },
+    {
+      "check": "prob_clinical_xgboost_native: no missing prediction",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "prob_clinical_xgboost_native: probabilities in [0,1]",
+      "result": "PASS",
+      "detail": "min 0.005093 max 0.880267"
+    },
+    {
+      "check": "shared prediction schema validates",
+      "result": "PASS",
+      "detail": "{'n_rows': 128, 'n_unique_ids': 128, 'probability_columns': ['prob_clinical_lr', 'prob_clinical_xgboost', 'prob_clinical_mlp', 'prob_clinical_xgboost_native'], 'n_events': 17, 'id_dtype': 'str', 'schema_ok': True}"
+    },
+    {
+      "check": "lr: artefact hash still matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "xgb: artefact hash still matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "mlp: artefact hash still matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "xgb_native: artefact hash still matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the Test run used the frozen specification file",
+      "result": "PASS",
+      "detail": "frozen file unchanged since the Test run"
+    },
+    {
+      "check": "the Test run was not a dry run",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the split evaluated was 'test'",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "thresholds are the Validation-derived frozen values, not recomputed on Test",
+      "result": "PASS",
+      "detail": "{'lr': 0.4969790829676273, 'xgb': 0.1290776282548904, 'mlp': 0.5540570616722107, 'xgb_native': 0.0887413322925567}"
+    },
+    {
+      "check": "preprocessing parameters come from Training only",
+      "result": "PASS",
+      "detail": "refitting on the whole cohort changes the fill values, so Test did not contribute"
+    },
+    {
+      "check": "Test transform produces the frozen columns in the frozen order",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no NaN in the Test design matrix",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no Inf in the Test design matrix",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen features are all present in the Test design matrix",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "lr: saved Test predictions reproduce from the frozen model",
+      "result": "PASS",
+      "detail": "max |difference| = 1.110e-16"
+    },
+    {
+      "check": "xgb: saved Test predictions reproduce from the frozen model",
+      "result": "PASS",
+      "detail": "max |difference| = 1.415e-08"
+    },
+    {
+      "check": "mlp: saved Test predictions reproduce from the frozen model",
+      "result": "PASS",
+      "detail": "max |difference| = 2.880e-08"
+    },
+    {
+      "check": "xgb_native: saved Test predictions reproduce from the frozen model",
+      "result": "PASS",
+      "detail": "max |difference| = 2.975e-08"
+    },
+    {
+      "check": "all saved Test predictions reproduce within 1e-6",
+      "result": "PASS",
+      "detail": "largest difference across models 2.975e-08"
+    },
+    {
+      "check": "the Test set was evaluated exactly once",
+      "result": "PASS",
+      "detail": "1 evaluation(s), 3 log entries total"
+    },
+    {
+      "check": "paired DeLong has not been run for Task B alone",
+      "result": "PASS",
+      "detail": "DeLong waits for Task C so that CXR and Late Fusion join the same patients"
+    }
+  ]
+}

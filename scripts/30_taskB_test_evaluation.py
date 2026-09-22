@@ -109,6 +109,10 @@ def main() -> int:
                     help="the researcher has explicitly approved opening the Test set")
     ap.add_argument("--dry-run", action="store_true",
                     help="run the identical path on Validation; Test is not read")
+    ap.add_argument("--recompute-metrics", action="store_true",
+                    help="rewrite the metric tables from the predictions already saved. No "
+                         "model is refit and no prediction changes; used only to correct an "
+                         "output-formatting defect in the saved tables.")
     args = ap.parse_args()
     project = Path(args.project).resolve()
     modeling = project / "results/taskB/modeling"
@@ -145,8 +149,11 @@ def main() -> int:
         df = tb.load_cohort(project)                       # all splits
         out = project / "results/taskB/evaluation"
         existing = list(out.glob("test_predictions_taskB.csv"))
-        if existing:
+        if existing and not args.recompute_metrics:
             print(f"STOP: {existing[0].name} already exists. The Test set is evaluated once.")
+            return 1
+        if args.recompute_metrics and not existing:
+            print("STOP: --recompute-metrics needs an existing prediction file.")
             return 1
     out.mkdir(parents=True, exist_ok=True)
 
@@ -160,10 +167,22 @@ def main() -> int:
 
     preds = {sch.ID_COLUMN: ev["Subject ID"].astype(str).tolist(),
              sch.LABEL_COLUMN: y.astype(int)}
+    saved = None
+    if args.recompute_metrics:
+        saved = pd.read_csv(out / "test_predictions_taskB.csv",
+                            dtype={sch.ID_COLUMN: str}, encoding="utf-8-sig")
+        if list(saved[sch.ID_COLUMN]) != order:
+            print("STOP: the saved prediction file does not match the frozen patient order.")
+            return 1
+        print("recomputing metric tables from the saved predictions; no model is refit")
+
     rows, curves = [], {}
     for name, col in FAMILIES.items():
-        pre, feats, predict = load_model(name, frozen["models"][name], train, project)
-        p = predict(pre.transform(ev)[feats].to_numpy(float))
+        if saved is not None:
+            p = saved[col].to_numpy(float)
+        else:
+            pre, feats, predict = load_model(name, frozen["models"][name], train, project)
+            p = predict(pre.transform(ev)[feats].to_numpy(float))
         preds[col] = p
         thr = frozen["models"][name]["threshold_youden"]
         preds[f"pred_{col.replace('prob_', '')}"] = (p >= thr).astype(int)
@@ -182,7 +201,9 @@ def main() -> int:
                      "auprc": round(float(ap_), 6), "auprc_ci_low": round(float(ap_lo), 6),
                      "auprc_ci_high": round(float(ap_hi), 6),
                      "brier": round(float(brier_score(y, p)), 6), "ece_5bin": round(ece, 6),
-                     "threshold": thr, **{k: round(v, 4) for k, v in rates.items()}})
+                     # the rates dict also carries a rounded "threshold"; the frozen,
+                     # full-precision value must win, so it is written last
+                     **{k: round(v, 4) for k, v in rates.items()}, "threshold": thr})
         rc = roc_curve(y, p)
         curves[name] = rc
         cal.to_csv(out / f"{split}_calibration_{name}.csv", index=False, encoding="utf-8-sig")
@@ -204,7 +225,10 @@ def main() -> int:
     summary = sch.validate(pf, sch.TASKB_REQUIRED, expected_ids=order, expected_labels=y)
     print(f"  prediction schema OK: {summary}")
     fname = "test_predictions_taskB.csv" if split == "test" else "val_predictions_dryrun.csv"
-    pf.to_csv(out / fname, index=False, encoding="utf-8-sig")
+    if args.recompute_metrics:
+        print(f"  {fname} left untouched (metrics-only recompute)")
+    else:
+        pf.to_csv(out / fname, index=False, encoding="utf-8-sig")
     pd.DataFrame(rows).to_csv(out / f"{split}_metrics_table.csv", index=False, encoding="utf-8-sig")
 
     meta = {"finished": datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds"),
@@ -219,7 +243,7 @@ def main() -> int:
             "schema_check": summary}
     (out / f"{split}_run_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2),
                                                 encoding="utf-8")
-    if not args.dry_run:
+    if not args.dry_run and not args.recompute_metrics:
         with open(project / "results/taskB/qc/test_access_log.jsonl", "a", encoding="utf-8") as f:
             f.write(json.dumps({"event": "test evaluation", **meta}, ensure_ascii=False) + "\n")
     print(f"\nwrote {len(list(out.glob('*')))} files to {out}")

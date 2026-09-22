@@ -1,0 +1,41 @@
+check,result,detail
+Test patient count,PASS,128
+Test death count,PASS,17
+Test outcome consistency (last.status vs true_label),PASS,
+Subject ID uniqueness,PASS,128 unique of 128
+prediction row count equals the Test patient count,PASS,128 vs 128
+subject set matches the split manifest,PASS,
+row order matches the frozen patient order,PASS,
+patient-order hash matches the frozen record,PASS,
+true_label alignment with the fixed split,PASS,
+"Subject ID dtype is str, matching Task A",PASS,
+all required DeLong columns are present,PASS,"['subject_id', 'true_label', 'prob_clinical_lr', 'prob_clinical_xgboost', 'prob_clinical_mlp']"
+prob_clinical_lr: no missing prediction,PASS,
+"prob_clinical_lr: probabilities in [0,1]",PASS,min 0.005126 max 0.996196
+prob_clinical_xgboost: no missing prediction,PASS,
+"prob_clinical_xgboost: probabilities in [0,1]",PASS,min 0.002930 max 0.885084
+prob_clinical_mlp: no missing prediction,PASS,
+"prob_clinical_mlp: probabilities in [0,1]",PASS,min 0.119841 max 0.960177
+prob_clinical_xgboost_native: no missing prediction,PASS,
+"prob_clinical_xgboost_native: probabilities in [0,1]",PASS,min 0.005093 max 0.880267
+shared prediction schema validates,PASS,"{'n_rows': 128, 'n_unique_ids': 128, 'probability_columns': ['prob_clinical_lr', 'prob_clinical_xgboost', 'prob_clinical_mlp', 'prob_clinical_xgboost_native'], 'n_events': 17, 'id_dtype': 'str', 'schema_ok': True}"
+lr: artefact hash still matches the frozen record,PASS,
+xgb: artefact hash still matches the frozen record,PASS,
+mlp: artefact hash still matches the frozen record,PASS,
+xgb_native: artefact hash still matches the frozen record,PASS,
+the Test run used the frozen specification file,PASS,frozen file unchanged since the Test run
+the Test run was not a dry run,PASS,
+the split evaluated was 'test',PASS,
+"thresholds are the Validation-derived frozen values, not recomputed on Test",PASS,"{'lr': 0.4969790829676273, 'xgb': 0.1290776282548904, 'mlp': 0.5540570616722107, 'xgb_native': 0.0887413322925567}"
+preprocessing parameters come from Training only,PASS,"refitting on the whole cohort changes the fill values, so Test did not contribute"
+Test transform produces the frozen columns in the frozen order,PASS,
+no NaN in the Test design matrix,PASS,
+no Inf in the Test design matrix,PASS,
+frozen features are all present in the Test design matrix,PASS,
+lr: saved Test predictions reproduce from the frozen model,PASS,max |difference| = 1.110e-16
+xgb: saved Test predictions reproduce from the frozen model,PASS,max |difference| = 1.415e-08
+mlp: saved Test predictions reproduce from the frozen model,PASS,max |difference| = 2.880e-08
+xgb_native: saved Test predictions reproduce from the frozen model,PASS,max |difference| = 2.975e-08
+all saved Test predictions reproduce within 1e-6,PASS,largest difference across models 2.975e-08
+the Test set was evaluated exactly once,PASS,"1 evaluation(s), 3 log entries total"
+paired DeLong has not been run for Task B alone,PASS,DeLong waits for Task C so that CXR and Late Fusion join the same patients
