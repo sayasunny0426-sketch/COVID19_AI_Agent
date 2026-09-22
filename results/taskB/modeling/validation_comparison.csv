@@ -1,0 +1,5 @@
+model,role,condition,cv_mean_auroc,cv_sd_auroc,val_auroc,val_auprc,val_brier,val_ece_5bin,threshold_youden,threshold_sens80,val_sensitivity_at_youden,val_specificity_at_youden,val_ppv_at_youden,val_npv_at_youden,n_features
+lr,primary,C=1.0_cw=balanced,0.889049,0.037311,0.895072,0.634584,0.116927,0.163569,0.496979083,0.57610949,0.8824,0.8649,0.5,0.9796,12
+xgb,primary,max_depth=3_learning_rate=0.03_min_child_weight=10_subsample=0.8_colsample_bytree=0.8_scale_pos_weight=1.0_reg_lambda=1.0,0.884746,0.039294,0.880763,0.549404,0.085876,0.039872,0.129077628,0.129077628,0.8235,0.8649,0.4828,0.9697,12
+mlp,primary,"hidden=(32, 16)_dropout=0.3_lr=0.0003_weight_decay=0.001_batch_size=32_pos_weight=6.562962962962963",0.879615,0.044333,0.864865,0.647555,0.168613,0.295272,0.554057062,0.554057062,0.8235,0.8559,0.4667,0.9694,12
+xgb_native,secondary,max_depth=3_learning_rate=0.03_min_child_weight=10_subsample=1.0_colsample_bytree=0.8_scale_pos_weight=1.0_reg_lambda=10.0,0.884318,0.038048,0.878643,0.593184,0.08179,0.024983,0.088741332,0.125506759,0.8824,0.7838,0.3846,0.9775,11

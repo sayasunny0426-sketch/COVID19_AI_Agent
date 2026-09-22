@@ -1,0 +1,196 @@
+{
+  "generated": "2026-09-22T23:56:17+09:00",
+  "script": "28_taskB_pre_test_qc.py",
+  "scope": "Training and Validation only. Test rows were not materialised; the Test side was checked from the split manifest (ids and split column) alone.",
+  "deferred_to_post_test_qc": [
+    "Test transform produces the same columns in the same order",
+    "no NaN / Inf in the Test design matrix",
+    "Test prediction count equals the Test patient count",
+    "Test predictions aligned with Subject ID",
+    "Test cohort and death counts match the frozen split"
+  ],
+  "n_checks": 36,
+  "n_failed": 0,
+  "checks": [
+    {
+      "check": "split manifest: Subject ID uniqueness",
+      "result": "PASS",
+      "detail": "1277 unique of 1277"
+    },
+    {
+      "check": "split manifest: no patient appears in two splits",
+      "result": "PASS",
+      "detail": "0 overlaps"
+    },
+    {
+      "check": "split manifest: cohort sizes match the frozen split",
+      "result": "PASS",
+      "detail": "{'train': 1021, 'val': 128, 'test': 128}"
+    },
+    {
+      "check": "split manifest: Test patients are present and held out",
+      "result": "PASS",
+      "detail": "128 Test ids exist in the manifest and appear in no other split (their outcomes and clinical values were not read)"
+    },
+    {
+      "check": "loader returned only Training and Validation rows",
+      "result": "PASS",
+      "detail": "['train', 'val']"
+    },
+    {
+      "check": "development death counts match the frozen split",
+      "result": "PASS",
+      "detail": "{'train': 135, 'val': 17}"
+    },
+    {
+      "check": "outcome consistency in development rows",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no post-T0 / outcome column is used as a predictor",
+      "result": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no missing indicator for sex (D-072)",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "every clinical column has a recorded keep/drop reason",
+      "result": "PASS",
+      "detail": "0 without a reason"
+    },
+    {
+      "check": "saved spec records that it was fitted on Training only",
+      "result": "PASS",
+      "detail": "train only"
+    },
+    {
+      "check": "Validation rows were not used to fit the preprocessor",
+      "result": "PASS",
+      "detail": "refitting on Train+Val changes the fill values, so they are Training-only"
+    },
+    {
+      "check": "no NaN in the Training design matrix",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no Inf in the Training design matrix",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen features are all present in the design matrix",
+      "result": "PASS",
+      "detail": "12 features"
+    },
+    {
+      "check": "Validation: transform produces the same columns in the same order",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Validation: no NaN / Inf after transform",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "preprocessing is deterministic",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen selection records that Test predictions were not generated",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen selection carries the exact Test-status wording",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen selection fixes the downstream prediction schema",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen selection fixes the DeLong family and correction before Test",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen selection fixes the feature-importance plan before Test",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "lr: saved model artefact exists",
+      "result": "PASS",
+      "detail": "model_lr.joblib"
+    },
+    {
+      "check": "lr: artefact hash matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "xgb: saved model artefact exists",
+      "result": "PASS",
+      "detail": "model_xgb.json"
+    },
+    {
+      "check": "xgb: artefact hash matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "mlp: saved model artefact exists",
+      "result": "PASS",
+      "detail": "model_mlp.pth"
+    },
+    {
+      "check": "mlp: artefact hash matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "xgb_native: saved model artefact exists",
+      "result": "PASS",
+      "detail": "model_xgb_native.json"
+    },
+    {
+      "check": "xgb_native: artefact hash matches the frozen record",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Validation predictions: one row per patient",
+      "result": "PASS",
+      "detail": "128 vs 128"
+    },
+    {
+      "check": "Validation predictions aligned with Subject ID",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Validation predictions carry the correct labels",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "all Validation probabilities are in [0,1]",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no Test prediction or Test metric file exists",
+      "result": "PASS",
+      "detail": "Test predictions have not been generated"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+check,result,detail
+split manifest: Subject ID uniqueness,PASS,1277 unique of 1277
+split manifest: no patient appears in two splits,PASS,0 overlaps
+split manifest: cohort sizes match the frozen split,PASS,"{'train': 1021, 'val': 128, 'test': 128}"
+split manifest: Test patients are present and held out,PASS,128 Test ids exist in the manifest and appear in no other split (their outcomes and clinical values were not read)
+loader returned only Training and Validation rows,PASS,"['train', 'val']"
+development death counts match the frozen split,PASS,"{'train': 135, 'val': 17}"
+outcome consistency in development rows,PASS,
+no post-T0 / outcome column is used as a predictor,PASS,[]
+no missing indicator for sex (D-072),PASS,
+every clinical column has a recorded keep/drop reason,PASS,0 without a reason
+saved spec records that it was fitted on Training only,PASS,train only
+Validation rows were not used to fit the preprocessor,PASS,"refitting on Train+Val changes the fill values, so they are Training-only"
+no NaN in the Training design matrix,PASS,
+no Inf in the Training design matrix,PASS,
+frozen features are all present in the design matrix,PASS,12 features
+Validation: transform produces the same columns in the same order,PASS,
+Validation: no NaN / Inf after transform,PASS,
+preprocessing is deterministic,PASS,
+frozen selection records that Test predictions were not generated,PASS,
+frozen selection carries the exact Test-status wording,PASS,
+frozen selection fixes the downstream prediction schema,PASS,
+frozen selection fixes the DeLong family and correction before Test,PASS,
+frozen selection fixes the feature-importance plan before Test,PASS,
+lr: saved model artefact exists,PASS,model_lr.joblib
+lr: artefact hash matches the frozen record,PASS,
+xgb: saved model artefact exists,PASS,model_xgb.json
+xgb: artefact hash matches the frozen record,PASS,
+mlp: saved model artefact exists,PASS,model_mlp.pth
+mlp: artefact hash matches the frozen record,PASS,
+xgb_native: saved model artefact exists,PASS,model_xgb_native.json
+xgb_native: artefact hash matches the frozen record,PASS,
+Validation predictions: one row per patient,PASS,128 vs 128
+Validation predictions aligned with Subject ID,PASS,
+Validation predictions carry the correct labels,PASS,
+"all Validation probabilities are in [0,1]",PASS,
+no Test prediction or Test metric file exists,PASS,Test predictions have not been generated

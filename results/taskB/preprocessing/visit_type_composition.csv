@@ -1,0 +1,7 @@
+split,visit_concept_name,n,deaths,death_rate
+test,Emergency Room Visit,32,0,0.0
+test,Inpatient Visit,96,17,0.1771
+train,Emergency Room Visit,262,1,0.0038
+train,Inpatient Visit,759,134,0.1765
+val,Emergency Room Visit,28,1,0.0357
+val,Inpatient Visit,100,16,0.16

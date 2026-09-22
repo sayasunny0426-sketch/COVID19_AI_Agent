@@ -1,0 +1,52 @@
+{
+  "generated": "2026-09-22T23:57:33+09:00",
+  "script": "29_taskB_indicator_sensitivity.py",
+  "purpose": "make the effect of the missing-indicator rule visible before the primary specification is frozen; the specification is not changed by these numbers",
+  "wording": "the rule was pre-specified before variable selection was run in this Task B analysis, not registered in advance of the study",
+  "datasets_used": "Training (selection, CV) and Validation (reported performance)",
+  "test_used": false,
+  "arms": [
+    {
+      "arm": "A_forced_in",
+      "description": "指示変数を lymph 変数群に含め、選択の対象外とする（D-070 の規則どおり）",
+      "indicator_in_model": true,
+      "n_variables": 10,
+      "n_coefficients": 12,
+      "selected_variables": "age, sex, spo2, sbp, crp, lymph, ddimer, lactate, egfr, troponin",
+      "comorbidity_retained": false,
+      "cv_mean_auroc": 0.889049,
+      "cv_sd_auroc": 0.037311,
+      "val_auroc": 0.895072,
+      "val_auprc": 0.634584,
+      "val_brier": 0.116927
+    },
+    {
+      "arm": "B_selectable",
+      "description": "指示変数を独立した選択単位とし、AIC が落とせるようにする",
+      "indicator_in_model": false,
+      "n_variables": 10,
+      "n_coefficients": 11,
+      "selected_variables": "age, sex, spo2, sbp, crp, lymph, ddimer, lactate, egfr, troponin",
+      "comorbidity_retained": false,
+      "cv_mean_auroc": 0.8894,
+      "cv_sd_auroc": 0.038188,
+      "val_auroc": 0.892952,
+      "val_auprc": 0.652742,
+      "val_brier": 0.117247
+    },
+    {
+      "arm": "C_no_indicator",
+      "description": "欠測指示変数を一切作らない",
+      "indicator_in_model": false,
+      "n_variables": 10,
+      "n_coefficients": 11,
+      "selected_variables": "age, sex, spo2, sbp, crp, lymph, ddimer, lactate, egfr, troponin",
+      "comorbidity_retained": false,
+      "cv_mean_auroc": 0.8894,
+      "cv_sd_auroc": 0.038188,
+      "val_auroc": 0.892952,
+      "val_auprc": 0.652742,
+      "val_brier": 0.117247
+    }
+  ]
+}

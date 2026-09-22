@@ -1,0 +1,14 @@
+variable_or_group,reason_not_selected
+39156-5_Body mass index (BMI) [Ratio],肥満は死亡リスク因子だが Train 欠測 32%。4C には含まれず、パラメータ予算を優先して見送り
+8331-1_Oral temperature,発熱は重症度と単調に関連せず（低体温も予後不良）、既存スコアでの寄与も小さいため見送り
+76282-3_Heart rate.beat-to-beat by EKG,SBP・呼吸数と重複する循環・代償の指標で、4C には含まれないため見送り
+2276-4_Ferritin [Mass/volume] in Serum or Plasma,炎症の指標だが CRP と重複し、Train 欠測 35%
+75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay,細菌感染合併の指標で CRP と重複。Train 欠測 23%
+33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count,リンパ球数と重複（NLR の構成要素）。リンパ球減少の方が文献的根拠が強い
+751-8_Neutrophils [#/volume] in Blood by Automated count,同上。リンパ球数と強く相関
+2160-0_Creatinine [Mass/volume] in Serum or Plasma,BUN・eGFR と強い共線性。腎領域は BUN（急性）と eGFR（慢性）で代表させる
+days_prior_sx,発症からの日数は予後と関連しうるが、自己申告で Train 欠測 24%。既存スコアに含まれない
+smoking_status_v,COVID-19 死亡との関連は文献間で一貫しない。Train 欠測 22%
+33762-6_Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma,心不全の指標だが Train 欠測 42%、併存症の hf と重複
+symptoms (cough_v / dyspnea_admission_v / fever_v ほか),自覚症状は主観的で Train 欠測 21-25%、既存スコアでは客観的生理指標に置換されている
+A1C / 脂質 / ESR / 尿検査,Train 欠測 55-85% で、かつ急性期の死亡予測における文献的根拠が弱い

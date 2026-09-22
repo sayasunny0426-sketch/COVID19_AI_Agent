@@ -1,0 +1,32 @@
+{
+  "generated": "2026-09-22T23:36:57+09:00",
+  "script": "24_taskB_missing_indicator_decision.py",
+  "dataset_used_for_decision": "Training only (n=1021, deaths=135)",
+  "validation_role": "この判断には使用しない。Validation はハイパーパラメータ選択・モデル選択・閾値決定にのみ用いる",
+  "test_role": "使用しない",
+  "criteria": {
+    "C1": "Training 欠測率 >= 5%",
+    "C2": "入院例内でも欠測と死亡の関連が p<0.05 で維持される",
+    "C3": "フルパネル症例に限定しても Bonferroni alpha=0.0071 で維持される",
+    "C4": "欠測が高い死亡率と関連する（向きの検証）",
+    "C5": "患者状態を反映する臨床的機序が事前に説明できる"
+  },
+  "n_variables_tested_for_bonferroni": 7,
+  "adopted": [
+    "lymph"
+  ],
+  "not_adopted": [
+    "age",
+    "sex",
+    "spo2",
+    "rr",
+    "sbp",
+    "bun",
+    "crp",
+    "ddimer",
+    "lactate",
+    "egfr",
+    "troponin",
+    "comorbidity"
+  ]
+}

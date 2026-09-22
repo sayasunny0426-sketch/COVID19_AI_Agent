@@ -1,0 +1,124 @@
+{
+  "generated": "2026-09-22T23:54:56+09:00",
+  "script": "26_taskB_train_models.py",
+  "seed": 42,
+  "selection_metric": "mean ROC-AUC over repeated stratified 5-fold x 3 CV inside Training",
+  "validation_role": "reported once per condition; family comparison and threshold only",
+  "test_used": false,
+  "features": [
+    "age_(59,74]",
+    "age_(74,90]",
+    "sex_MALE",
+    "spo2",
+    "sbp",
+    "crp",
+    "lymph",
+    "lymph_missing",
+    "ddimer",
+    "lactate",
+    "egfr",
+    "troponin_detectable"
+  ],
+  "n_features": 12,
+  "grids": {
+    "lr": {
+      "C": [
+        "0.01",
+        "0.1",
+        "1.0",
+        "10.0"
+      ],
+      "class_weight": [
+        "None",
+        "balanced"
+      ]
+    },
+    "xgb_stage1": {
+      "max_depth": [
+        "2",
+        "3"
+      ],
+      "learning_rate": [
+        "0.03",
+        "0.05",
+        "0.1"
+      ],
+      "min_child_weight": [
+        "1",
+        "5",
+        "10"
+      ]
+    },
+    "xgb_stage1_fixed": {
+      "subsample": "0.8",
+      "colsample_bytree": "0.8",
+      "scale_pos_weight": "1.0",
+      "reg_lambda": "1.0"
+    },
+    "xgb_stage2": {
+      "subsample": [
+        "0.8",
+        "1.0"
+      ],
+      "colsample_bytree": [
+        "0.8",
+        "1.0"
+      ],
+      "scale_pos_weight": [
+        "1.0",
+        "6.562962962962963"
+      ],
+      "reg_lambda": [
+        "1.0",
+        "10.0"
+      ]
+    },
+    "xgb_n_estimators": 300,
+    "mlp_stage1": {
+      "hidden": [
+        "(16, 8)",
+        "(32, 16)"
+      ],
+      "dropout": [
+        "0.2",
+        "0.3"
+      ],
+      "lr": [
+        "0.0001",
+        "0.0003",
+        "0.001"
+      ]
+    },
+    "mlp_stage1_fixed": {
+      "weight_decay": "0.0001",
+      "batch_size": "32",
+      "pos_weight": "1.0"
+    },
+    "mlp_stage2": {
+      "weight_decay": [
+        "0.0001",
+        "0.001"
+      ],
+      "batch_size": [
+        "32",
+        "64"
+      ],
+      "pos_weight": [
+        "1.0",
+        "6.562962962962963"
+      ]
+    }
+  },
+  "results": {
+    "mlp": {
+      "n_conditions": 20,
+      "best_condition": "hidden=(32, 16)_dropout=0.3_lr=0.0003_weight_decay=0.001_batch_size=32_pos_weight=6.562962962962963",
+      "cv_mean_auroc": 0.879615,
+      "cv_sd_auroc": 0.044333,
+      "cv_mean_auprc": 0.563256,
+      "val_auroc": 0.864865,
+      "val_auprc": 0.647555,
+      "minutes": 28.9
+    }
+  }
+}

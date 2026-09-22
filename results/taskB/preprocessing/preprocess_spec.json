@@ -1,0 +1,161 @@
+{
+  "generated": "2026-09-22T23:36:23+09:00",
+  "script": "22_taskB_preprocess_spec.py",
+  "fitted_on": "train only",
+  "n_train": 1021,
+  "deaths_train": 135,
+  "implausible_bounds": {
+    "8331-1_Oral temperature": [
+      30.0,
+      43.0
+    ],
+    "59408-5_Oxygen saturation in Arterial blood by Pulse oximetry": [
+      40.0,
+      100.0
+    ],
+    "9279-1_Respiratory rate": [
+      4.0,
+      60.0
+    ],
+    "76282-3_Heart rate.beat-to-beat by EKG": [
+      20.0,
+      250.0
+    ],
+    "8480-6_Systolic blood pressure": [
+      50.0,
+      260.0
+    ],
+    "76536-2_Mean blood pressure by Noninvasive": [
+      30.0,
+      200.0
+    ],
+    "39156-5_Body mass index (BMI) [Ratio]": [
+      12.0,
+      80.0
+    ],
+    "2951-2_Sodium [Moles/volume] in Serum or Plasma": [
+      100.0,
+      180.0
+    ],
+    "2823-3_Potassium [Moles/volume] in Serum or Plasma": [
+      1.5,
+      9.0
+    ],
+    "33254-4_pH of Arterial blood adjusted to patient's actual temperature": [
+      6.7,
+      7.8
+    ]
+  },
+  "implausible_set_to_missing_train": 7,
+  "continuous": {
+    "spo2": {
+      "column": "59408-5_Oxygen saturation in Arterial blood by Pulse oximetry",
+      "transform": "none",
+      "imputation": "median",
+      "fill_value": 95.0,
+      "missing_indicator": false
+    },
+    "rr": {
+      "column": "9279-1_Respiratory rate",
+      "transform": "log1p",
+      "imputation": "median",
+      "fill_value": 3.044522437723423,
+      "missing_indicator": false
+    },
+    "sbp": {
+      "column": "8480-6_Systolic blood pressure",
+      "transform": "none",
+      "imputation": "mean",
+      "fill_value": 129.34641805691854,
+      "missing_indicator": false
+    },
+    "bun": {
+      "column": "3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma",
+      "transform": "log1p",
+      "imputation": "median",
+      "fill_value": 2.772588722239781,
+      "missing_indicator": true
+    },
+    "crp": {
+      "column": "1988-5_C reactive protein [Mass/volume] in Serum or Plasma",
+      "transform": "log1p",
+      "imputation": "median",
+      "fill_value": 2.2407096892759584,
+      "missing_indicator": true
+    },
+    "lymph": {
+      "column": "731-0_Lymphocytes [#/volume] in Blood by Automated count",
+      "transform": "log1p",
+      "imputation": "median",
+      "fill_value": 0.6626879730752367,
+      "missing_indicator": true
+    },
+    "ddimer": {
+      "column": "48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay",
+      "transform": "log1p",
+      "imputation": "median",
+      "fill_value": 5.857933154483459,
+      "missing_indicator": true
+    },
+    "lactate": {
+      "column": "2524-7_Lactate [Moles/volume] in Serum or Plasma",
+      "transform": "log1p",
+      "imputation": "median",
+      "fill_value": 0.9162907318741551,
+      "missing_indicator": true
+    },
+    "egfr": {
+      "column": "62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI)",
+      "transform": "none",
+      "imputation": "median",
+      "fill_value": 86.0,
+      "missing_indicator": true
+    }
+  },
+  "categorical": {
+    "age": {
+      "column": "age.splits",
+      "imputation": "none",
+      "fill_value": null
+    },
+    "sex": {
+      "column": "gender_concept_name",
+      "imputation": "mode",
+      "fill_value": "MALE"
+    },
+    "troponin": {
+      "column": "6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma",
+      "imputation": "explicit_level",
+      "fill_value": null
+    },
+    "comorbidity": {
+      "column": "__derived__",
+      "imputation": "explicit_level",
+      "fill_value": null
+    }
+  },
+  "onehot_reference_levels": {
+    "age": "[18,59]",
+    "sex": "FEMALE",
+    "comorbidity": "0"
+  },
+  "onehot_drop_first": true,
+  "onehot_drop_first_rationale": "LR では全水準を残すと切片と完全共線になり係数が一意に定まらない。旧 Task B は drop='first' を指定せず全水準を保持していたが、本実装では参照水準を臨床的に低リスク側に固定して解釈可能な OR を得る",
+  "scaling": {
+    "applied_to": [
+      "logistic_regression",
+      "mlp"
+    ],
+    "method": "StandardScaler（Training で fit）",
+    "not_applied_to": [
+      "xgboost"
+    ],
+    "rationale": "決定木は単調変換に不変で scaling の恩恵がなく、生値のままの方が分割点が解釈しやすい"
+  },
+  "missing_indicator_threshold": 0.1,
+  "skew_thresholds": {
+    "symmetric": 0.5,
+    "strong": 1.0
+  },
+  "leakage_guard": "すべての統計量は Training のみで算出。Validation / Test は参照していない"
+}

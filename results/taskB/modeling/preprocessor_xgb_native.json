@@ -1,0 +1,90 @@
+{
+  "native_missing": true,
+  "scale": false,
+  "missing_indicators": [
+    "lymph"
+  ],
+  "transforms": {
+    "spo2": "none",
+    "rr": "log1p",
+    "sbp": "none",
+    "bun": "log1p",
+    "crp": "log1p",
+    "lymph": "log1p",
+    "ddimer": "log1p",
+    "lactate": "log1p",
+    "egfr": "none"
+  },
+  "fill_strategy": {
+    "spo2": "median",
+    "rr": "median",
+    "sbp": "mean",
+    "bun": "median",
+    "crp": "median",
+    "lymph": "median",
+    "ddimer": "median",
+    "lactate": "median",
+    "egfr": "median"
+  },
+  "fill_values": {
+    "spo2": 95.0,
+    "rr": 3.044522437723423,
+    "sbp": 129.34641805691854,
+    "bun": 2.772588722239781,
+    "crp": 2.2407096892759584,
+    "lymph": 0.6626879730752367,
+    "ddimer": 5.857933154483459,
+    "lactate": 0.9162907318741551,
+    "egfr": 86.0
+  },
+  "category_fill": {
+    "sex": "MALE"
+  },
+  "category_levels": {
+    "age": [
+      "[18,59]",
+      "(59,74]",
+      "(74,90]"
+    ],
+    "sex": [
+      "FEMALE",
+      "MALE"
+    ],
+    "troponin": [
+      "undetectable",
+      "detectable"
+    ],
+    "comorbidity": [
+      "0",
+      "1",
+      "2+",
+      "NotAbstracted"
+    ]
+  },
+  "reference_levels": {
+    "age": "[18,59]",
+    "sex": "FEMALE",
+    "troponin": "undetectable",
+    "comorbidity": "0"
+  },
+  "scaler": {},
+  "feature_names": [
+    "spo2",
+    "rr",
+    "sbp",
+    "bun",
+    "crp",
+    "lymph",
+    "ddimer",
+    "lactate",
+    "egfr",
+    "age_(59,74]",
+    "age_(74,90]",
+    "sex_MALE",
+    "troponin_detectable",
+    "comorbidity_1",
+    "comorbidity_2+",
+    "comorbidity_NotAbstracted"
+  ],
+  "fitted_on": "train only"
+}

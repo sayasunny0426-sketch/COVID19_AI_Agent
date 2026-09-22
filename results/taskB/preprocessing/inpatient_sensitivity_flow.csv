@@ -1,0 +1,8 @@
+step,n,deaths,note
+1. 臨床ファイルの全患者,1384,,患者データファイル.csv（ID 重複なし）
+2. うち visit_concept_name = Inpatient Visit,1025,,受診形態の内訳（臨床ファイル全体）
+2. うち visit_concept_name = Emergency Room Visit,357,,受診形態の内訳（臨床ファイル全体）
+2. うち visit_concept_name = Outpatient Visit,2,,受診形態の内訳（臨床ファイル全体）
+3. CXR 選定後の固定コホート,1277,169.0,"Task A の index CXR 選定規則（T0-2 日〜T0 当日）を満たした患者。臨床ファイルの 1,384 例のうち 107 例が CXR 条件を満たさず対象外"
+4. 固定コホート ∩ Inpatient Visit（感度分析の対象）,955,167.0,感度分析集団
+5. 固定コホートのうち Emergency Room Visit（感度分析で除外）,322,2.0,ED で評価され帰宅した患者。Training では在院日数 中央値 1 日

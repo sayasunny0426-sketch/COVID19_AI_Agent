@@ -1,0 +1,45 @@
+{
+  "generated": "2026-09-22T23:35:24+09:00",
+  "script": "21_taskB_clinical_audit.py",
+  "cohort_development_only": {
+    "train": 1021,
+    "val": 128,
+    "deaths": {
+      "train": 135,
+      "val": 17
+    },
+    "test": "not read (held out until the Test evaluation is approved)"
+  },
+  "outcome_consistency_mismatches": 0,
+  "columns_total": 131,
+  "roles": {
+    "EXCLUDE_derived_duplicate": 54,
+    "NOT_SELECTED": 30,
+    "CANDIDATE": 12,
+    "EXCLUDE_post_T0": 11,
+    "CONSIDERED_not_selected": 11,
+    "CANDIDATE_member": 8,
+    "ADMIN": 4,
+    "EXCLUDE_constant": 1
+  },
+  "columns_without_reason": 0,
+  "candidates": {
+    "n_variables": 13,
+    "estimated_parameters": 15,
+    "parameter_budget": 13,
+    "epv_target": 10,
+    "selection_required": true
+  },
+  "chart_block": {
+    "n_columns": 21,
+    "train_all_missing": 178,
+    "death_rate_block_missing": 0.0955,
+    "death_rate_block_present": 0.14
+  },
+  "implausible_values": 7,
+  "input_sha256": {
+    "clinical": "6248f0c37db20d6102d8781b6d86cfeccd5e275635b3ad75d23b42026460264a",
+    "split": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8"
+  },
+  "note": "Training set のみを用いて算出。Validation / Test は件数確認以外に参照していない"
+}

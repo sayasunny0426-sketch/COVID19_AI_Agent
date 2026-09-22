@@ -1,0 +1,293 @@
+{
+  "frozen": "2026-09-22T23:55:52+09:00",
+  "script": "27_taskB_select_and_freeze.py",
+  "seed": 42,
+  "cohort": {
+    "train": 1021,
+    "val": 128,
+    "deaths_train": 135,
+    "deaths_val": 17
+  },
+  "features_primary": [
+    "age_(59,74]",
+    "age_(74,90]",
+    "sex_MALE",
+    "spo2",
+    "sbp",
+    "crp",
+    "lymph",
+    "lymph_missing",
+    "ddimer",
+    "lactate",
+    "egfr",
+    "troponin_detectable"
+  ],
+  "n_features_primary": 12,
+  "selection_rule": "hyperparameters by repeated stratified CV inside Training; family comparison and threshold on Validation; Test unused",
+  "threshold_rule": "primary: Validation Youden maximum, tie-break lowest threshold. secondary (exploratory): highest threshold with Validation sensitivity >= 0.80. Neither is recomputed on Test.",
+  "models": {
+    "lr": {
+      "condition": "C=1.0_cw=balanced",
+      "params": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "penalty": "l2",
+        "solver": "lbfgs"
+      },
+      "features": [
+        "age_(59,74]",
+        "age_(74,90]",
+        "sex_MALE",
+        "spo2",
+        "sbp",
+        "crp",
+        "lymph",
+        "lymph_missing",
+        "ddimer",
+        "lactate",
+        "egfr",
+        "troponin_detectable"
+      ],
+      "n_features": 12,
+      "artefact": "model_lr.joblib",
+      "artefact_sha256": "308e4d705e3c4f1eccdf8f5978409e3e195b278f1a9f1adb4c21060f4b900af4",
+      "preprocessor": "preprocessor_lr.json",
+      "preprocessor_sha256": "a34b867b1de5cb18703cbfbf6d56351fb1637a7010ebd9ab9d0858ea1f855f9e",
+      "threshold_youden": 0.49697908296762733,
+      "threshold_sens80": 0.5761094898423746,
+      "cv_mean_auroc": 0.889049,
+      "val_auroc": 0.8950715421303657
+    },
+    "xgb": {
+      "condition": "max_depth=3_learning_rate=0.03_min_child_weight=10_subsample=0.8_colsample_bytree=0.8_scale_pos_weight=1.0_reg_lambda=1.0",
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.03,
+        "min_child_weight": 10,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "scale_pos_weight": 1.0,
+        "reg_lambda": 1.0
+      },
+      "features": [
+        "age_(59,74]",
+        "age_(74,90]",
+        "sex_MALE",
+        "spo2",
+        "sbp",
+        "crp",
+        "lymph",
+        "lymph_missing",
+        "ddimer",
+        "lactate",
+        "egfr",
+        "troponin_detectable"
+      ],
+      "n_features": 12,
+      "artefact": "model_xgb.json",
+      "artefact_sha256": "796fd344a382dde608b0eabce881ce628f3624a8929d263cb7001aaa1f57bc21",
+      "preprocessor": "preprocessor_xgb.json",
+      "preprocessor_sha256": "a34b867b1de5cb18703cbfbf6d56351fb1637a7010ebd9ab9d0858ea1f855f9e",
+      "threshold_youden": 0.12907762825489044,
+      "threshold_sens80": 0.12907762825489044,
+      "cv_mean_auroc": 0.884746,
+      "val_auroc": 0.8807631160572337
+    },
+    "mlp": {
+      "condition": "hidden=(32, 16)_dropout=0.3_lr=0.0003_weight_decay=0.001_batch_size=32_pos_weight=6.562962962962963",
+      "params": {
+        "hidden": [
+          32,
+          16
+        ],
+        "dropout": 0.3,
+        "lr": 0.0003,
+        "weight_decay": 0.001,
+        "batch_size": 32,
+        "pos_weight": 6.562962962962963,
+        "best_epoch": 15
+      },
+      "features": [
+        "age_(59,74]",
+        "age_(74,90]",
+        "sex_MALE",
+        "spo2",
+        "sbp",
+        "crp",
+        "lymph",
+        "lymph_missing",
+        "ddimer",
+        "lactate",
+        "egfr",
+        "troponin_detectable"
+      ],
+      "n_features": 12,
+      "artefact": "model_mlp.pth",
+      "artefact_sha256": "44df480d2d2496ad17dcd71e9c46ec287a01d95cb4fa87a4262e51f97e6e4c29",
+      "preprocessor": "preprocessor_mlp.json",
+      "preprocessor_sha256": "a34b867b1de5cb18703cbfbf6d56351fb1637a7010ebd9ab9d0858ea1f855f9e",
+      "threshold_youden": 0.5540570616722107,
+      "threshold_sens80": 0.5540570616722107,
+      "cv_mean_auroc": 0.879615,
+      "val_auroc": 0.8648648648648649
+    },
+    "xgb_native": {
+      "condition": "max_depth=3_learning_rate=0.03_min_child_weight=10_subsample=1.0_colsample_bytree=0.8_scale_pos_weight=1.0_reg_lambda=10.0",
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.03,
+        "min_child_weight": 10,
+        "subsample": 1.0,
+        "colsample_bytree": 0.8,
+        "scale_pos_weight": 1.0,
+        "reg_lambda": 10.0
+      },
+      "features": [
+        "age_(59,74]",
+        "age_(74,90]",
+        "sex_MALE",
+        "spo2",
+        "sbp",
+        "crp",
+        "lymph",
+        "ddimer",
+        "lactate",
+        "egfr",
+        "troponin_detectable"
+      ],
+      "n_features": 11,
+      "artefact": "model_xgb_native.json",
+      "artefact_sha256": "2c02aa2699deed22336cdba9ed919d121fabb9f4ac64828558dea22e0b0713ea",
+      "preprocessor": "preprocessor_xgb_native.json",
+      "preprocessor_sha256": "4ef59822ec4f78038c203d23b0d3c5f2b519ced48b4efb001ad930644f250afd",
+      "threshold_youden": 0.08874133229255676,
+      "threshold_sens80": 0.12550675868988037,
+      "cv_mean_auroc": 0.884318,
+      "val_auroc": 0.8786433492315845
+    }
+  },
+  "best_primary_family_on_validation": "lr",
+  "report_all_three": true,
+  "candidate_variables": [
+    "age",
+    "sex",
+    "spo2",
+    "rr",
+    "sbp",
+    "bun",
+    "crp",
+    "lymph",
+    "ddimer",
+    "lactate",
+    "egfr",
+    "troponin",
+    "comorbidity"
+  ],
+  "missing_indicator_rule": {
+    "adopted": [
+      "lymph"
+    ],
+    "wording": "pre-specified before variable selection in this Task B run",
+    "why_kept_in_primary": [
+      "the rule was fixed before variable selection was run and is applied consistently",
+      "the specification is not changed on the basis of Validation or Test performance",
+      "the size of its effect is made explicit by the arm A/B/C sensitivity analysis"
+    ],
+    "not_because": "it produced a higher Validation AUROC",
+    "sensitivity": "results/taskB/variable_selection/indicator_rule_sensitivity.csv"
+  },
+  "secondary_analyses": {
+    "xgb_native": "pre-specified secondary model. Native missing handling did not improve cross-validated performance compared with the imputation-based approach in this analysis.",
+    "inpatient_only": "pre-specified sensitivity analysis on the 955 patients coded Inpatient Visit, to check that the main result is robust when restricted to inpatient-coded encounters"
+  },
+  "feature_importance_plan": {
+    "primary_method": "permutation importance",
+    "primary_rationale": "the only model-agnostic measure that puts a linear model, a tree ensemble and a neural network on the same scale, so the three families can be compared fairly",
+    "dataset": "Validation (the Test set is not used for interpretability)",
+    "metric": "decrease in ROC-AUC when one feature is permuted",
+    "n_repeats": 30,
+    "seed": 42,
+    "secondary_per_family": {
+      "lr": "standardised coefficients and odds ratios with 95% CI",
+      "xgb": "native gain-based importance",
+      "mlp": "none beyond permutation importance"
+    },
+    "not_used": {
+      "SHAP": "values are not comparable across model families in one scale, so it cannot serve the primary cross-model comparison"
+    },
+    "caveats": [
+      "Feature importance is not causal importance.",
+      "Correlated predictors share importance, so a low value does not mean a variable is clinically unimportant. In this feature set bun/egfr and crp/ddimer/lymph are correlated.",
+      "Permutation importance is computed on 128 Validation patients with 17 events, so individual values carry wide uncertainty."
+    ],
+    "output": "results/taskB/feature_importance/permutation_importance_validation.csv"
+  },
+  "prediction_schema": {
+    "file": "results/taskB/evaluation/test_predictions_taskB.csv",
+    "required_columns": [
+      "subject_id",
+      "true_label",
+      "prob_clinical_lr",
+      "prob_clinical_xgboost",
+      "prob_clinical_mlp"
+    ],
+    "optional_columns": [
+      "split",
+      "prob_clinical_xgboost_native",
+      "pred_clinical_lr",
+      "pred_clinical_xgboost",
+      "pred_clinical_mlp",
+      "model_version",
+      "run_id"
+    ],
+    "join_key": "subject_id",
+    "id_dtype": "str",
+    "one_row_per_patient": true,
+    "patient_order": "fixed split manifest order, filtered to split == 'test'",
+    "patient_order_sha256": "235bd8320899ab8b1cf3974885571557e5db46ab6b3747da5c6a5f4867ea5219",
+    "constraints": [
+      "no duplicate subject_id",
+      "no missing prediction",
+      "probabilities in [0,1]",
+      "true_label verified against the fixed split"
+    ],
+    "merge_target": "results/comparison/test_predictions_all_models.csv",
+    "merge_partners": [
+      "results/taskA/evaluation/test_predictions_primary.csv (prob_cxr)",
+      "Task C Late Fusion (prob_late_fusion)"
+    ],
+    "status": "fixed before the Test evaluation; the file does not exist yet"
+  },
+  "delong_plan": {
+    "test": "paired DeLong (DeLong 1988; Sun & Xu 2014 fast algorithm), midranks for ties",
+    "implementation": "src/covid_mortality/evaluation/delong.py (numpy only, shared with Task A)",
+    "pairing": "the same Test patients for every model; predictions are merged on subject_id and the row order is verified before testing. Two-sample AUC comparisons are not used.",
+    "family": [
+      "late_fusion vs clinical_lr",
+      "late_fusion vs clinical_xgboost",
+      "late_fusion vs clinical_mlp",
+      "late_fusion vs cxr"
+    ],
+    "family_rationale": "the confirmatory question is whether multimodal Late Fusion improves on each single-modality model, so the family is the four Late Fusion comparisons. Comparisons among the single-modality models are exploratory and reported with unadjusted p-values, labelled as such.",
+    "multiplicity_correction": "Holm, applied within the family above",
+    "outputs_per_comparison": [
+      "auc_a",
+      "auc_b",
+      "auc_difference",
+      "se_of_difference",
+      "z",
+      "p_value_unadjusted",
+      "p_value_holm",
+      "ci95_low",
+      "ci95_high"
+    ],
+    "output_files": [
+      "results/comparison/delong_results.json",
+      "results/comparison/delong_results.csv"
+    ],
+    "fixed_before_test": true
+  },
+  "test_status": "Test predictions and Test performance metrics have not been generated. The Test set had previously been accessed for limited QC purposes, but no Test information was used for preprocessing fitting, variable selection, hyperparameter tuning, checkpoint selection, or model selection.",
+  "test_access_log": "results/taskB/qc/test_access_log.json",
+  "test_predictions_generated": false
+}

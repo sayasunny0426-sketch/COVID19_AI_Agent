@@ -1,0 +1,182 @@
+{
+  "generated": "2026-09-22T23:14:11+09:00",
+  "script": "25_taskB_variable_selection.py",
+  "seed": 42,
+  "specification": {
+    "direction": "backward elimination",
+    "criterion": "AIC",
+    "unit": "original clinical variable (dummies move together)",
+    "model": "unpenalised logistic regression (statsmodels Logit)",
+    "data": "training only"
+  },
+  "n_train": 1021,
+  "deaths_train": 135,
+  "parameter_budget": 13,
+  "candidate_variables": [
+    "age",
+    "sex",
+    "spo2",
+    "rr",
+    "sbp",
+    "bun",
+    "crp",
+    "lymph",
+    "ddimer",
+    "lactate",
+    "egfr",
+    "troponin",
+    "comorbidity"
+  ],
+  "candidate_features": 17,
+  "selected_variables": [
+    "age",
+    "sex",
+    "spo2",
+    "sbp",
+    "crp",
+    "lymph",
+    "ddimer",
+    "lactate",
+    "egfr",
+    "troponin",
+    "comorbidity"
+  ],
+  "selected_features": [
+    "age_(59,74]",
+    "age_(74,90]",
+    "sex_MALE",
+    "spo2",
+    "sbp",
+    "crp",
+    "lymph",
+    "lymph_missing",
+    "ddimer",
+    "lactate",
+    "egfr",
+    "troponin_detectable",
+    "comorbidity_1",
+    "comorbidity_2+",
+    "comorbidity_NotAbstracted"
+  ],
+  "n_selected_features": 15,
+  "within_budget_as_variables": true,
+  "within_budget_as_parameters": false,
+  "events_per_parameter": 9.0,
+  "primary_selection": {
+    "variables": [
+      "age",
+      "sex",
+      "spo2",
+      "sbp",
+      "crp",
+      "lymph",
+      "ddimer",
+      "lactate",
+      "egfr",
+      "troponin"
+    ],
+    "features": [
+      "age_(59,74]",
+      "age_(74,90]",
+      "sex_MALE",
+      "spo2",
+      "sbp",
+      "crp",
+      "lymph",
+      "lymph_missing",
+      "ddimer",
+      "lactate",
+      "egfr",
+      "troponin_detectable"
+    ],
+    "n_features": 12,
+    "history": [
+      {
+        "removed": "comorbidity",
+        "aic_increase": 0.3266,
+        "n_features_after": 12
+      }
+    ],
+    "events_per_parameter": 11.25,
+    "rule": "backward AIC subject to the parameter budget (primary)"
+  },
+  "sensitivity_unconstrained_aic": {
+    "variables": [
+      "age",
+      "sex",
+      "spo2",
+      "sbp",
+      "crp",
+      "lymph",
+      "ddimer",
+      "lactate",
+      "egfr",
+      "troponin",
+      "comorbidity"
+    ],
+    "features": [
+      "age_(59,74]",
+      "age_(74,90]",
+      "sex_MALE",
+      "spo2",
+      "sbp",
+      "crp",
+      "lymph",
+      "lymph_missing",
+      "ddimer",
+      "lactate",
+      "egfr",
+      "troponin_detectable",
+      "comorbidity_1",
+      "comorbidity_2+",
+      "comorbidity_NotAbstracted"
+    ],
+    "n_features": 15,
+    "role": "AIC optimum without the budget constraint (sensitivity analysis)"
+  },
+  "final_model": {
+    "aic": 523.199,
+    "log_likelihood": -245.5995,
+    "pseudo_r2_mcfadden": 0.3841,
+    "llr_p_value": 2.625419766094514e-56
+  },
+  "removal_history": [
+    {
+      "step": 1,
+      "removed": "bun",
+      "aic_before": 525.5952,
+      "aic_after": 524.06,
+      "delta_aic": -1.5352,
+      "n_variables_after": 12
+    },
+    {
+      "step": 2,
+      "removed": "rr",
+      "aic_before": 524.06,
+      "aic_after": 523.199,
+      "delta_aic": -0.8611,
+      "n_variables_after": 11
+    }
+  ],
+  "bootstrap": {
+    "n_requested": 500,
+    "n_used": 500,
+    "retention_rate": {
+      "age": 1.0,
+      "sex": 0.928,
+      "spo2": 0.988,
+      "rr": 0.372,
+      "sbp": 0.67,
+      "bun": 0.3,
+      "crp": 0.966,
+      "lymph": 0.968,
+      "ddimer": 0.606,
+      "lactate": 0.99,
+      "egfr": 0.732,
+      "troponin": 0.862,
+      "comorbidity": 0.694
+    },
+    "model_size_median": 10
+  },
+  "validation_test_use": "neither Validation nor Test was used in this script"
+}

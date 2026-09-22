@@ -1,0 +1,35 @@
+{
+  "generated": "2026-09-22T23:39:12+09:00",
+  "statement": "Test predictions have not been generated. Test has NOT been left entirely untouched: the entries below record every read of Test data so far.",
+  "reads_so_far": [
+    {
+      "what": "Test row count and death count (128 / 17)",
+      "where": "tb.load_cohort assertions; results/taskB/preprocessing/audit_summary.json",
+      "when": "scripts/21-27 runs, 2026-09-22",
+      "used_for_any_modelling_decision": false
+    },
+    {
+      "what": "Test visit-type composition (Inpatient 96 / ER 32) and deaths per stratum",
+      "where": "results/taskB/preprocessing/visit_type_composition.csv, inpatient_sensitivity_flow.csv",
+      "when": "scripts/23-24 runs, 2026-09-22",
+      "used_for_any_modelling_decision": false,
+      "reason": "requested by the researcher to define and size the inpatient sensitivity analysis population"
+    },
+    {
+      "what": "Test design matrix column order and NaN/Inf check (no labels used)",
+      "where": "former scripts/28_taskB_qc.py",
+      "when": "written 2026-09-22, superseded the same day",
+      "used_for_any_modelling_decision": false,
+      "status": "script removed; the check is deferred to post-Test QC"
+    }
+  ],
+  "never_done": [
+    "Test feature values entering any preprocessing parameter",
+    "Test rows entering variable selection",
+    "Test rows entering hyperparameter search or model fitting",
+    "Test predictions",
+    "Test performance metrics",
+    "Test-derived thresholds"
+  ],
+  "from_now_on": "scripts/21-29 load Training + Validation only via tb.load_development(); the pre-Test QC checks the Test side from the split manifest alone; Test data is opened only by the approved Test evaluation script."
+}

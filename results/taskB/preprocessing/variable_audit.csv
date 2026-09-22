@@ -1,0 +1,132 @@
+column,role,reason,dict_type,chart_abstracted,n_unique_train,missing_rate_train,description
+to_patient_id,ADMIN,患者 ID（管理列）,string,False,1021,0.0,TCIA patient identifier
+covid19_statuses,ADMIN,Training set で positive のみの定数列（情報量ゼロ）,string,False,1,0.0,COVID-19 status as determined through either positive PCR test or outside documentation reviewed by clinician
+last.status,EXCLUDE_post_T0,アウトカムそのもの（院内死亡）,string,False,2,0.0,For the selected visit the status of the patient
+age.splits,CANDIDATE,"年齢は COVID-19 院内死亡の最も強い予後因子で、ほぼすべての既存スコアに含まれる（根拠: 4C Mortality Score, CURB-65, COVID-GRAM, OpenSAFELY）",string,False,3,0.0,Age intervals (in years) at time of admission; truncated for patients over 90 years of age
+gender_concept_name,CANDIDATE,"男性で死亡リスクが高いことが一貫して報告されている（根拠: 4C Mortality Score, OpenSAFELY）",string,False,2,0.0186,Documented gender in the EHR (Electronic Health Record); gender is dropped in select cases for de-identification purposes
+visit_start_datetime,ADMIN,T0 の定義そのもの。予測変数ではない,string,False,26,0.0,Date shifted start of selected visit
+visit_concept_name,ADMIN,受診形態（ER / 入院）。T0 で既知だが triage 判断を含み、欠測構造の主因でもあるため予測変数には用いず、欠測の記述にのみ使う（Q-B4）,string,False,2,0.0,For the selected visit the type of the visit; note patients can be admitted for observation (multiple days) in emergency department
+is_icu,EXCLUDE_post_T0,入院後の ICU 入室。T0 では未確定で、重症度の結果指標,string,False,2,0.0,Patient admitted to the ICU based on documented room charges
+was_ventilated,EXCLUDE_post_T0,入院後の侵襲的人工呼吸の実施。T0 では未確定,string,False,2,0.0,The patient had invasive ventilation
+invasive_vent_days,EXCLUDE_post_T0,人工呼吸日数。入院経過の結果,numeric,False,37,0.8462,Number of documented days of invasive ventilation support
+length_of_stay,EXCLUDE_post_T0,在院日数。エピソード終了後にしか確定せず、死亡と強く交絡,int64,False,58,0.0,Number of calendar days in the facility
+Acute.Hepatic.Injury..during.hospitalization.,EXCLUDE_post_T0,定義に during hospitalization と明記＝T0 以降の合併症,string,False,2,0.1734,ALT or AST was at least 15 times above the test's upper limit
+Acute.Kidney.Injury..during.hospitalization.,EXCLUDE_post_T0,定義に during hospitalization と明記＝T0 以降の合併症,string,False,2,0.0,Had an increase in serum creatinine of 0.3 mg/dL within 48 hours
+Urine.protein,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,string,False,2,0.6004,Protein in urine
+kidney_replacement_therapy,EXCLUDE_post_T0,腎代替療法。入院後の治療介入である可能性が高い（実施時期の記載なし）,string,False,1,0.9579,Did the patient have documented renal replacement therapy
+kidney_transplant,EXCLUDE_constant,Training set で値が 1 種類以下（情報量なし）,string,False,1,0.9853,Did the patient have a kidney transplant
+htn_v,CANDIDATE_member,併存症カウント（comorbidity）の構成要素として使用,string,True,2,0.1783,"Documented ICD-10 code for HTN (Hypertension), taking anti-hypertensive medications and/or documented SBP>140/90"
+dm_v,CANDIDATE_member,併存症カウント（comorbidity）の構成要素として使用,string,True,2,0.1763,"Documented ICD-10 code for diabetes type 1 or 2, taking insulin or other oral medications for diabetes"
+cad_v,CANDIDATE_member,併存症カウント（comorbidity）の構成要素として使用,string,True,2,0.1773,"Documented ICD-10 code for CAD (Coronary Artery Disease), history of stent placement, existing cath report documenting disease"
+hf_ef_v,CANDIDATE_member,併存症カウント（comorbidity）の構成要素として使用,string,True,3,0.1851,"For HFrEF, documented ICD-10 code for HFrEF or echocardiogram documenting reduced ejection fraction (reduced EF is <40%, 40% or higher is preserved EF). For HFpEF, documented ICD-10 code for HFpEF or echocardiogram documenting diastolic dysfunction."
+ckd_v,CANDIDATE_member,併存症カウント（comorbidity）の構成要素として使用,string,True,2,0.1773,"Documented ICD-10 code for CKD (Chronic Kidney Disease), reduced GFR on lab work."
+malignancies_v,CANDIDATE_member,併存症カウント（comorbidity）の構成要素として使用,string,True,2,0.1841,"Documented ICD-10 code for malignancies, receiving treatment for active malignancy"
+copd_v,CANDIDATE_member,併存症カウント（comorbidity）の構成要素として使用,string,True,2,0.1783,"Documented ICD-10 code for COPD (Chronic obstructive pulmonary disease), PFTs documenting obstructive defect along with positive smoking history"
+other_lung_disease_v,CANDIDATE_member,併存症カウント（comorbidity）の構成要素として使用,string,True,2,0.1783,"Documented ICD-10 code for other lung diseases including asthma, ILD, pulmonary hypertension, chronic PE, lung resection"
+acei_v,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,string,True,2,0.1841,Admission medication reconciliation documenting use of ACE Inhibitor as a home medication
+arb_v,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,string,True,2,0.1841,Admission medication reconciliation documenting use of ARB (Angiotensin receptor blockers) as a home medication
+antibiotics_use_v,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,string,True,2,0.2047,Patient on an antibiotic prior to presentation
+nsaid_use_v,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,string,True,2,0.2233,Admission medication reconciliation documenting use of NSAID (Non-steroidal anti-inflammatory drug) as a home medication
+days_prior_sx,CONSIDERED_not_selected,発症からの日数は予後と関連しうるが、自己申告で Train 欠測 24%。既存スコアに含まれない,numeric,True,24,0.239,The number of days prior to presentation that symptoms began
+smoking_status_v,CONSIDERED_not_selected,COVID-19 死亡との関連は文献間で一貫しない。Train 欠測 22%,string,True,3,0.2174,"Marks patient's smoking status as either current, former, never smoker, or unknown. This refers only to cigarettes and cigars. E-cigarettes and marijuana do not count."
+cough_v,NOT_SELECTED,自覚症状。主観的で Train 欠測 21-25%、既存スコアでは客観指標に置換されている,string,True,2,0.2243,Reported cough
+dyspnea_admission_v,NOT_SELECTED,自覚症状。主観的で Train 欠測 21-25%、既存スコアでは客観指標に置換されている,string,True,2,0.2135,Shortness of breath on admission
+nausea_v,NOT_SELECTED,自覚症状。主観的で Train 欠測 21-25%、既存スコアでは客観指標に置換されている,string,True,2,0.2468,Reported nausea
+vomiting_v,NOT_SELECTED,自覚症状。主観的で Train 欠測 21-25%、既存スコアでは客観指標に置換されている,string,True,2,0.2409,Reported vomiting
+diarrhea_v,NOT_SELECTED,自覚症状。主観的で Train 欠測 21-25%、既存スコアでは客観指標に置換されている,string,True,2,0.2341,Reported diarrhea
+abdominal_pain_v,NOT_SELECTED,自覚症状。主観的で Train 欠測 21-25%、既存スコアでは客観指標に置換されている,string,True,2,0.2449,Abdominal pain symptom
+fever_v,NOT_SELECTED,自覚症状。主観的で Train 欠測 21-25%、既存スコアでは客観指標に置換されている,string,True,2,0.2125,Yes or no. Only refers to subjective or objective fever at home. Fever in ED does not count.
+BMI.over30,EXCLUDE_derived_duplicate,連続変数 `39156-5_Body mass index (BMI) [Ratio]` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.3203,Body mass index over 30
+BMI.over35,EXCLUDE_derived_duplicate,連続変数 `39156-5_Body mass index (BMI) [Ratio]` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.3203,Body mass index over 35
+temperature.over38,EXCLUDE_derived_duplicate,連続変数 `8331-1_Oral temperature` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.0284,Temperature at time of admission over 38 degrees centigrade
+pulseOx.under90,EXCLUDE_derived_duplicate,連続変数 `59408-5_Oxygen saturation in Arterial blood ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.0029,Measured blood oxygen level below 90% using a pulse oximeter
+Respiration.over24,EXCLUDE_derived_duplicate,連続変数 `9279-1_Respiratory rate` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.002,Respiration rate over 24 breaths per minute
+HeartRate.over100,EXCLUDE_derived_duplicate,連続変数 `76282-3_Heart rate.beat-to-beat by EKG` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.0029,Heart rate over 100 beats per minute
+Lymphocytes.under1k,EXCLUDE_derived_duplicate,連続変数 `731-0_Lymphocytes [#/volume] in Blood by Aut` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.2831,Serum lymphocytes
+Aspartate.over40,EXCLUDE_derived_duplicate,連続変数 `1920-8_Aspartate aminotransferase [Enzymatic` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.1812,Serum AST measuring liver function
+Alanine.over60,EXCLUDE_derived_duplicate,連続変数 `1744-2_Alanine aminotransferase [Enzymatic a` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.1812,Serum ALT measuring liver function
+A1C.over6.5,EXCLUDE_derived_duplicate,連続変数 `4548-4_Hemoglobin A1c/Hemoglobin.total in Bl` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.6856,Serum hemoglobin A1C over 6.5
+A1C.under6.5,EXCLUDE_derived_duplicate,連続変数 `4548-4_Hemoglobin A1c/Hemoglobin.total in Bl` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.6856,
+A1C.6.6to7.9,EXCLUDE_derived_duplicate,連続変数 `4548-4_Hemoglobin A1c/Hemoglobin.total in Bl` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.6856,
+A1C.8to9.9,EXCLUDE_derived_duplicate,連続変数 `4548-4_Hemoglobin A1c/Hemoglobin.total in Bl` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.6856,
+A1C.over10,EXCLUDE_derived_duplicate,連続変数 `4548-4_Hemoglobin A1c/Hemoglobin.total in Bl` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.6856,
+Sodium.above145,EXCLUDE_derived_duplicate,連続変数 `2951-2_Sodium [Moles/volume] in Serum or Pla` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,Serum sodium
+Sodium.between135and145,EXCLUDE_derived_duplicate,連続変数 `2951-2_Sodium [Moles/volume] in Serum or Pla` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,
+Sodium.below135,EXCLUDE_derived_duplicate,連続変数 `2951-2_Sodium [Moles/volume] in Serum or Pla` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,
+Potassium.above5.2,EXCLUDE_derived_duplicate,連続変数 `2823-3_Potassium [Moles/volume] in Serum or ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.189,Serum potassium
+Potassium.between3.5and5.2,EXCLUDE_derived_duplicate,連続変数 `2823-3_Potassium [Moles/volume] in Serum or ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.189,
+Potassium.below3.5,EXCLUDE_derived_duplicate,連続変数 `2823-3_Potassium [Moles/volume] in Serum or ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.189,
+Chloride.above107,EXCLUDE_derived_duplicate,連続変数 `2075-0_Chloride [Moles/volume] in Serum or P` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,Serum chloride
+Chloride.between96and107,EXCLUDE_derived_duplicate,連続変数 `2075-0_Chloride [Moles/volume] in Serum or P` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,
+Chloride.below96,EXCLUDE_derived_duplicate,連続変数 `2075-0_Chloride [Moles/volume] in Serum or P` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,
+Bicarbonate.above31,EXCLUDE_derived_duplicate,連続変数 `1963-8_Bicarbonate [Moles/volume] in Serum o` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.145,Serum bicarbonate
+Bicarbonate.between21and31,EXCLUDE_derived_duplicate,連続変数 `1963-8_Bicarbonate [Moles/volume] in Serum o` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.145,
+Bicarbonate.below21,EXCLUDE_derived_duplicate,連続変数 `1963-8_Bicarbonate [Moles/volume] in Serum o` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.145,
+Blood_Urea_Nitrogen.above20,EXCLUDE_derived_duplicate,連続変数 `3094-0_Urea nitrogen [Mass/volume] in Serum ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,Serum BUN measured for kidney function
+Blood_Urea_Nitrogen.between5and20,EXCLUDE_derived_duplicate,連続変数 `3094-0_Urea nitrogen [Mass/volume] in Serum ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,
+Blood_Urea_Nitrogen.below5,EXCLUDE_derived_duplicate,連続変数 `3094-0_Urea nitrogen [Mass/volume] in Serum ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,
+Creatinine.above1.2,EXCLUDE_derived_duplicate,連続変数 `2160-0_Creatinine [Mass/volume] in Serum or ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,Serum creatinine measured for kidney function
+Creatinine.between0.5and1.2,EXCLUDE_derived_duplicate,連続変数 `2160-0_Creatinine [Mass/volume] in Serum or ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,
+Creatinine.below0.5,EXCLUDE_derived_duplicate,連続変数 `2160-0_Creatinine [Mass/volume] in Serum or ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.144,
+eGFR.above60,EXCLUDE_derived_duplicate,連続変数 `62238-1_Glomerular filtration rate/1.73 sq M` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.1587,Serum estimated glomerular filtration rate
+eGFR.between30and60,EXCLUDE_derived_duplicate,連続変数 `62238-1_Glomerular filtration rate/1.73 sq M` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.1587,
+eGFR.below30,EXCLUDE_derived_duplicate,連続変数 `62238-1_Glomerular filtration rate/1.73 sq M` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.1587,
+blood_pH.above7.45,EXCLUDE_derived_duplicate,連続変数 `33254-4_pH of Arterial blood adjusted to pat` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.8345,
+blood_pH.between7.35and7.45,EXCLUDE_derived_duplicate,連続変数 `33254-4_pH of Arterial blood adjusted to pat` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.8345,
+blood_pH.below7.35,EXCLUDE_derived_duplicate,連続変数 `33254-4_pH of Arterial blood adjusted to pat` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.8345,
+Troponin.above0.01,EXCLUDE_derived_duplicate,連続変数 `6598-7_Troponin T.cardiac [Mass/volume] in S` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.2889,Serum indicator of damage to heart tissue
+D_dimer.above3000,EXCLUDE_derived_duplicate,連続変数 `48058-2_Fibrin D-dimer DDU [Mass/volume] in ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.3036,Serum D-dimer
+D_dimer.between500and3000,EXCLUDE_derived_duplicate,連続変数 `48058-2_Fibrin D-dimer DDU [Mass/volume] in ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.3036,
+D_dimer.below500,EXCLUDE_derived_duplicate,連続変数 `48058-2_Fibrin D-dimer DDU [Mass/volume] in ` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.3036,
+ESR.above30,EXCLUDE_derived_duplicate,連続変数 `30341-2_Erythrocyte sedimentation rate` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.5563,Serum erythrocyte sedimentation rate
+Microscopic_hematuria.above2,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,boolean,False,2,0.6053,Blood in urine
+SBP.below120,EXCLUDE_derived_duplicate,連続変数 `8480-6_Systolic blood pressure` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.002,Systolic blood pressure
+SBP.between120and139,EXCLUDE_derived_duplicate,連続変数 `8480-6_Systolic blood pressure` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.002,
+SBP.above139,EXCLUDE_derived_duplicate,連続変数 `8480-6_Systolic blood pressure` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.002,
+MAP.below65,EXCLUDE_derived_duplicate,連続変数 `76536-2_Mean blood pressure by Noninvasive` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.1391,Mean arterial pressure
+MAP.between65and90,EXCLUDE_derived_duplicate,連続変数 `76536-2_Mean blood pressure by Noninvasive` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.1391,
+MAP.above90,EXCLUDE_derived_duplicate,連続変数 `76536-2_Mean blood pressure by Noninvasive` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.1391,
+procalcitonin.below0.25,EXCLUDE_derived_duplicate,連続変数 `75241-0_Procalcitonin [Mass/volume] in Serum` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.2331,Serum procalcitonin
+procalcitonin.between0.25and0.5,EXCLUDE_derived_duplicate,連続変数 `75241-0_Procalcitonin [Mass/volume] in Serum` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.2331,
+procalcitonin.above0.5,EXCLUDE_derived_duplicate,連続変数 `75241-0_Procalcitonin [Mass/volume] in Serum` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.2331,
+ferritin.above1k,EXCLUDE_derived_duplicate,連続変数 `2276-4_Ferritin [Mass/volume] in Serum or Pl` から完全に再現可能な区分ダミー。Training set で一致率 1.000、欠測パターンも一致し追加情報がない,boolean,False,2,0.3536,Serum ferritin
+Proteinuria.above80,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,boolean,False,2,0.8462,
+8331-1_Oral temperature,CONSIDERED_not_selected,発熱は重症度と単調に関連せず（低体温も予後不良）、既存スコアでの寄与も小さいため見送り,numeric,False,37,0.0284,Oral temperature in degrees C
+59408-5_Oxygen saturation in Arterial blood by Pulse oximetry,CANDIDATE,"低酸素血症は COVID-19 重症度の中心的指標で、呼吸不全の直接の所見（根拠: 4C Mortality Score, NEWS2）",numeric,False,34,0.0029,
+9279-1_Respiratory rate,CANDIDATE,"呼吸数は呼吸仕事量を反映し、酸素化とは別の側面を表す（根拠: 4C Mortality Score, CURB-65, qSOFA, NEWS2）",numeric,False,41,0.002,
+76282-3_Heart rate.beat-to-beat by EKG,CONSIDERED_not_selected,SBP・呼吸数と重複する循環・代償の指標で、4C には含まれないため見送り,numeric,False,103,0.0029,
+8480-6_Systolic blood pressure,CANDIDATE,"低血圧は循環不全・臓器灌流低下の指標。循環動態を代表する（根拠: CURB-65, qSOFA, NEWS2）",numeric,False,123,0.002,
+76536-2_Mean blood pressure by Noninvasive,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,85,0.1391,
+33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count,CONSIDERED_not_selected,リンパ球数と重複（NLR の構成要素）。リンパ球減少の方が文献的根拠が強い,numeric,False,609,0.143,
+751-8_Neutrophils [#/volume] in Blood by Automated count,CONSIDERED_not_selected,同上。リンパ球数と強く相関,numeric,False,515,0.2831,
+731-0_Lymphocytes [#/volume] in Blood by Automated count,CANDIDATE,"リンパ球減少は COVID-19 の重症化・死亡と繰り返し関連が報告されている（根拠: COVID-GRAM（NLR）, Zhou et al. Lancet 2020）",numeric,False,212,0.2831,
+2951-2_Sodium [Moles/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,44,0.144,
+1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,148,0.1812,
+1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,139,0.1812,
+2157-6_Creatine kinase [Enzymatic activity/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,225,0.6758,
+2524-7_Lactate [Moles/volume] in Serum or Plasma,CANDIDATE,"乳酸上昇は組織低灌流・嫌気性代謝を示し、敗血症性ショックの診断基準に含まれる（根拠: Sepsis-3, Zhou et al. Lancet 2020）",numeric,False,60,0.2429,
+6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma,CANDIDATE,"心筋傷害は COVID-19 死亡と強く関連することが報告されている（根拠: Zhou et al. Lancet 2020, Shi et al. JAMA Cardiol 2020）",numeric,False,31,0.2889,
+33762-6_Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma,CONSIDERED_not_selected,心不全の指標だが Train 欠測 42%、併存症の hf と重複,numeric,False,417,0.4192,
+75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay,CONSIDERED_not_selected,細菌感染合併の指標で CRP と重複。Train 欠測 23%,numeric,False,153,0.2331,
+48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay,CANDIDATE,"凝固活性化・血栓症を反映し、多変量解析で独立した死亡予測因子として報告されている（根拠: Zhou et al. Lancet 2020, Wynants 系統的レビュー）",numeric,False,459,0.3036,
+2276-4_Ferritin [Mass/volume] in Serum or Plasma,CONSIDERED_not_selected,炎症の指標だが CRP と重複し、Train 欠測 35%,numeric,False,641,0.3536,
+1988-5_C reactive protein [Mass/volume] in Serum or Plasma,CANDIDATE,"全身性炎症反応の代表指標で 4C の構成要素（根拠: 4C Mortality Score, Wynants 系統的レビュー）",numeric,False,270,0.2233,
+4548-4_Hemoglobin A1c/Hemoglobin.total in Blood,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,80,0.6856,
+39156-5_Body mass index (BMI) [Ratio],CONSIDERED_not_selected,肥満は死亡リスク因子だが Train 欠測 32%。4C には含まれず、パラメータ予算を優先して見送り,numeric,False,523,0.3203,
+2951-2_Sodium [Moles/volume] in Serum or Plasma.1,EXCLUDE_derived_duplicate,`2951-2_Sodium [Moles/volume] in Serum or Pla` と完全に同一（値・欠測パターンとも）,numeric,False,44,0.144,
+2823-3_Potassium [Moles/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,42,0.189,
+2075-0_Chloride [Moles/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,45,0.144,
+1963-8_Bicarbonate [Moles/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,33,0.145,
+3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma,CANDIDATE,"尿素窒素の上昇は腎機能低下と脱水・異化亢進を反映し、4C の構成要素（根拠: 4C Mortality Score, CURB-65）",numeric,False,84,0.144,
+2160-0_Creatinine [Mass/volume] in Serum or Plasma,CONSIDERED_not_selected,BUN・eGFR と強い共線性。腎領域は BUN（急性）と eGFR（慢性）で代表させる,numeric,False,210,0.144,
+"62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI)",CANDIDATE,"推算 GFR は慢性腎機能を表し、BUN（急性の変動）とは異なる情報を持つ（根拠: OpenSAFELY（CKD）, 4C（併存症））",numeric,False,116,0.1587,
+33254-4_pH of Arterial blood adjusted to patient's actual temperature,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,45,0.8345,
+30341-2_Erythrocyte sedimentation rate,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,113,0.5563,
+2345-7_Glucose [Mass/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,214,0.144,
+13457-7_Cholesterol in LDL [Mass/volume] in Serum or Plasma by calculation,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,93,0.7806,
+13458-5_Cholesterol in VLDL [Mass/volume] in Serum or Plasma by calculation,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,46,0.7796,
+2571-8_Triglyceride [Mass/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,134,0.7679,
+2085-9_Cholesterol in HDL [Mass/volume] in Serum or Plasma,NOT_SELECTED,候補領域が他変数で代表されているか、Train 欠測が高い（considered_not_selected 参照）,numeric,False,50,0.7777,
+therapeutic.exnox.Boolean,EXCLUDE_post_T0,治療用エノキサパリン投与＝入院後の治療介入,boolean,False,2,0.0607,Patient had enoxaparin administered
+therapeutic.heparin.Boolean,EXCLUDE_post_T0,治療用量ヘパリン投与＝入院後の治療介入,boolean,False,2,0.0607,Patient had heparin administered at a therapeutic dose
+Other.anticoagulation.therapy,EXCLUDE_post_T0,その他の抗凝固療法＝入院後の治療介入の可能性,string,False,7,0.0607,Patient had other anticoagulation therapy as listed

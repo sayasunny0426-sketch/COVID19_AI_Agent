@@ -1,0 +1,132 @@
+column,missing_train,missing_ER,missing_inpatient,ER_minus_inpatient
+to_patient_id,0.0,0.0,0.0,0.0
+covid19_statuses,0.0,0.0,0.0,0.0
+last.status,0.0,0.0,0.0,0.0
+age.splits,0.0,0.0,0.0,0.0
+gender_concept_name,0.0186,0.0,0.025,-0.025
+visit_start_datetime,0.0,0.0,0.0,0.0
+visit_concept_name,0.0,0.0,0.0,0.0
+is_icu,0.0,0.0,0.0,0.0
+was_ventilated,0.0,0.0,0.0,0.0
+invasive_vent_days,0.8462,1.0,0.7931,0.2069
+length_of_stay,0.0,0.0,0.0,0.0
+Acute.Hepatic.Injury..during.hospitalization.,0.1734,0.645,0.0105,0.6345
+Acute.Kidney.Injury..during.hospitalization.,0.0,0.0,0.0,0.0
+Urine.protein,0.6004,0.9008,0.4967,0.4041
+kidney_replacement_therapy,0.9579,0.9962,0.9447,0.0515
+kidney_transplant,0.9853,1.0,0.9802,0.0198
+htn_v,0.1783,0.2824,0.1423,0.1401
+dm_v,0.1763,0.2786,0.141,0.1376
+cad_v,0.1773,0.2786,0.1423,0.1363
+hf_ef_v,0.1851,0.2863,0.1502,0.1361
+ckd_v,0.1773,0.2786,0.1423,0.1363
+malignancies_v,0.1841,0.2786,0.1515,0.1271
+copd_v,0.1783,0.2824,0.1423,0.1401
+other_lung_disease_v,0.1783,0.2786,0.1436,0.135
+acei_v,0.1841,0.2863,0.1489,0.1374
+arb_v,0.1841,0.2901,0.1476,0.1425
+antibiotics_use_v,0.2047,0.3015,0.1713,0.1302
+nsaid_use_v,0.2233,0.3206,0.1897,0.1309
+days_prior_sx,0.239,0.3244,0.2095,0.1149
+smoking_status_v,0.2174,0.3473,0.1726,0.1747
+cough_v,0.2243,0.2824,0.2042,0.0782
+dyspnea_admission_v,0.2135,0.2824,0.1897,0.0927
+nausea_v,0.2468,0.3092,0.2253,0.0839
+vomiting_v,0.2409,0.3015,0.22,0.0815
+diarrhea_v,0.2341,0.2824,0.2174,0.065
+abdominal_pain_v,0.2449,0.2863,0.2306,0.0557
+fever_v,0.2125,0.2824,0.1884,0.094
+BMI.over30,0.3203,0.7443,0.1739,0.5704
+BMI.over35,0.3203,0.7443,0.1739,0.5704
+temperature.over38,0.0284,0.0153,0.0329,-0.0176
+pulseOx.under90,0.0029,0.0038,0.0026,0.0012
+Respiration.over24,0.002,0.0076,0.0,0.0076
+HeartRate.over100,0.0029,0.0076,0.0013,0.0063
+Lymphocytes.under1k,0.2831,0.6221,0.166,0.4561
+Aspartate.over40,0.1812,0.645,0.0211,0.6239
+Alanine.over60,0.1812,0.645,0.0211,0.6239
+A1C.over6.5,0.6856,0.9733,0.5863,0.387
+A1C.under6.5,0.6856,0.9733,0.5863,0.387
+A1C.6.6to7.9,0.6856,0.9733,0.5863,0.387
+A1C.8to9.9,0.6856,0.9733,0.5863,0.387
+A1C.over10,0.6856,0.9733,0.5863,0.387
+Sodium.above145,0.144,0.5496,0.004,0.5456
+Sodium.between135and145,0.144,0.5496,0.004,0.5456
+Sodium.below135,0.144,0.5496,0.004,0.5456
+Potassium.above5.2,0.189,0.5573,0.0619,0.4954
+Potassium.between3.5and5.2,0.189,0.5573,0.0619,0.4954
+Potassium.below3.5,0.189,0.5573,0.0619,0.4954
+Chloride.above107,0.144,0.5496,0.004,0.5456
+Chloride.between96and107,0.144,0.5496,0.004,0.5456
+Chloride.below96,0.144,0.5496,0.004,0.5456
+Bicarbonate.above31,0.145,0.5496,0.0053,0.5443
+Bicarbonate.between21and31,0.145,0.5496,0.0053,0.5443
+Bicarbonate.below21,0.145,0.5496,0.0053,0.5443
+Blood_Urea_Nitrogen.above20,0.144,0.5496,0.004,0.5456
+Blood_Urea_Nitrogen.between5and20,0.144,0.5496,0.004,0.5456
+Blood_Urea_Nitrogen.below5,0.144,0.5496,0.004,0.5456
+Creatinine.above1.2,0.144,0.5496,0.004,0.5456
+Creatinine.between0.5and1.2,0.144,0.5496,0.004,0.5456
+Creatinine.below0.5,0.144,0.5496,0.004,0.5456
+eGFR.above60,0.1587,0.5496,0.0237,0.5259
+eGFR.between30and60,0.1587,0.5496,0.0237,0.5259
+eGFR.below30,0.1587,0.5496,0.0237,0.5259
+blood_pH.above7.45,0.8345,1.0,0.7773,0.2227
+blood_pH.between7.35and7.45,0.8345,1.0,0.7773,0.2227
+blood_pH.below7.35,0.8345,1.0,0.7773,0.2227
+Troponin.above0.01,0.2889,0.7023,0.1462,0.5561
+D_dimer.above3000,0.3036,0.7824,0.1383,0.6441
+D_dimer.between500and3000,0.3036,0.7824,0.1383,0.6441
+D_dimer.below500,0.3036,0.7824,0.1383,0.6441
+ESR.above30,0.5563,0.9885,0.4071,0.5814
+Microscopic_hematuria.above2,0.6053,0.9008,0.5033,0.3975
+SBP.below120,0.002,0.0038,0.0013,0.0025
+SBP.between120and139,0.002,0.0038,0.0013,0.0025
+SBP.above139,0.002,0.0038,0.0013,0.0025
+MAP.below65,0.1391,0.542,0.0,0.542
+MAP.between65and90,0.1391,0.542,0.0,0.542
+MAP.above90,0.1391,0.542,0.0,0.542
+procalcitonin.below0.25,0.2331,0.7901,0.0408,0.7493
+procalcitonin.between0.25and0.5,0.2331,0.7901,0.0408,0.7493
+procalcitonin.above0.5,0.2331,0.7901,0.0408,0.7493
+ferritin.above1k,0.3536,0.8359,0.1871,0.6488
+Proteinuria.above80,0.8462,0.9924,0.7958,0.1966
+8331-1_Oral temperature,0.0284,0.0153,0.0329,-0.0176
+59408-5_Oxygen saturation in Arterial blood by Pulse oximetry,0.0029,0.0038,0.0026,0.0012
+9279-1_Respiratory rate,0.002,0.0076,0.0,0.0076
+76282-3_Heart rate.beat-to-beat by EKG,0.0029,0.0076,0.0013,0.0063
+8480-6_Systolic blood pressure,0.002,0.0038,0.0013,0.0025
+76536-2_Mean blood pressure by Noninvasive,0.1391,0.542,0.0,0.542
+33256-9_Leukocytes [#/volume] corrected for nucleated erythrocytes in Blood by Automated count,0.143,0.5496,0.0026,0.547
+751-8_Neutrophils [#/volume] in Blood by Automated count,0.2831,0.6221,0.166,0.4561
+731-0_Lymphocytes [#/volume] in Blood by Automated count,0.2831,0.6221,0.166,0.4561
+2951-2_Sodium [Moles/volume] in Serum or Plasma,0.144,0.5496,0.004,0.5456
+1920-8_Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,0.1812,0.645,0.0211,0.6239
+1744-2_Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P,0.1812,0.645,0.0211,0.6239
+2157-6_Creatine kinase [Enzymatic activity/volume] in Serum or Plasma,0.6758,0.9771,0.5718,0.4053
+2524-7_Lactate [Moles/volume] in Serum or Plasma,0.2429,0.7137,0.0804,0.6333
+6598-7_Troponin T.cardiac [Mass/volume] in Serum or Plasma,0.2889,0.7023,0.1462,0.5561
+33762-6_Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma,0.4192,0.8473,0.2714,0.5759
+75241-0_Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay,0.2331,0.7901,0.0408,0.7493
+48058-2_Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay,0.3036,0.7824,0.1383,0.6441
+2276-4_Ferritin [Mass/volume] in Serum or Plasma,0.3536,0.8359,0.1871,0.6488
+1988-5_C reactive protein [Mass/volume] in Serum or Plasma,0.2233,0.729,0.0487,0.6803
+4548-4_Hemoglobin A1c/Hemoglobin.total in Blood,0.6856,0.9733,0.5863,0.387
+39156-5_Body mass index (BMI) [Ratio],0.3203,0.7443,0.1739,0.5704
+2951-2_Sodium [Moles/volume] in Serum or Plasma.1,0.144,0.5496,0.004,0.5456
+2823-3_Potassium [Moles/volume] in Serum or Plasma,0.189,0.5573,0.0619,0.4954
+2075-0_Chloride [Moles/volume] in Serum or Plasma,0.144,0.5496,0.004,0.5456
+1963-8_Bicarbonate [Moles/volume] in Serum or Plasma,0.145,0.5496,0.0053,0.5443
+3094-0_Urea nitrogen [Mass/volume] in Serum or Plasma,0.144,0.5496,0.004,0.5456
+2160-0_Creatinine [Mass/volume] in Serum or Plasma,0.144,0.5496,0.004,0.5456
+"62238-1_Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI)",0.1587,0.5496,0.0237,0.5259
+33254-4_pH of Arterial blood adjusted to patient's actual temperature,0.8345,1.0,0.7773,0.2227
+30341-2_Erythrocyte sedimentation rate,0.5563,0.9885,0.4071,0.5814
+2345-7_Glucose [Mass/volume] in Serum or Plasma,0.144,0.5496,0.004,0.5456
+13457-7_Cholesterol in LDL [Mass/volume] in Serum or Plasma by calculation,0.7806,0.9885,0.7088,0.2797
+13458-5_Cholesterol in VLDL [Mass/volume] in Serum or Plasma by calculation,0.7796,0.9885,0.7075,0.281
+2571-8_Triglyceride [Mass/volume] in Serum or Plasma,0.7679,0.9885,0.6917,0.2968
+2085-9_Cholesterol in HDL [Mass/volume] in Serum or Plasma,0.7777,0.9885,0.7049,0.2836
+therapeutic.exnox.Boolean,0.0607,0.2366,0.0,0.2366
+therapeutic.heparin.Boolean,0.0607,0.2366,0.0,0.2366
+Other.anticoagulation.therapy,0.0607,0.2366,0.0,0.2366

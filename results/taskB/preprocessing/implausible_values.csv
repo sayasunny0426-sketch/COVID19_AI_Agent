@@ -1,0 +1,8 @@
+column,subject_id,value,plausible_low,plausible_high,action,reason
+9279-1_Respiratory rate,A792369,88.0,4.0,60.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する
+9279-1_Respiratory rate,A142433,95.0,4.0,60.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する
+9279-1_Respiratory rate,A596625,67.0,4.0,60.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する
+76282-3_Heart rate.beat-to-beat by EKG,A966882,6.0,20.0,250.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する
+76282-3_Heart rate.beat-to-beat by EKG,A842970,16.0,20.0,250.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する
+39156-5_Body mass index (BMI) [Ratio],A862000,92.8,12.0,80.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する
+39156-5_Body mass index (BMI) [Ratio],A507051,11.95,12.0,80.0,set to missing,生理学的に成立しない値。患者は除外せず、当該測定値のみ欠測化する

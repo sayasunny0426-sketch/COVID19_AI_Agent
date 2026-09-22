@@ -1,0 +1,26 @@
+{
+  "generated": "2026-09-22T23:36:26+09:00",
+  "script": "23_taskB_missingness_mechanism.py",
+  "evaluated_on": "training set only (n=1021, deaths=135)",
+  "no_lab_panel_pattern": {
+    "n_lab_variables": 7,
+    "patients_with_no_lab_at_all": 143,
+    "of_which_ER": 142,
+    "of_which_inpatient": 1,
+    "death_rate_no_lab": 0.007,
+    "death_rate_any_lab": 0.1526,
+    "min_pairwise_phi": 0.405,
+    "max_pairwise_phi": 0.944,
+    "within_inpatient": {
+      "n_missing": 1,
+      "n_observed": 758,
+      "death_rate_missing": 1.0,
+      "death_rate_observed": 0.1755,
+      "risk_difference": 0.8245,
+      "odds_ratio_missing_vs_observed": Infinity,
+      "fisher_p": 0.17654808959156787
+    }
+  },
+  "cohort_flow_emitted": false,
+  "note": "Training-only analysis. The cohort-level visit-type tables, which read Test metadata, are emitted only with --cohort-flow."
+}

@@ -1,0 +1,71 @@
+{
+  "primary": {
+    "variables": [
+      "age",
+      "sex",
+      "spo2",
+      "sbp",
+      "crp",
+      "lymph",
+      "ddimer",
+      "lactate",
+      "egfr",
+      "troponin"
+    ],
+    "features": [
+      "age_(59,74]",
+      "age_(74,90]",
+      "sex_MALE",
+      "spo2",
+      "sbp",
+      "crp",
+      "lymph",
+      "lymph_missing",
+      "ddimer",
+      "lactate",
+      "egfr",
+      "troponin_detectable"
+    ],
+    "n_features": 12,
+    "events_per_parameter": 11.25,
+    "rule": "backward AIC subject to <= 13 coefficients"
+  },
+  "sensitivity_unconstrained_aic": {
+    "variables": [
+      "age",
+      "sex",
+      "spo2",
+      "sbp",
+      "crp",
+      "lymph",
+      "ddimer",
+      "lactate",
+      "egfr",
+      "troponin",
+      "comorbidity"
+    ],
+    "features": [
+      "age_(59,74]",
+      "age_(74,90]",
+      "sex_MALE",
+      "spo2",
+      "sbp",
+      "crp",
+      "lymph",
+      "lymph_missing",
+      "ddimer",
+      "lactate",
+      "egfr",
+      "troponin_detectable",
+      "comorbidity_1",
+      "comorbidity_2+",
+      "comorbidity_NotAbstracted"
+    ],
+    "n_features": 15,
+    "events_per_parameter": 9.0
+  },
+  "parameter_budget": 13,
+  "deaths_train": 135,
+  "epv_target": 10,
+  "fitted_on": "train only"
+}

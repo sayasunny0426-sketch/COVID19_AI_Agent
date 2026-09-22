@@ -1,0 +1,14 @@
+variable,in_primary_selection,bootstrap_retention_rate,n_retained,n_resamples
+age,True,1.0,500,500
+lactate,True,0.99,495,500
+spo2,True,0.988,494,500
+lymph,True,0.968,484,500
+crp,True,0.966,483,500
+sex,True,0.928,464,500
+troponin,True,0.862,431,500
+egfr,True,0.732,366,500
+comorbidity,True,0.694,347,500
+sbp,True,0.67,335,500
+ddimer,True,0.606,303,500
+rr,False,0.372,186,500
+bun,False,0.3,150,500
