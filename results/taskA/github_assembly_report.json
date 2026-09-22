@@ -1,0 +1,64 @@
+{
+  "out_dir": "github_repo",
+  "files": 96,
+  "bytes": 2055921,
+  "drive_root": "G:\\マイドライブ\\気合のCOVID19",
+  "imported_from_drive": 18,
+  "excluded_from_drive": 5,
+  "publish_uids": false,
+  "verified_numbers": {
+    "cohort": 1277,
+    "split": {
+      "train": 1021,
+      "val": 128,
+      "test": 128
+    },
+    "deaths": {
+      "train": 135,
+      "val": 17,
+      "test": 17
+    },
+    "delta_days": {
+      "-1": 1055,
+      "0": 215,
+      "-2": 7
+    },
+    "images": 1277,
+    "qc_roundtrip": true,
+    "conditions": 10,
+    "best_condition": "lr3e-4_aug_b",
+    "best_val_auroc": 0.872637,
+    "stage2_best_improvement": -0.002825999999999995,
+    "margin": 0.005,
+    "split_sha256": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8"
+  },
+  "redacted_paths": {
+    "docs/open_questions.md": 1,
+    "docs/decision_log.md": 2,
+    "results/taskA/preprocessing/dicom_header_audit_summary.json": 1,
+    "results/taskA/preprocessing/cxr_dicom_audit_summary.json": 1,
+    "results/taskA/preprocessing/split_reconciliation_report.json": 1
+  },
+  "audit": {
+    "large_files": [],
+    "binaries": [],
+    "caches": [],
+    "secrets": [],
+    "local_paths_outside_notebooks": [
+      "scripts/09_taskA_run_training.py"
+    ],
+    "uid_columns": [],
+    "duplicates": [],
+    "dicom_or_checkpoint": []
+  },
+  "audit_counts": {
+    "large_files": 0,
+    "binaries": 0,
+    "caches": 0,
+    "secrets": 0,
+    "local_paths_outside_notebooks": 1,
+    "uid_columns": 0,
+    "duplicates": 0,
+    "dicom_or_checkpoint": 0
+  }
+}

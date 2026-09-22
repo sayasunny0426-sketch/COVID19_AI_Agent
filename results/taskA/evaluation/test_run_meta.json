@@ -1,0 +1,33 @@
+{
+  "finished": "2026-09-21T11:00:01+00:00",
+  "split_evaluated": "test",
+  "dry_run": false,
+  "frozen_selection": "<DRIVE_ROOT>/01_TaskA_CXR/04_Training/AIagent_taskA_runs/final_selection.json",
+  "frozen_sha256": "fd93d6fe83c0a6a023398bf3d6950f2fd70459a4927677b7c7f5939ef36397da",
+  "thresholds": {
+    "youden": 0.008507705,
+    "sensitivity80": 0.016904498
+  },
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "python": "3.13.15",
+  "torch": "2.11.0+cu128",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "seconds": 88.5,
+  "n_bootstrap": 2000,
+  "outputs": [
+    "test_access_log.jsonl",
+    "test_calibration_bins.csv",
+    "test_metrics_primary.json",
+    "test_metrics_secondary.json",
+    "test_metrics_table.csv",
+    "test_pr_curve_points.csv",
+    "test_predictions_all_variants.csv",
+    "test_predictions_ensemble.csv",
+    "test_predictions_primary.csv",
+    "test_predictions_seed42.csv",
+    "test_predictions_seed43.csv",
+    "test_predictions_seed44.csv",
+    "test_roc_curve_points.csv"
+  ]
+}

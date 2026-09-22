@@ -1,0 +1,32 @@
+{
+  "n": 128,
+  "events": 17,
+  "nonevents": 111,
+  "auroc_current": 0.9072602013778484,
+  "auroc_aiagent": 0.8346581875993639,
+  "auroc_difference_current_minus_aiagent": 0.07260201377848441,
+  "difference_se": 0.03345928682839613,
+  "ci95_low": 0.007021811594827995,
+  "ci95_high": 0.1381822159621408,
+  "p_value_two_sided_unadjusted": 0.03001734994600902,
+  "test": "paired DeLong",
+  "comparison_type": "exploratory/post-hoc",
+  "input_files": {
+    "current": "TaskA_CXR_Test患者別予測結果.csv",
+    "aiagent": "test_predictions_primary.csv"
+  },
+  "input_sha256": {
+    "current": "611e87102d15b79a2c3d65174dbe0c851ae5df52b32948d0c0be35dc0930a8b2",
+    "aiagent": "76dae650320f9e203d70d932082ee9442401a606f89317ef7a5e309e29006190"
+  },
+  "validation": {
+    "current_n": 128,
+    "aiagent_n": 128,
+    "matched_n": 128,
+    "subject_ids_all_match": true,
+    "duplicate_subject_ids": false,
+    "true_labels_all_match": true,
+    "deaths": 17,
+    "survivors": 111
+  }
+}

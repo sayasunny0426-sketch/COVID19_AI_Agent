@@ -1,0 +1,14 @@
+{
+  "decision": {
+    "selected_condition": "lr3e-4_aug_b",
+    "reason": "best alternative improves mean Validation AUROC by -0.002826, which is below the pre-registered practical tolerance / parsimony margin of 0.005; the simpler Stage 1 condition is kept",
+    "baseline": "lr3e-4_aug_b",
+    "baseline_mean_val_auroc": 0.872637,
+    "margin": 0.005,
+    "best_alternative": "lr3e-4_aug_b_warmup1",
+    "best_alternative_mean_val_auroc": 0.869811,
+    "improvement": -0.002825999999999995
+  },
+  "rule": "D-054",
+  "n_conditions": 10
+}

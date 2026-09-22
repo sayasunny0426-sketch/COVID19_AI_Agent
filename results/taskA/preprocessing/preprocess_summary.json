@@ -1,0 +1,62 @@
+{
+  "images_written": 1277,
+  "failures": 0,
+  "target_size": 512,
+  "pipeline": {
+    "percentile_clip": [
+      1.0,
+      99.0
+    ],
+    "pad": "zero, square on long side",
+    "resize": "bilinear",
+    "dtype": "uint16 (16-bit PNG)",
+    "window_center_width_used": false,
+    "dataset_statistics_used": false
+  },
+  "png_mode": {
+    "I;16": 1277
+  },
+  "reread_dtype": {
+    "uint16": 1277
+  },
+  "reread_shape": {
+    "512x512": 1277
+  },
+  "exact_roundtrip_all": true,
+  "dtype_is_uint16_all": true,
+  "max_abs_diff_max": 0,
+  "photometric": {
+    "MONOCHROME2": 1277
+  },
+  "inverted_count": 0,
+  "degenerate_count": 0,
+  "stored_min": {
+    "min": 0,
+    "max": 0
+  },
+  "stored_max": {
+    "min": 65253,
+    "max": 65535
+  },
+  "split_counts": {
+    "train": 1021,
+    "test": 128,
+    "val": 128
+  },
+  "deaths_per_split": {
+    "test": 17,
+    "train": 135,
+    "val": 17
+  },
+  "pad_fraction": {
+    "min": 0.0,
+    "median": 0.1675,
+    "max": 0.3612
+  },
+  "clipped_fraction_high": {
+    "min": 0.0092,
+    "max": 0.01
+  },
+  "total_bytes": 439602068,
+  "elapsed_sec": 582.2
+}

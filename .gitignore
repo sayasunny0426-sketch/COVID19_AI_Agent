@@ -1,0 +1,43 @@
+# data and imaging artefacts (never committed)
+# NOTE: anchored with a leading slash. An unanchored `data/` also matches
+# src/covid_mortality/data/, which is source code and must stay tracked.
+/data/
+results/**/images/
+*.dcm
+*.nii
+*.nii.gz
+*.png
+!results/taskA/gradcam/*.png
+
+# model artefacts
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.joblib
+*.npy
+*.npz
+
+# environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.uv/
+uv.lock
+
+# secrets and local settings
+.env
+*.key
+*.pem
+credentials*.json
+token*.json
+
+# scratch
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+/outputs/

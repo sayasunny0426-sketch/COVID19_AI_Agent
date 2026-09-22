@@ -1,0 +1,155 @@
+{
+  "n_files": 1277,
+  "dicom_dir": "<LOCAL_PATH> Drive\\気合のCOVID19\\01_TaskA_CXR\\01_前処理\\selected_dicom_1277",
+  "decoded": true,
+  "read_errors": 0,
+  "split_counts": {
+    "train": 1021,
+    "test": 128,
+    "val": 128
+  },
+  "Modality": {
+    "CR": 1246,
+    "DX": 31
+  },
+  "Manufacturer": {
+    "CARESTREAM HEALTH": 1246,
+    "Carestream": 31
+  },
+  "PhotometricInterpretation": {
+    "MONOCHROME2": 1277
+  },
+  "BitsAllocated": {
+    "16": 1277
+  },
+  "BitsStored": {
+    "12": 1277
+  },
+  "HighBit": {
+    "11": 1277
+  },
+  "PixelRepresentation": {
+    "0": 1277
+  },
+  "SamplesPerPixel": {
+    "1": 1277
+  },
+  "RescaleSlope": {
+    "1": 1277
+  },
+  "RescaleIntercept": {
+    "0": 1277
+  },
+  "RescaleType": {
+    "US": 1277
+  },
+  "VOILUTFunction": {
+    "<missing>": 1277
+  },
+  "PresentationLUTShape": {
+    "IDENTITY": 1277
+  },
+  "PixelIntensityRelationship": {
+    "<missing>": 1246,
+    "LOG": 31
+  },
+  "PixelIntensityRelationshipSign": {
+    "<missing>": 1246,
+    "-1": 31
+  },
+  "missing_tags": {
+    "PatientID": 0,
+    "Modality": 0,
+    "Manufacturer": 0,
+    "Rows": 0,
+    "Columns": 0,
+    "BitsAllocated": 0,
+    "BitsStored": 0,
+    "HighBit": 0,
+    "PixelRepresentation": 0,
+    "PhotometricInterpretation": 0,
+    "RescaleSlope": 0,
+    "RescaleIntercept": 0,
+    "RescaleType": 0,
+    "WindowCenter": 0,
+    "WindowWidth": 0,
+    "VOILUTFunction": 1277,
+    "PresentationLUTShape": 0,
+    "PixelSpacing": 0,
+    "ImagerPixelSpacing": 0,
+    "PixelIntensityRelationship": 1246,
+    "PixelIntensityRelationshipSign": 1246,
+    "SamplesPerPixel": 0,
+    "SOPInstanceUID": 0
+  },
+  "has_VOILUTSequence": 0,
+  "has_ModalityLUTSequence": 0,
+  "WindowCenter_value_count_distribution": {
+    "1": 1277
+  },
+  "WindowCenter_most_common_values": {
+    "2048": 1277
+  },
+  "WindowWidth_value_count_distribution": {
+    "1": 1277
+  },
+  "WindowWidth_most_common_values": {
+    "4096": 1277
+  },
+  "Rows_x_Columns_top": {
+    "2539x3050": 367,
+    "2517x3028": 336,
+    "2544x3056": 270,
+    "2520x3032": 28,
+    "3050x2539": 14,
+    "3028x2517": 13,
+    "3056x2544": 11,
+    "2539x2935": 4,
+    "2510x3028": 4,
+    "2366x3028": 3
+  },
+  "distinct_Rows_x_Columns": 185,
+  "portrait_rows_gt_cols": 61,
+  "landscape_cols_gt_rows": 1215,
+  "square": 1,
+  "aspect_ratio": {
+    "min": 0.639,
+    "max": 1.242,
+    "n_distinct": 157
+  },
+  "PixelSpacing_missing": 0,
+  "decode_errors": 0,
+  "pixel_dtype": {
+    "uint16": 1277
+  },
+  "pixel_value_range_all": {
+    "min": 0,
+    "max": 4095
+  },
+  "pixel_value_range_by_split": {
+    "test": {
+      "n": 128,
+      "min": 0,
+      "max": 4095,
+      "mean_of_means": 1993.4
+    },
+    "train": {
+      "n": 1021,
+      "min": 0,
+      "max": 4095,
+      "mean_of_means": 1993.5
+    },
+    "val": {
+      "n": 128,
+      "min": 0,
+      "max": 4095,
+      "mean_of_means": 2001.3
+    }
+  },
+  "note_on_pixel_stats": "per-split values are descriptive; any preprocessing decision that depends on pixel statistics must use the Training set only",
+  "by_photometric_and_split": {
+    "MONOCHROME2|test": 128,
+    "MONOCHROME2|train": 1021,
+    "MONOCHROME2|val": 128
+  }
+}

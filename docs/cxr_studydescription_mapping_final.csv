@@ -1,0 +1,20 @@
+﻿StudyDescription,classification,n_series,n_studies,n_patients,n_frontal_series_AP_PA,n_frontal_patients,series_description_breakdown,modality_breakdown,reason,notes,status
+CHEST AP PORT,chest_candidate,9010,4284,760,9009,760,AP=8991; PA=18; LATERAL=1,CR=7149; DX=1861,胸部のポータブル正面撮影。COVID-19 入院例の標準的な撮影,1 Series だけ SeriesDescription が LATERAL で、frontal 判定の段階で除かれる,確定（D-038、2026-09-20 承認）
+CHEST AP VIEWONLY,chest_candidate,3626,1787,961,3626,961,AP=3608; PA=18,CR=3130; DX=496,胸部正面撮影。VIEWONLY は保存・読影形式の区別で、撮影部位は胸部,PA が 18 Series 含まれる,確定（D-038、2026-09-20 承認）
+CHEST AP PORTABLE,chest_candidate,338,155,56,338,56,AP=338,CR=338,CHEST AP PORT と同じ内容の別表記,,確定（D-038、2026-09-20 承認）
+CHEST AP VIEW ONLY,chest_candidate,134,67,59,134,59,AP=133; PA=1,CR=134,CHEST AP VIEWONLY の別表記（スペースあり）,,確定（D-038、2026-09-20 承認）
+CHEST ROUTINE PA AP AND LATERAL,chest_candidate,30,22,19,22,19,AP=15; LATERAL=8; PA=7,CR=30,胸部の定型撮影。frontal は SeriesDescription の AP/PA で選ぶ,LATERAL 8 Series を含むため、frontal 判定が必須,確定（D-038、2026-09-20 承認）
+CODE T CHEST AP PORTABLE,chest_candidate,4,2,2,4,2,AP=4,CR=4,胸部の AP 撮影であり、CODE T という名称だけを理由に除外しない（研究者決定 2026-09-20）。TRAUMA CHEST AP PORTABLE とは別に扱う,frontal CXR としての適格性で判断する,確定（D-038、2026-09-20 承認）
+CHEST AP INFANT PORTABLE,chest_candidate,2,1,1,2,1,AP=2,CR=2,胸部の AP 撮影であり、INFANT という名称だけを理由に除外しない（研究者決定 2026-09-20）,患者側の適格性は StudyDescription ではなく患者選定の段階で評価する,確定（D-038、2026-09-20 承認）
+CHEST OVER PENETRATED PA AP PORTABLE,chest_candidate,2,1,1,2,1,AP=2,CR=2,胸部正面撮影。透過条件の指定で、部位や方向は変わらない（名前だけを理由に除外しない）,撮影条件が他と異なるため、画像の見え方が違う可能性がある,確定（D-038、2026-09-20 承認）
+CHEST ROUTINE PA/AP AND LATERAL,chest_candidate,2,1,1,2,1,AP=2,CR=2,同上（表記違い）,,確定（D-038、2026-09-20 承認）
+CHEST AP PORT CENTRAL LINE PL,exclude_special_purpose,471,218,111,471,111,AP=471,CR=327; DX=144,中心静脈カテーテル留置の確認目的（方針 4）,除外対象のなかで最も多い,確定（D-038、2026-09-20 承認）
+CHEST AP CENTRAL LINE PL PORTABLE,exclude_special_purpose,24,11,8,24,8,AP=24,CR=24,同上（表記違い）,,確定（D-038、2026-09-20 承認）
+TRAUMA CHEST AP PORTABLE,exclude_special_purpose,2,1,1,2,1,AP=2,CR=2,外傷対応での撮影（方針 5）,,確定（D-038、2026-09-20 承認）
+FLAT PLATE OF ABDOMEN PORTABLE,exclude_non_chest,375,155,77,375,77,AP=375,CR=277; DX=98,腹部単純撮影,,確定（D-038、2026-09-20 承認）
+ABD SERIES FLAT AND ERECT PORTABLE,exclude_non_chest,50,11,10,50,10,AP=50,CR=40; DX=10,腹部シリーズ（臥位・立位）,,確定（D-038、2026-09-20 承認）
+ABDOMEN SUPINE KUB,exclude_non_chest,37,16,13,37,13,AP=37,CR=25; DX=12,腹部 KUB,,確定（D-038、2026-09-20 承認）
+ABDOMEN SERIES FLAT AND ERECT,exclude_non_chest,14,3,3,14,3,AP=14,CR=14,腹部シリーズ,,確定（D-038、2026-09-20 承認）
+ABD UPRT VIEWONLY,exclude_non_chest,6,3,3,6,3,AP=6,CR=4; DX=2,腹部立位撮影,,確定（D-038、2026-09-20 承認）
+ABDOMEN SERIES FLAT AND ERECT PORTABLE,exclude_non_chest,4,1,1,4,1,AP=4,CR=4,腹部シリーズ,,確定（D-038、2026-09-20 承認）
+ABD SUPINE LATERAL,exclude_non_chest,1,1,1,1,1,AP=1,CR=1,腹部撮影,Study 名は LATERAL だが SeriesDescription は AP で、両者が一致しない（1 Series）,確定（D-038、2026-09-20 承認）

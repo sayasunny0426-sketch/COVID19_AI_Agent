@@ -1,0 +1,433 @@
+{
+  "seed42": {
+    "model": "seed42",
+    "n": 128,
+    "events": 17,
+    "prevalence": 0.1328125,
+    "auroc": {
+      "point": 0.834658187599364,
+      "ci_low": 0.7344727080021197,
+      "ci_high": 0.9231717011128775,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "auprc": {
+      "point": 0.4575616003173064,
+      "ci_low": 0.3094881197590473,
+      "ci_high": 0.7126201156224752,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "brier": 0.10580814877417963,
+    "accuracy_at_0.5": 0.875,
+    "operating_point_youden": {
+      "threshold": 0.008507705,
+      "tp": 14.0,
+      "tn": 77.0,
+      "fp": 34.0,
+      "fn": 3.0,
+      "sensitivity": 0.8235294117647058,
+      "specificity": 0.6936936936936937,
+      "ppv": 0.2916666666666667,
+      "npv": 0.9625,
+      "accuracy": 0.7109375
+    },
+    "operating_point_sensitivity80": {
+      "threshold": 0.016904498,
+      "tp": 12.0,
+      "tn": 85.0,
+      "fp": 26.0,
+      "fn": 5.0,
+      "sensitivity": 0.7058823529411765,
+      "specificity": 0.7657657657657657,
+      "ppv": 0.3157894736842105,
+      "npv": 0.9444444444444444,
+      "accuracy": 0.7578125
+    },
+    "calibration_bins": [
+      {
+        "bin": 0,
+        "n": 26,
+        "mean_predicted": 0.00010317967826267704,
+        "observed_rate": 0.0,
+        "events": 0
+      },
+      {
+        "bin": 1,
+        "n": 25,
+        "mean_predicted": 0.0008118507103063166,
+        "observed_rate": 0.04,
+        "events": 1
+      },
+      {
+        "bin": 2,
+        "n": 26,
+        "mean_predicted": 0.003567905630916357,
+        "observed_rate": 0.07692307692307693,
+        "events": 2
+      },
+      {
+        "bin": 3,
+        "n": 25,
+        "mean_predicted": 0.017922138795256615,
+        "observed_rate": 0.08,
+        "events": 2
+      },
+      {
+        "bin": 4,
+        "n": 26,
+        "mean_predicted": 0.38056790828704834,
+        "observed_rate": 0.46153846153846156,
+        "events": 12
+      }
+    ],
+    "ece": 0.051146888844755274
+  },
+  "seed43": {
+    "model": "seed43",
+    "n": 128,
+    "events": 17,
+    "prevalence": 0.1328125,
+    "auroc": {
+      "point": 0.8357180710121886,
+      "ci_low": 0.7106120826709061,
+      "ci_high": 0.9385267620561738,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "auprc": {
+      "point": 0.5841057510900913,
+      "ci_low": 0.40554942498152574,
+      "ci_high": 0.7892967799096436,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "brier": 0.10098601648897546,
+    "accuracy_at_0.5": 0.8515625,
+    "operating_point_youden": {
+      "threshold": 0.008507705,
+      "tp": 15.0,
+      "tn": 57.0,
+      "fp": 54.0,
+      "fn": 2.0,
+      "sensitivity": 0.8823529411764706,
+      "specificity": 0.5135135135135135,
+      "ppv": 0.21739130434782608,
+      "npv": 0.9661016949152542,
+      "accuracy": 0.5625
+    },
+    "operating_point_sensitivity80": {
+      "threshold": 0.016904498,
+      "tp": 15.0,
+      "tn": 70.0,
+      "fp": 41.0,
+      "fn": 2.0,
+      "sensitivity": 0.8823529411764706,
+      "specificity": 0.6306306306306306,
+      "ppv": 0.26785714285714285,
+      "npv": 0.9722222222222222,
+      "accuracy": 0.6640625
+    },
+    "calibration_bins": [
+      {
+        "bin": 0,
+        "n": 26,
+        "mean_predicted": 0.00035247631603851914,
+        "observed_rate": 0.038461538461538464,
+        "events": 1
+      },
+      {
+        "bin": 1,
+        "n": 25,
+        "mean_predicted": 0.0023079300299286842,
+        "observed_rate": 0.04,
+        "events": 1
+      },
+      {
+        "bin": 2,
+        "n": 26,
+        "mean_predicted": 0.011324102059006691,
+        "observed_rate": 0.0,
+        "events": 0
+      },
+      {
+        "bin": 3,
+        "n": 25,
+        "mean_predicted": 0.09776841104030609,
+        "observed_rate": 0.16,
+        "events": 4
+      },
+      {
+        "bin": 4,
+        "n": 26,
+        "mean_predicted": 0.7055233716964722,
+        "observed_rate": 0.4230769230769231,
+        "events": 11
+      }
+    ],
+    "ece": 0.08692938598960609
+  },
+  "seed44": {
+    "model": "seed44",
+    "n": 128,
+    "events": 17,
+    "prevalence": 0.1328125,
+    "auroc": {
+      "point": 0.84525702172761,
+      "ci_low": 0.7594064652888183,
+      "ci_high": 0.9189321674615792,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "auprc": {
+      "point": 0.4753917574364088,
+      "ci_low": 0.3184328699219964,
+      "ci_high": 0.6903980658020228,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "brier": 0.11192772761824374,
+    "accuracy_at_0.5": 0.8828125,
+    "operating_point_youden": {
+      "threshold": 0.008507705,
+      "tp": 12.0,
+      "tn": 88.0,
+      "fp": 23.0,
+      "fn": 5.0,
+      "sensitivity": 0.7058823529411765,
+      "specificity": 0.7927927927927928,
+      "ppv": 0.34285714285714286,
+      "npv": 0.946236559139785,
+      "accuracy": 0.78125
+    },
+    "operating_point_sensitivity80": {
+      "threshold": 0.016904498,
+      "tp": 12.0,
+      "tn": 97.0,
+      "fp": 14.0,
+      "fn": 5.0,
+      "sensitivity": 0.7058823529411765,
+      "specificity": 0.8738738738738738,
+      "ppv": 0.46153846153846156,
+      "npv": 0.9509803921568627,
+      "accuracy": 0.8515625
+    },
+    "calibration_bins": [
+      {
+        "bin": 0,
+        "n": 26,
+        "mean_predicted": 5.3004827350378036e-05,
+        "observed_rate": 0.0,
+        "events": 0
+      },
+      {
+        "bin": 1,
+        "n": 25,
+        "mean_predicted": 0.00029905085102654994,
+        "observed_rate": 0.04,
+        "events": 1
+      },
+      {
+        "bin": 2,
+        "n": 26,
+        "mean_predicted": 0.001123724039644003,
+        "observed_rate": 0.038461538461538464,
+        "events": 1
+      },
+      {
+        "bin": 3,
+        "n": 25,
+        "mean_predicted": 0.008184568956494331,
+        "observed_rate": 0.12,
+        "events": 3
+      },
+      {
+        "bin": 4,
+        "n": 26,
+        "mean_predicted": 0.2283102571964264,
+        "observed_rate": 0.46153846153846156,
+        "events": 12
+      }
+    ],
+    "ece": 0.08456253217332232
+  },
+  "three_seed_ensemble": {
+    "model": "ensemble(3 seeds)",
+    "n": 128,
+    "events": 17,
+    "prevalence": 0.1328125,
+    "auroc": {
+      "point": 0.8463169051404346,
+      "ci_low": 0.7387122416534181,
+      "ci_high": 0.9374668786433492,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "auprc": {
+      "point": 0.4988238255767566,
+      "ci_low": 0.3446446145541084,
+      "ci_high": 0.7639094292102814,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "brier": 0.09062279342143095,
+    "accuracy_at_0.5": 0.8828125,
+    "operating_point_youden": {
+      "threshold": 0.008507705,
+      "tp": 15.0,
+      "tn": 65.0,
+      "fp": 46.0,
+      "fn": 2.0,
+      "sensitivity": 0.8823529411764706,
+      "specificity": 0.5855855855855856,
+      "ppv": 0.2459016393442623,
+      "npv": 0.9701492537313433,
+      "accuracy": 0.625
+    },
+    "operating_point_sensitivity80": {
+      "threshold": 0.016904498,
+      "tp": 15.0,
+      "tn": 75.0,
+      "fp": 36.0,
+      "fn": 2.0,
+      "sensitivity": 0.8823529411764706,
+      "specificity": 0.6756756756756757,
+      "ppv": 0.29411764705882354,
+      "npv": 0.974025974025974,
+      "accuracy": 0.703125
+    },
+    "calibration_bins": [
+      {
+        "bin": 0,
+        "n": 26,
+        "mean_predicted": 0.00041461738874204457,
+        "observed_rate": 0.038461538461538464,
+        "events": 1
+      },
+      {
+        "bin": 1,
+        "n": 25,
+        "mean_predicted": 0.0020634843967854977,
+        "observed_rate": 0.0,
+        "events": 0
+      },
+      {
+        "bin": 2,
+        "n": 26,
+        "mean_predicted": 0.008566038683056831,
+        "observed_rate": 0.038461538461538464,
+        "events": 1
+      },
+      {
+        "bin": 3,
+        "n": 25,
+        "mean_predicted": 0.06511667370796204,
+        "observed_rate": 0.16,
+        "events": 4
+      },
+      {
+        "bin": 4,
+        "n": 26,
+        "mean_predicted": 0.41086435317993164,
+        "observed_rate": 0.4230769230769231,
+        "events": 11
+      }
+    ],
+    "ece": 0.03521640645840307
+  },
+  "L1_excluding_T0_day": {
+    "model": "primary, index CXR before T0 day",
+    "n": 106,
+    "events": 9,
+    "prevalence": 0.08490566037735849,
+    "auroc": {
+      "point": 0.8911798396334479,
+      "ci_low": 0.7915234822451317,
+      "ci_high": 0.9668098510882015,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "auprc": {
+      "point": 0.5612354058432489,
+      "ci_low": 0.32236358415385946,
+      "ci_high": 0.821268115942029,
+      "n_boot": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "brier": 0.06483035846709091,
+    "accuracy_at_0.5": 0.9150943396226415,
+    "operating_point_youden": {
+      "threshold": 0.008507705,
+      "tp": 8.0,
+      "tn": 68.0,
+      "fp": 29.0,
+      "fn": 1.0,
+      "sensitivity": 0.8888888888888888,
+      "specificity": 0.7010309278350515,
+      "ppv": 0.21621621621621623,
+      "npv": 0.9855072463768116,
+      "accuracy": 0.7169811320754716
+    },
+    "operating_point_sensitivity80": {
+      "threshold": 0.016904498,
+      "tp": 7.0,
+      "tn": 75.0,
+      "fp": 22.0,
+      "fn": 2.0,
+      "sensitivity": 0.7777777777777778,
+      "specificity": 0.7731958762886598,
+      "ppv": 0.2413793103448276,
+      "npv": 0.974025974025974,
+      "accuracy": 0.7735849056603774
+    },
+    "calibration_bins": [
+      {
+        "bin": 0,
+        "n": 22,
+        "mean_predicted": 8.726503438083455e-05,
+        "observed_rate": 0.0,
+        "events": 0
+      },
+      {
+        "bin": 1,
+        "n": 21,
+        "mean_predicted": 0.000747291895095259,
+        "observed_rate": 0.0,
+        "events": 0
+      },
+      {
+        "bin": 2,
+        "n": 21,
+        "mean_predicted": 0.0028508107643574476,
+        "observed_rate": 0.047619047619047616,
+        "events": 1
+      },
+      {
+        "bin": 3,
+        "n": 21,
+        "mean_predicted": 0.014280539005994797,
+        "observed_rate": 0.047619047619047616,
+        "events": 1
+      },
+      {
+        "bin": 4,
+        "n": 21,
+        "mean_predicted": 0.329108327627182,
+        "observed_rate": 0.3333333333333333,
+        "events": 7
+      }
+    ],
+    "ece": 0.01647716731325622,
+    "n_excluded": 22
+  }
+}

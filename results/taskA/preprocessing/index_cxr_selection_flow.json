@@ -1,0 +1,65 @@
+{
+  "all_patients_clinical_file": 1384,
+  "all_patients_dicom": 1365,
+  "with_CR_or_DX": 1365,
+  "with_chest_candidate": 1364,
+  "with_frontal_AP_PA": 1364,
+  "with_eligible_on_or_before_T0": 1309,
+  "excluded_only_after_T0": 55,
+  "patients_without_any_CR_DX": 19,
+  "selected_day_series_at_earliest_time": {
+    "1": 84,
+    "2": 1222,
+    "3": 3
+  },
+  "patients_resolved_by_SeriesNumber_tiebreak": 1225,
+  "delta_days_distribution": {
+    "0": 215,
+    "-1": 1055,
+    "-2": 7,
+    "-3": 5,
+    "-4": 2,
+    "-5": 4,
+    "-6": 4,
+    "-7": 2,
+    "-8": 6,
+    "-11": 1,
+    "-12": 1,
+    "-13": 1,
+    "-14": 1,
+    "-33": 1,
+    "-87": 1,
+    "-127": 1,
+    "-160": 1,
+    "-261": 1
+  },
+  "delta_days_summary": {
+    "0": 215,
+    "-1": 1055,
+    "-2": 7,
+    "<=-3": 32,
+    "min": -261,
+    "max": 0,
+    "within_T0-2_to_T0": 1277,
+    "outside_T0-2_window": 32
+  },
+  "selected_modality": {
+    "CR": 1278,
+    "DX": 31
+  },
+  "selected_view": {
+    "AP": 1307,
+    "PA": 2
+  },
+  "selected_study_description": {
+    "CHEST AP VIEWONLY": 804,
+    "CHEST AP PORT": 425,
+    "CHEST AP VIEW ONLY": 45,
+    "CHEST AP PORTABLE": 30,
+    "CHEST ROUTINE PA AP AND LATERAL": 3,
+    "CHEST ROUTINE PA/AP AND LATERAL": 1,
+    "CODE T CHEST AP PORTABLE": 1
+  },
+  "manifest_rows": 1309,
+  "note": "no inclusion window applied (rule 11); no cohort fixed; no split applied; existing 1,277-patient manifest not consulted"
+}

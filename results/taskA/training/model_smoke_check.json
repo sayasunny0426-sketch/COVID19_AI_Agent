@@ -1,0 +1,69 @@
+{
+  "pretrained_resnet18_built": {
+    "pass": true,
+    "detail": {
+      "total": 11177025,
+      "trainable": 11177025
+    }
+  },
+  "head_is_single_logit": {
+    "pass": true,
+    "detail": {
+      "in": 512,
+      "out": 1
+    }
+  },
+  "forward_shape": {
+    "pass": true,
+    "detail": [
+      4,
+      1
+    ]
+  },
+  "forward_finite": {
+    "pass": true,
+    "detail": {
+      "min": 0.217,
+      "max": 0.4825
+    }
+  },
+  "loss_computes": {
+    "pass": true,
+    "detail": {
+      "pos_weight": 6.563,
+      "loss": 0.8952
+    }
+  },
+  "warmup_freeze_works": {
+    "pass": true,
+    "detail": {
+      "head_only": 513,
+      "all": 11177025
+    }
+  },
+  "gradcam_layer_activations": {
+    "pass": true,
+    "detail": [
+      1,
+      512,
+      7,
+      7
+    ]
+  },
+  "gradcam_layer_gradients": {
+    "pass": true,
+    "detail": [
+      1,
+      512,
+      7,
+      7
+    ]
+  },
+  "feature_extractor_512d": {
+    "pass": true,
+    "detail": [
+      2,
+      512
+    ]
+  }
+}

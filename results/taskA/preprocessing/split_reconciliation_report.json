@@ -1,0 +1,72 @@
+{
+  "source_file": "<LOCAL_PATH>",
+  "sha256": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8",
+  "rows": 1277,
+  "columns": [
+    "Subject ID",
+    "to_patient_id",
+    "last.status",
+    "true_label",
+    "split"
+  ],
+  "1_subject_id_set": {
+    "identical": true,
+    "n_split": 1277,
+    "n_cohort": 1277,
+    "only_in_split": [],
+    "only_in_cohort": []
+  },
+  "2_no_patient_overlap": {
+    "duplicated_subject_ids": 0,
+    "patients_in_more_than_one_split": 0,
+    "ok": true
+  },
+  "3_split_sizes": {
+    "observed": {
+      "train": 1021,
+      "val": 128,
+      "test": 128
+    },
+    "expected": {
+      "train": 1021,
+      "val": 128,
+      "test": 128
+    },
+    "ok": true
+  },
+  "4_deaths_per_split": {
+    "observed": {
+      "train": 135,
+      "val": 17,
+      "test": 17
+    },
+    "expected": {
+      "train": 135,
+      "val": 17,
+      "test": 17
+    },
+    "ok": true
+  },
+  "5_internal_consistency": {
+    "subject_id_equals_to_patient_id": true,
+    "label_status_mismatches": 0,
+    "split_values": [
+      "test",
+      "train",
+      "val"
+    ],
+    "ok": true
+  },
+  "6_labels_match_clinical_file": {
+    "compared": 1277,
+    "mismatches": 0,
+    "examples": [],
+    "ok": true
+  },
+  "all_checks_passed": true,
+  "adopted_copy": {
+    "path": "data\\splits\\COVID19_固定患者split_1277.csv",
+    "sha256_after_copy": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8",
+    "identical_to_source": true
+  }
+}

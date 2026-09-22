@@ -1,0 +1,250 @@
+{
+  "config": {
+    "input_size": 224,
+    "cache_size": 512,
+    "imagenet_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "imagenet_std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "augmentations": {
+      "none": {
+        "name": "none",
+        "translate": 0.0,
+        "scale": [
+          1.0,
+          1.0
+        ],
+        "degrees": 0.0,
+        "brightness": 0.0,
+        "contrast": 0.0
+      },
+      "aug_a": {
+        "name": "aug_a",
+        "translate": 0.03,
+        "scale": [
+          0.97,
+          1.03
+        ],
+        "degrees": 0.0,
+        "brightness": 0.05,
+        "contrast": 0.05
+      },
+      "aug_b": {
+        "name": "aug_b",
+        "translate": 0.05,
+        "scale": [
+          0.95,
+          1.05
+        ],
+        "degrees": 7.0,
+        "brightness": 0.1,
+        "contrast": 0.1
+      }
+    },
+    "expected_split_counts": {
+      "train": [
+        1021,
+        135
+      ],
+      "val": [
+        128,
+        17
+      ],
+      "test": [
+        128,
+        17
+      ]
+    }
+  },
+  "dataset_size": {
+    "pass": true,
+    "detail": {
+      "n": 1277
+    }
+  },
+  "split_counts": {
+    "pass": true,
+    "detail": {
+      "train": 1021,
+      "val": 128,
+      "test": 128
+    }
+  },
+  "split_deaths": {
+    "pass": true,
+    "detail": {
+      "train": 135,
+      "val": 17,
+      "test": 17
+    }
+  },
+  "patient_id_unique": {
+    "pass": true,
+    "detail": {
+      "unique_ids": 1277
+    }
+  },
+  "no_cross_split_overlap": {
+    "pass": true,
+    "detail": {
+      "train&val": 0,
+      "train&test": 0,
+      "val&test": 0
+    }
+  },
+  "one_image_per_patient": {
+    "pass": true,
+    "detail": {
+      "distinct_SOPInstanceUID": 1277
+    }
+  },
+  "no_missing_images": {
+    "pass": true,
+    "detail": {
+      "missing": 0
+    }
+  },
+  "image_read_errors": {
+    "pass": true,
+    "detail": {
+      "errors": 0,
+      "examples": []
+    }
+  },
+  "png_dtype_uint16": {
+    "pass": true,
+    "detail": [
+      "uint16"
+    ]
+  },
+  "png_shape_512": {
+    "pass": true,
+    "detail": [
+      "(512, 512)"
+    ]
+  },
+  "png_scaling_range": {
+    "pass": true,
+    "detail": {
+      "min_of_max": 65253,
+      "max_of_max": 65535
+    }
+  },
+  "label_consistency": {
+    "pass": true,
+    "detail": {
+      "mismatches": 0
+    }
+  },
+  "tensor_shape": {
+    "pass": true,
+    "detail": [
+      3,
+      224,
+      224
+    ]
+  },
+  "tensor_dtype": {
+    "pass": true,
+    "detail": "torch.float32"
+  },
+  "label_dtype": {
+    "pass": true,
+    "detail": "torch.float32"
+  },
+  "three_channels_identical": {
+    "pass": true,
+    "detail": "channels equal after de-normalisation"
+  },
+  "denormalised_range_0_1": {
+    "pass": true,
+    "detail": {
+      "min": 0.0,
+      "max": 0.99957
+    }
+  },
+  "normalised_range_matches_imagenet": {
+    "pass": true,
+    "detail": {
+      "observed": [
+        -2.118,
+        2.638
+      ],
+      "possible": [
+        -2.118,
+        2.64
+      ]
+    }
+  },
+  "val_test_repeat_read_identical": {
+    "pass": true,
+    "detail": "two reads of the same index are bit-identical"
+  },
+  "train_without_aug_deterministic": {
+    "pass": true,
+    "detail": "no randomness when aug=none"
+  },
+  "train_augmentation_active": {
+    "pass": true,
+    "detail": {
+      "aug_a": 4.321693420410156,
+      "aug_b": 4.172248840332031
+    }
+  },
+  "augmentation_blocked_for_val": {
+    "pass": true,
+    "detail": "constructor raises ValueError"
+  },
+  "augmentation_blocked_for_test": {
+    "pass": true,
+    "detail": "constructor raises ValueError"
+  },
+  "val_loader_order_deterministic": {
+    "pass": true,
+    "detail": {
+      "n": 128
+    }
+  },
+  "train_loader_shuffles_reproducibly": {
+    "pass": true,
+    "detail": {
+      "same_seed_identical": true,
+      "different_seed_differs": true
+    }
+  },
+  "batch_shape": {
+    "pass": true,
+    "detail": [
+      16,
+      3,
+      224,
+      224
+    ]
+  },
+  "loader_covers_all_patients": {
+    "pass": true,
+    "detail": {
+      "n_unique": 128
+    }
+  },
+  "pos_weight_from_train_only": {
+    "pass": true,
+    "detail": {
+      "pos_weight": 6.563
+    }
+  },
+  "pos_weight_blocked_outside_train": {
+    "pass": true,
+    "detail": "raises ValueError"
+  },
+  "summary": {
+    "checks": 29,
+    "failures": []
+  }
+}

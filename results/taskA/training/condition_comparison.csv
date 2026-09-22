@@ -1,0 +1,11 @@
+stage,condition,n_seeds,mean_val_auroc,sd_val_auroc,mean_val_auprc,mean_val_loss,best_epochs,unfreeze_schedule,source,note
+stage1,lr3e-4_aug_b,3,0.872637,0.004569,0.537411,1.700158,"5,9,14",,researcher_report_2026-09-21,Stage 1 baseline / selected
+stage2,lr3e-4_aug_b_warmup1,3,0.869811,0.008043,0.556175,1.712621,"2,3,9","{""fc"": 1, ""layer4"": 2, ""rest"": 2}",researcher_report_2026-09-21,not selected
+stage1,lr1e-4_aug_a,3,0.866985,0.024952,,,,,researcher_report_2026-09-21,Stage 1 runner-up (AUROC only reported)
+stage1,lr3e-5_aug_b,3,0.858506,0.013625,,,,,researcher_report_2026-09-21,
+stage2,lr3e-4_aug_b_staged,3,0.856209,0.008112,0.487404,1.653959,"2,3,4","{""fc"": 1, ""layer4"": 2, ""rest"": 4}",researcher_report_2026-09-21,not selected
+stage1,lr3e-5_aug_a,3,0.854619,0.008632,,,,,researcher_report_2026-09-21,
+stage1,lr3e-4_aug_a,3,0.850380,0.005956,,,,,researcher_report_2026-09-21,one run had best epoch = 1 (seed42)
+stage1,lr1e-4_aug_b,3,0.848790,0.020880,,,,,researcher_report_2026-09-21,
+stage1,lr1e-5_aug_b,3,0.844727,0.006425,,,,,researcher_report_2026-09-21,
+stage1,lr1e-5_aug_a,3,0.839958,0.007842,,,,,researcher_report_2026-09-21,

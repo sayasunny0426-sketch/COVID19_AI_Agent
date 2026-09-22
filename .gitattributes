@@ -1,0 +1,7 @@
+# Byte-exact storage.
+#
+# results/taskA/ holds research artefacts whose SHA256 is recorded in results/taskA/README.md
+# and checked against the master copy. Git for Windows ships with core.autocrlf=true, which
+# would rewrite CRLF to LF on commit and change those hashes. `-text` turns all end-of-line
+# conversion off, so what is committed is byte-for-byte what was verified.
+* -text
