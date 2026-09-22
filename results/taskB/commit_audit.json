@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-22T23:57:36+09:00",
+  "generated": "2026-09-23T00:24:50+09:00",
   "script": "31_taskB_prepare_commit.py",
-  "files_copied": 75,
+  "files_copied": 77,
   "copied": [
     "src/covid_mortality/features/taskB_clinical.py",
     "src/covid_mortality/features/taskB_preprocess.py",
@@ -21,6 +21,7 @@
     "docs/decision_log.md",
     "docs/change_log.csv",
     "docs/open_questions.md",
+    "results/taskB/README.md",
     "results/taskB/preprocessing/audit_summary.json",
     "results/taskB/preprocessing/candidate_table.csv",
     "results/taskB/preprocessing/categorical_summary.csv",
@@ -38,7 +39,6 @@
     "results/taskB/preprocessing/figures/dist_spo2.png",
     "results/taskB/preprocessing/figures/dist_troponin.png",
     "results/taskB/preprocessing/implausible_values.csv",
-    "results/taskB/preprocessing/inpatient_sensitivity_flow.csv",
     "results/taskB/preprocessing/missing_indicator_decision.csv",
     "results/taskB/preprocessing/missing_indicator_decision.json",
     "results/taskB/preprocessing/missingness_mechanism.csv",
@@ -47,7 +47,6 @@
     "results/taskB/preprocessing/preprocess_spec.json",
     "results/taskB/preprocessing/preprocessor_train_fit.json",
     "results/taskB/preprocessing/variable_audit.csv",
-    "results/taskB/preprocessing/visit_type_composition.csv",
     "results/taskB/variable_selection/bootstrap_stability.csv",
     "results/taskB/variable_selection/budget_constrained_history.csv",
     "results/taskB/variable_selection/final_model_coefficients.csv",
@@ -77,12 +76,19 @@
     "results/taskB/modeling/xgb_search.csv",
     "results/taskB/qc/pre_test_qc_report.csv",
     "results/taskB/qc/pre_test_qc_report.json",
-    "results/taskB/qc/test_access_log.json"
+    "results/taskB/qc/test_access_log.json",
+    "results/taskB/secondary_exploratory_unused/inpatient_sensitivity_flow.csv",
+    "results/taskB/secondary_exploratory_unused/README.md",
+    "results/taskB/secondary_exploratory_unused/visit_type_composition.csv"
   ],
   "redactions": {
     "scripts/31_taskB_prepare_commit.py": 1,
     "docs/decision_log.md": 2
   },
+  "stale_removed": [
+    "results/taskB/preprocessing/inpatient_sensitivity_flow.csv",
+    "results/taskB/preprocessing/visit_type_composition.csv"
+  ],
   "audit_counts": {
     "raw_clinical_source": 0,
     "dicom": 0,

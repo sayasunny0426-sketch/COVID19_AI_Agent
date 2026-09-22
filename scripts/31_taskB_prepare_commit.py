@@ -37,7 +37,14 @@ CODE = [
     "scripts/31_taskB_prepare_commit.py",
 ]
 DOCS = ["docs/decision_log.md", "docs/change_log.csv", "docs/open_questions.md"]
-RESULT_DIRS = ["preprocessing", "variable_selection", "modeling", "qc"]
+RESULT_DIRS = ["preprocessing", "variable_selection", "modeling", "qc",
+               # kept in the repository but clearly separated: an analysis that was NOT
+               # performed, so its material must never be read as a result (D-081)
+               "secondary_exploratory_unused"]
+TOP_FILES = ["results/taskB/README.md"]
+# files that moved out of the primary tree and must not linger in the repository
+STALE = ["results/taskB/preprocessing/inpatient_sensitivity_flow.csv",
+         "results/taskB/preprocessing/visit_type_composition.csv"]
 # model binaries stay out of the repository; their hashes are in the frozen JSON
 SKIP_SUFFIX = {".joblib", ".pth", ".pt", ".pkl"}
 MAX_MB = 5
@@ -83,8 +90,17 @@ def main() -> int:
               f"this commit is for the development phase only")
         return 1
 
+    removed = []
+    for rel in STALE:
+        p = repo / rel
+        if p.exists():
+            p.unlink()
+            removed.append(rel)
+    if removed:
+        print(f"removed stale copies that moved out of the primary tree: {removed}")
+
     copied, redactions = [], {}
-    for rel in CODE + DOCS:
+    for rel in CODE + DOCS + TOP_FILES:
         src = project / rel
         if not src.exists():
             print(f"  (missing, skipped) {rel}")
@@ -156,7 +172,7 @@ def main() -> int:
 
     report = {"generated": datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds"),
               "script": Path(__file__).name, "files_copied": len(copied),
-              "copied": copied, "redactions": redactions,
+              "copied": copied, "redactions": redactions, "stale_removed": removed,
               "audit_counts": {k: len(v) for k, v in problems.items()},
               "audit": {k: v[:8] for k, v in problems.items()},
               "test_outputs_present": False}

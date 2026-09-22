@@ -8,6 +8,10 @@ development death counts match the frozen split,PASS,"{'train': 135, 'val': 17}"
 outcome consistency in development rows,PASS,
 no post-T0 / outcome column is used as a predictor,PASS,[]
 no missing indicator for sex (D-072),PASS,
+variable selection used the Training set only,PASS,training only
+variable selection method is backward elimination by AIC,PASS,
+final variable set records that it was fitted on Training only,PASS,train only
+no inpatient-only result is mixed into the primary tree,PASS,inpatient-only material is isolated in secondary_exploratory_unused/
 every clinical column has a recorded keep/drop reason,PASS,0 without a reason
 saved spec records that it was fitted on Training only,PASS,train only
 Validation rows were not used to fit the preprocessor,PASS,"refitting on Train+Val changes the fill values, so they are Training-only"

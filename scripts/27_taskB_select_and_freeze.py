@@ -253,13 +253,35 @@ def main() -> int:
                 "the size of its effect is made explicit by the arm A/B/C sensitivity analysis"],
             "not_because": "it produced a higher Validation AUROC",
             "sensitivity": "results/taskB/variable_selection/indicator_rule_sensitivity.csv"},
+        "variable_selection": {
+            "method": "backward elimination by AIC, subject to the parameter budget",
+            "unit": "original clinical variable (all dummies of a categorical variable move together)",
+            "dataset": "Training set only (n=1021, 135 deaths)",
+            "validation_used": False, "test_used": False,
+            "statement": ("Variable selection was performed by backward elimination by AIC on "
+                          "the Training set only. Neither the Validation set nor the Test set "
+                          "was used for variable selection."),
+            "stability": "500 bootstrap resamples of Training; reported, not used to select"},
+        "analysis_population": {
+            "primary": "the fixed cohort of 1,277 patients, identical to Task A and Task C",
+            "rationale": ("keeping one patient set across Task A, B and C is what makes the "
+                          "paired DeLong comparison and the Late Fusion analysis possible"),
+            "composition_note": ("the cohort mixes inpatient-coded encounters with emergency "
+                                 "department encounters that were discharged; this is stated in "
+                                 "the cohort description and the limitations"),
+            "inpatient_only_sensitivity": "not performed (decision_log D-081)"},
         "secondary_analyses": {
             "xgb_native": ("pre-specified secondary model. Native missing handling did not "
                            "improve cross-validated performance compared with the "
-                           "imputation-based approach in this analysis."),
-            "inpatient_only": ("pre-specified sensitivity analysis on the 955 patients coded "
-                               "Inpatient Visit, to check that the main result is robust when "
-                               "restricted to inpatient-coded encounters")},
+                           "imputation-based approach in this analysis.")},
+        "future_analysis_candidates": [
+            {"analysis": "inpatient-only analysis restricted to visit_concept_name == "
+                         "'Inpatient Visit' (955 of 1,277 patients)",
+             "purpose": "separate discrimination of illness severity from reproduction of the "
+                        "admit-or-discharge triage decision",
+             "status": "not performed; population-definition tables only, kept unused in "
+                       "results/taskB/secondary_exploratory_unused/",
+             "reference": "decision_log D-081"}],
         "feature_importance_plan": importance_plan,
         "prediction_schema": prediction_schema,
         "delong_plan": sch.DELONG_PLAN,

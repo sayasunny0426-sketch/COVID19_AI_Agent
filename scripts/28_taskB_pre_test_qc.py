@@ -97,6 +97,24 @@ def main() -> int:
     q.check("no post-T0 / outcome column is used as a predictor",
             not (used_cols & set(tb.POST_T0)), str(sorted(used_cols & set(tb.POST_T0))))
     q.check("no missing indicator for sex (D-072)", "sex_missing" not in feats)
+    vsel = json.loads((project / "results/taskB/variable_selection/"
+                       "variable_selection_summary.json").read_text(encoding="utf-8"))
+    q.check("variable selection used the Training set only",
+            vsel["specification"]["data"] == "training only"
+            and "neither Validation nor Test" in vsel["validation_test_use"],
+            vsel["specification"]["data"])
+    q.check("variable selection method is backward elimination by AIC",
+            vsel["specification"]["direction"] == "backward elimination"
+            and vsel["specification"]["criterion"] == "AIC")
+    fv = json.loads((project / "results/taskB/variable_selection/final_variables.json")
+                    .read_text(encoding="utf-8"))
+    q.check("final variable set records that it was fitted on Training only",
+            fv.get("fitted_on") == "train only", fv.get("fitted_on", ""))
+    q.check("no inpatient-only result is mixed into the primary tree",
+            not list((project / "results/taskB/preprocessing").glob("*inpatient*"))
+            and not list((project / "results/taskB/modeling").glob("*inpatient*")),
+            "inpatient-only material is isolated in secondary_exploratory_unused/")
+
     audit = pd.read_csv(project / "results/taskB/preprocessing/variable_audit.csv",
                         encoding="utf-8-sig")
     q.check("every clinical column has a recorded keep/drop reason",

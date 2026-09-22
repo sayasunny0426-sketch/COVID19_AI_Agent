@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-22T23:56:17+09:00",
+  "generated": "2026-09-23T00:24:18+09:00",
   "script": "28_taskB_pre_test_qc.py",
   "scope": "Training and Validation only. Test rows were not materialised; the Test side was checked from the split manifest (ids and split column) alone.",
   "deferred_to_post_test_qc": [
@@ -9,7 +9,7 @@
     "Test predictions aligned with Subject ID",
     "Test cohort and death counts match the frozen split"
   ],
-  "n_checks": 36,
+  "n_checks": 40,
   "n_failed": 0,
   "checks": [
     {
@@ -56,6 +56,26 @@
       "check": "no missing indicator for sex (D-072)",
       "result": "PASS",
       "detail": ""
+    },
+    {
+      "check": "variable selection used the Training set only",
+      "result": "PASS",
+      "detail": "training only"
+    },
+    {
+      "check": "variable selection method is backward elimination by AIC",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "final variable set records that it was fitted on Training only",
+      "result": "PASS",
+      "detail": "train only"
+    },
+    {
+      "check": "no inpatient-only result is mixed into the primary tree",
+      "result": "PASS",
+      "detail": "inpatient-only material is isolated in secondary_exploratory_unused/"
     },
     {
       "check": "every clinical column has a recorded keep/drop reason",
