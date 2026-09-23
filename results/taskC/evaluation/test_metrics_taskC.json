@@ -1,0 +1,48 @@
+{
+  "model": "Task C Late Fusion (primary)",
+  "formula": "p_fused = 0.75 * p_clinical_lr + 0.25 * p_cxr",
+  "n": 128,
+  "events": 17,
+  "auroc": {
+    "point": 0.944886,
+    "ci_low": 0.892422,
+    "ci_high": 0.983042,
+    "n_resamples": 2000,
+    "stratified": true,
+    "seed": 12345
+  },
+  "auprc": {
+    "point": 0.780516,
+    "ci_low": 0.61756,
+    "ci_high": 0.923811,
+    "n_resamples": 2000,
+    "stratified": true,
+    "seed": 12345
+  },
+  "brier": 0.078034,
+  "ece": 0.128711,
+  "calibration_definition": {
+    "brier": "standard Brier score",
+    "ece_bins": 10,
+    "ece_scheme": "equal_width",
+    "statement": "ECE with 10 equal-width bins over [0,1]",
+    "implementation": "src/covid_mortality/evaluation/metrics.py :: expected_calibration_error(y, p, n_bins, scheme)",
+    "same_on_validation_and_test": true
+  },
+  "threshold": {
+    "value": 0.32592158196659415,
+    "source": "Validation Youden maximum, tie-break lowest; frozen for Test",
+    "recomputed_on_test": false
+  },
+  "operating_point": {
+    "sensitivity": 0.882353,
+    "specificity": 0.810811,
+    "ppv": 0.416667,
+    "npv": 0.978261,
+    "tp": 15.0,
+    "tn": 90.0,
+    "fp": 21.0,
+    "fn": 2.0
+  },
+  "frozen_sha256": "210be0f4ba16ace028c14cfdc2167efa55fdbb80ad86d3829291216710da2db8"
+}

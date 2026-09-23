@@ -1,0 +1,19 @@
+{
+  "role": "secondary / exploratory. NOT used for model selection and NOT promoted to primary. The primary specification was frozen before the Test set was opened and is unchanged.",
+  "models": {
+    "logit_space_weighted_average_w0.70": {
+      "note": "weight chosen on Validation within the secondary arm",
+      "auroc": 0.932697,
+      "auprc": 0.748343,
+      "brier": 0.067416,
+      "ece_10_equal_width": 0.087442
+    },
+    "logistic_stacking": {
+      "note": "3 parameters fitted on the 128 Validation patients (17 events), then applied to Test; exploratory",
+      "auroc": 0.935877,
+      "auprc": 0.754355,
+      "brier": 0.062388,
+      "ece_10_equal_width": 0.059033
+    }
+  }
+}

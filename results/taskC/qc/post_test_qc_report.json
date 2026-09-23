@@ -1,0 +1,279 @@
+{
+  "generated": "2026-09-23T10:59:51+09:00",
+  "script": "42_taskC_post_test_qc.py",
+  "frozen_sha256": "210be0f4ba16ace028c14cfdc2167efa55fdbb80ad86d3829291216710da2db8",
+  "n_checks": 54,
+  "n_failed": 0,
+  "checks": [
+    {
+      "check": "the Test run used the frozen specification file",
+      "result": "PASS",
+      "detail": "frozen file unchanged since the Test run"
+    },
+    {
+      "check": "the run recorded that the specification did not change",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: taskA_frozen_selection",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: taskA_val_predictions",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: taskA_test_predictions",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: taskB_frozen_selection",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: taskB_val_predictions",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: taskB_test_predictions",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: split_manifest",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: taskC_selected_weight",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "input unchanged: taskC_validation_metrics",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task A model not retrained",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task B model not retrained",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task C Test predictions: 128 rows",
+      "result": "PASS",
+      "detail": "128"
+    },
+    {
+      "check": "Task C Test predictions: unique subject_id",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task C Test predictions: row order matches the split manifest",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task C Test predictions: 17 events",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task C Test predictions: no missing probability",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task C Test predictions: no NaN / Inf",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task C Test predictions: probabilities in [0,1]",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the fused Test column reproduces from the frozen weight",
+      "result": "PASS",
+      "detail": "max |difference| 1.11e-16"
+    },
+    {
+      "check": "the fusion weight is the frozen one",
+      "result": "PASS",
+      "detail": "w_clinical = 0.75"
+    },
+    {
+      "check": "the clinical component is the frozen one",
+      "result": "PASS",
+      "detail": "lr"
+    },
+    {
+      "check": "Test labels match the fixed split",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "threshold equals the frozen Validation-derived value",
+      "result": "PASS",
+      "detail": "0.325922"
+    },
+    {
+      "check": "threshold recorded as not recomputed on Test",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "calibration definition on Test matches the frozen one",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "combined file: required columns present",
+      "result": "PASS",
+      "detail": "['subject_id', 'true_label', 'prob_cxr', 'prob_clinical_lr', 'prob_clinical_xgboost', 'prob_clinical_mlp', 'prob_late_fusion']"
+    },
+    {
+      "check": "combined file: 128 patients",
+      "result": "PASS",
+      "detail": "128"
+    },
+    {
+      "check": "combined file: unique subject_id",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "combined file: deterministic order matching the manifest",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "combined file: labels aligned",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "combined file: no missing probability",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "combined file: probabilities in [0,1]",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "combined file: Task A column matches the Task A artefact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "combined file: Task B columns match the Task B artefact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: family column present and populated",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: Family A has 3 comparisons",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: Family B has 2 comparisons",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: the overlapping comparison appears once per family",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: the overlapping comparison has one unadjusted p-value",
+      "result": "PASS",
+      "detail": "0.769705"
+    },
+    {
+      "check": "DeLong: Holm was applied within each family separately",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: adjusted p-values are never below the unadjusted ones",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: every comparison states that non-significance is not equivalence",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: AUCs agree with the Test metrics table",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "DeLong: input hash recorded",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "secondary Test results are labelled exploratory and not promoted",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the primary model in the metrics table is the Late Fusion",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "roc_points data saved for all five models",
+      "result": "PASS",
+      "detail": "5 files"
+    },
+    {
+      "check": "pr_points data saved for all five models",
+      "result": "PASS",
+      "detail": "5 files"
+    },
+    {
+      "check": "calibration data saved for all five models",
+      "result": "PASS",
+      "detail": "5 files"
+    },
+    {
+      "check": "modality importance on Test saved and labelled post hoc",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "run metadata saved with package versions and seeds",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Test access log records exactly one Task C Test evaluation",
+      "result": "PASS",
+      "detail": "1 entries"
+    }
+  ]
+}

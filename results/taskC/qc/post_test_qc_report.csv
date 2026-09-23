@@ -1,0 +1,55 @@
+﻿check,result,detail
+the Test run used the frozen specification file,PASS,frozen file unchanged since the Test run
+the run recorded that the specification did not change,PASS,
+input unchanged: taskA_frozen_selection,PASS,
+input unchanged: taskA_val_predictions,PASS,
+input unchanged: taskA_test_predictions,PASS,
+input unchanged: taskB_frozen_selection,PASS,
+input unchanged: taskB_val_predictions,PASS,
+input unchanged: taskB_test_predictions,PASS,
+input unchanged: split_manifest,PASS,
+input unchanged: taskC_selected_weight,PASS,
+input unchanged: taskC_validation_metrics,PASS,
+Task A model not retrained,PASS,
+Task B model not retrained,PASS,
+Task C Test predictions: 128 rows,PASS,128
+Task C Test predictions: unique subject_id,PASS,
+Task C Test predictions: row order matches the split manifest,PASS,
+Task C Test predictions: 17 events,PASS,
+Task C Test predictions: no missing probability,PASS,
+Task C Test predictions: no NaN / Inf,PASS,
+"Task C Test predictions: probabilities in [0,1]",PASS,
+the fused Test column reproduces from the frozen weight,PASS,max |difference| 1.11e-16
+the fusion weight is the frozen one,PASS,w_clinical = 0.75
+the clinical component is the frozen one,PASS,lr
+Test labels match the fixed split,PASS,
+threshold equals the frozen Validation-derived value,PASS,0.325922
+threshold recorded as not recomputed on Test,PASS,
+calibration definition on Test matches the frozen one,PASS,
+combined file: required columns present,PASS,"['subject_id', 'true_label', 'prob_cxr', 'prob_clinical_lr', 'prob_clinical_xgboost', 'prob_clinical_mlp', 'prob_late_fusion']"
+combined file: 128 patients,PASS,128
+combined file: unique subject_id,PASS,
+combined file: deterministic order matching the manifest,PASS,
+combined file: labels aligned,PASS,
+combined file: no missing probability,PASS,
+"combined file: probabilities in [0,1]",PASS,
+combined file: Task A column matches the Task A artefact,PASS,
+combined file: Task B columns match the Task B artefact,PASS,
+DeLong: family column present and populated,PASS,
+DeLong: Family A has 3 comparisons,PASS,
+DeLong: Family B has 2 comparisons,PASS,
+DeLong: the overlapping comparison appears once per family,PASS,
+DeLong: the overlapping comparison has one unadjusted p-value,PASS,0.769705
+DeLong: Holm was applied within each family separately,PASS,
+DeLong: adjusted p-values are never below the unadjusted ones,PASS,
+DeLong: every comparison states that non-significance is not equivalence,PASS,
+DeLong: AUCs agree with the Test metrics table,PASS,
+DeLong: input hash recorded,PASS,
+secondary Test results are labelled exploratory and not promoted,PASS,
+the primary model in the metrics table is the Late Fusion,PASS,
+roc_points data saved for all five models,PASS,5 files
+pr_points data saved for all five models,PASS,5 files
+calibration data saved for all five models,PASS,5 files
+modality importance on Test saved and labelled post hoc,PASS,
+run metadata saved with package versions and seeds,PASS,
+Test access log records exactly one Task C Test evaluation,PASS,1 entries

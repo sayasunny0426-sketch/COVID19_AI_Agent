@@ -1,0 +1,6 @@
+﻿model,role,n,events,auroc,auroc_ci_low,auroc_ci_high,auprc,auprc_ci_low,auprc_ci_high,brier,ece_10_equal_width,threshold,tp,tn,fp,fn,sensitivity,specificity,ppv,npv,accuracy
+late_fusion,PRIMARY,128,17,0.944886,0.892422,0.983042,0.780516,0.61756,0.923811,0.078034,0.128711,0.325922,15.0,90.0,21.0,2.0,0.882353,0.810811,0.416667,0.978261,0.820312
+cxr,component (reference),128,17,0.834658,0.725477,0.923172,0.457562,0.304393,0.698145,0.105808,0.097227,,,,,,,,,,
+clinical_lr,component (reference),128,17,0.946476,0.895601,0.984632,0.770898,0.604491,0.927203,0.097765,0.161595,,,,,,,,,,
+clinical_xgboost,component (reference),128,17,0.928988,0.873847,0.970866,0.657762,0.484684,0.844691,0.07321,0.074899,,,,,,,,,,
+clinical_mlp,component (reference),128,17,0.924218,0.859565,0.977213,0.74765,0.574068,0.91556,0.160305,0.300495,,,,,,,,,,

@@ -1,0 +1,82 @@
+{
+  "finished": "2026-09-23T10:56:29+09:00",
+  "script": "40_taskC_test_evaluation.py",
+  "split_evaluated": "test",
+  "frozen_sha256": "210be0f4ba16ace028c14cfdc2167efa55fdbb80ad86d3829291216710da2db8",
+  "seed": 42,
+  "bootstrap": {
+    "n_resamples": 2000,
+    "stratified": true,
+    "seed": 12345
+  },
+  "python": "3.13.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "sklearn": "1.9.1",
+    "torch": "2.14.0+cpu",
+    "xgboost": "3.4.1"
+  },
+  "inputs": {
+    "taskA_frozen_selection": {
+      "path": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\final_selection.json",
+      "sha256": "fd93d6fe83c0a6a023398bf3d6950f2fd70459a4927677b7c7f5939ef36397da"
+    },
+    "taskA_val_predictions": {
+      "path": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\lr3e-4_aug_b\\seed42\\val_predictions.csv",
+      "sha256": "76e5f995d19cada22f82b49787195782c8619cce34d0405b1f9835ddee08f4e5"
+    },
+    "taskA_test_predictions": {
+      "path": "github_repo\\results\\taskA\\evaluation\\test_predictions_primary.csv",
+      "sha256": "76dae650320f9e203d70d932082ee9442401a606f89317ef7a5e309e29006190"
+    },
+    "taskB_frozen_selection": {
+      "path": "results\\taskB\\modeling\\final_selection_taskB.json",
+      "sha256": "27bfa7dccd34318f2c5e76ef8f0775e1687cef94320a8c372e181e5b43b803aa"
+    },
+    "taskB_val_predictions": {
+      "path": "results\\taskB\\modeling\\validation_predictions.csv",
+      "sha256": "179e7324f011566f7878b689ae77ecaea491a4503d253141c482621618058a83"
+    },
+    "taskB_test_predictions": {
+      "path": "results\\taskB\\evaluation\\test_predictions_taskB.csv",
+      "sha256": "347c88cc911ee72251217dffb0dae1fd0d7294785b569a8e4c650033135b5292"
+    },
+    "split_manifest": {
+      "path": "data\\splits\\COVID19_固定患者split_1277.csv",
+      "sha256": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8"
+    },
+    "taskC_selected_weight": {
+      "path": "results\\taskC\\fusion\\selected_weight.json",
+      "sha256": "f8908bc716178a36c29fa994435f56f1ab23beab00f7805cfede20910f7aec37"
+    },
+    "taskC_validation_metrics": {
+      "path": "results\\taskC\\validation\\validation_metrics_taskC.json",
+      "sha256": "b2260783d2ae2d9830b92da57e26fd61ee4dbab788518150c1abb15337b239a8"
+    }
+  },
+  "outputs": [
+    "modality_importance_test.csv",
+    "secondary_exploratory_test.json",
+    "test_calibration_clinical_lr.csv",
+    "test_calibration_clinical_mlp.csv",
+    "test_calibration_clinical_xgboost.csv",
+    "test_calibration_cxr.csv",
+    "test_calibration_late_fusion.csv",
+    "test_metrics_table.csv",
+    "test_metrics_taskC.json",
+    "test_pr_points_clinical_lr.csv",
+    "test_pr_points_clinical_mlp.csv",
+    "test_pr_points_clinical_xgboost.csv",
+    "test_pr_points_cxr.csv",
+    "test_pr_points_late_fusion.csv",
+    "test_predictions_taskC.csv",
+    "test_roc_points_clinical_lr.csv",
+    "test_roc_points_clinical_mlp.csv",
+    "test_roc_points_clinical_xgboost.csv",
+    "test_roc_points_cxr.csv",
+    "test_roc_points_late_fusion.csv"
+  ],
+  "specification_changed": false
+}

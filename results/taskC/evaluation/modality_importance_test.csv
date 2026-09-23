@@ -1,0 +1,3 @@
+﻿modality,mean_auroc_drop,sd_auroc_drop,n_repeats,seed,dataset,baseline_auroc,role
+clinical,0.350539,0.058264,30,42,Test,0.944886,post hoc descriptive; does not change any specification
+cxr,0.003551,0.006233,30,42,Test,0.944886,post hoc descriptive; does not change any specification
