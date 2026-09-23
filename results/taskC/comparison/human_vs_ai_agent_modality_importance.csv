@@ -1,0 +1,5 @@
+﻿pipeline,modality,baseline_auroc,mean_auroc_drop,sd_auroc_drop,dataset,source
+Human-guided,clinical,0.9443561208267092,0.1690598834128246,0.0341473799653764,Test,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_ModalityPermutationImportance.csv
+Human-guided,cxr,0.9443561208267092,0.0446724960254373,0.0198432201897838,Test,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_ModalityPermutationImportance.csv
+AI-Agent,clinical,0.944886,0.350539,0.058264,Test,AI-Agent frozen Task C result: results/taskC/evaluation/modality_importance_test.csv
+AI-Agent,cxr,0.944886,0.003551,0.006233,Test,AI-Agent frozen Task C result: results/taskC/evaluation/modality_importance_test.csv

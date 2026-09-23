@@ -30,9 +30,12 @@ CODE = [
     "scripts/40_taskC_test_evaluation.py",
     "scripts/41_taskC_delong.py",
     "scripts/42_taskC_post_test_qc.py",
+    "scripts/43_taskC_human_vs_agent_comparison.py",
 ]
-DOCS = ["docs/decision_log.md", "docs/change_log.csv", "docs/open_questions.md"]
-RESULT_DIRS = ["preflight", "inputs", "fusion", "validation", "modeling", "qc", "evaluation"]
+DOCS = ["docs/decision_log.md", "docs/change_log.csv", "docs/open_questions.md",
+        "docs/taskC_human_vs_ai_agent_comparison.md"]
+RESULT_DIRS = ["preflight", "inputs", "fusion", "validation", "modeling", "qc", "evaluation",
+               "comparison"]
 COMPARISON_FILES = ["results/comparison/README.md", "results/comparison/delong_plan.json",
                     "results/comparison/test_predictions_all_models.csv",
                     "results/comparison/delong_results.csv",

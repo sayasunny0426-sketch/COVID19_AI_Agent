@@ -1,0 +1,7 @@
+﻿model,pipeline,auroc,ci_low,ci_high,n_resamples,stratified,seed
+Late Fusion,Human-guided,0.944356,0.881823,0.986751,2000,True,12345
+Late Fusion,AI-Agent,0.944886,0.892422,0.983042,2000,True,12345
+Clinical LR,Human-guided,0.941176,0.885533,0.981452,2000,True,12345
+Clinical LR,AI-Agent,0.946476,0.895601,0.984632,2000,True,12345
+CXR ResNet18,Human-guided,0.90726,0.840964,0.964507,2000,True,12345
+CXR ResNet18,AI-Agent,0.834658,0.725477,0.923172,2000,True,12345

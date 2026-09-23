@@ -1,0 +1,53 @@
+{
+  "generated": "2026-09-23T11:19:55+09:00",
+  "script": "43_taskC_human_vs_agent_comparison.py",
+  "nature": "exploratory methodological comparison; descriptive only. No refit, no retuning, no new statistical test, and no claim of superiority.",
+  "ece_definitions": {
+    "human_guided": "10 equal-width bins over [0,1] (Notebook/TaskC_01_LateFusion_Validation構築.ipynb)",
+    "ai_agent": "10 equal-width bins over [0,1] (src/covid_mortality/evaluation/metrics.py)",
+    "identical": true,
+    "harmonisation_needed": false
+  },
+  "bootstrap_definitions": {
+    "human_guided": {
+      "n_resamples": 10000,
+      "stratified": true,
+      "seed": 42
+    },
+    "ai_agent": {
+      "n_resamples": 2000,
+      "stratified": true,
+      "seed": 12345
+    },
+    "identical": false,
+    "harmonised_artefact": "harmonized_ci.csv"
+  },
+  "paired_pipeline_comparison": {
+    "technically_feasible": true,
+    "evidence": "both pipelines saved patient-level Late Fusion Test predictions for the same 128 patients with 17 deaths and agreeing labels",
+    "executed": false,
+    "if_executed": "must be treated as a separate exploratory methodological analysis, entirely outside the study's confirmatory DeLong families"
+  },
+  "human_guided_sources": [
+    "03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv",
+    "03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv",
+    "03_TaskC_マルチモーダル/TaskC_LateFusion_Validation最終重み候補.csv",
+    "03_TaskC_マルチモーダル/TaskC_LateFusion_DeLong_Holm比較.csv",
+    "03_TaskC_マルチモーダル/TaskC_LateFusion_ModalityPermutationImportance.csv",
+    "03_TaskC_マルチモーダル/TaskC_LateFusion_Test患者別予測結果.csv",
+    "04_全モデル比較・統計解析/LateFusion_vs_Clinical3モデル_DeLong_Holm.csv",
+    "04_全モデル比較・統計解析/全5モデル_最終Test評価比較.csv",
+    "Notebook/TaskC_01_LateFusion_Validation構築.ipynb"
+  ],
+  "ai_agent_sources": [
+    "results/taskC/modeling/final_selection_taskC.json",
+    "results/taskC/fusion/selected_weight.json",
+    "results/taskC/validation/validation_metrics_taskC.json",
+    "results/taskC/evaluation/test_metrics_table.csv",
+    "results/taskC/evaluation/modality_importance_test.csv",
+    "results/taskC/evaluation/secondary_exploratory_test.json",
+    "results/comparison/delong_results.csv"
+  ],
+  "discrepancies_found": 2,
+  "official_metrics_overwritten": false
+}

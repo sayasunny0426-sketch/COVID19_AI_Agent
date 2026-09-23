@@ -1,0 +1,73 @@
+﻿model,pipeline,split,metric,value,source
+Late Fusion,Human-guided,Test,roc_auc,0.944356,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Late Fusion,AI-Agent,Test,roc_auc,0.944886,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Late Fusion,Human-guided,Test,roc_auc_ci_low,0.884473,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Late Fusion,AI-Agent,Test,roc_auc_ci_low,0.892422,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Late Fusion,Human-guided,Test,roc_auc_ci_high,0.985162,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Late Fusion,AI-Agent,Test,roc_auc_ci_high,0.983042,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Late Fusion,Human-guided,Test,pr_auc,0.797135,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Late Fusion,AI-Agent,Test,pr_auc,0.780516,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Late Fusion,Human-guided,Test,brier,0.05921,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Late Fusion,AI-Agent,Test,brier,0.078034,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Late Fusion,Human-guided,Test,ece_10_equal_width,0.064514,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Late Fusion,AI-Agent,Test,ece_10_equal_width,0.128711,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Clinical LR,Human-guided,Test,roc_auc,0.941176,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Clinical LR,AI-Agent,Test,roc_auc,0.946476,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Clinical LR,Human-guided,Test,roc_auc_ci_low,0.887122,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Clinical LR,AI-Agent,Test,roc_auc_ci_low,0.895601,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Clinical LR,Human-guided,Test,roc_auc_ci_high,0.981452,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Clinical LR,AI-Agent,Test,roc_auc_ci_high,0.984632,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Clinical LR,Human-guided,Test,pr_auc,0.800251,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Clinical LR,AI-Agent,Test,pr_auc,0.770898,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Clinical LR,Human-guided,Test,brier,0.057177,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Clinical LR,AI-Agent,Test,brier,0.097765,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Clinical LR,Human-guided,Test,ece_10_equal_width,0.041302,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+Clinical LR,AI-Agent,Test,ece_10_equal_width,0.161595,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+CXR ResNet18,Human-guided,Test,roc_auc,0.90726,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+CXR ResNet18,AI-Agent,Test,roc_auc,0.834658,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+CXR ResNet18,Human-guided,Test,roc_auc_ci_low,0.835718,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+CXR ResNet18,AI-Agent,Test,roc_auc_ci_low,0.725477,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+CXR ResNet18,Human-guided,Test,roc_auc_ci_high,0.962904,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+CXR ResNet18,AI-Agent,Test,roc_auc_ci_high,0.923172,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+CXR ResNet18,Human-guided,Test,pr_auc,0.622926,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+CXR ResNet18,AI-Agent,Test,pr_auc,0.457562,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+CXR ResNet18,Human-guided,Test,brier,0.101732,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+CXR ResNet18,AI-Agent,Test,brier,0.105808,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+CXR ResNet18,Human-guided,Test,ece_10_equal_width,0.152336,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_最終Test評価比較.csv
+CXR ResNet18,AI-Agent,Test,ece_10_equal_width,0.097227,AI-Agent frozen Task C result: results/taskC/evaluation/test_metrics_table.csv
+Late Fusion,Human-guided,Validation,roc_auc,0.91256,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+Late Fusion,AI-Agent,Validation,roc_auc,0.920509,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+Late Fusion,Human-guided,Validation,pr_auc,0.654359,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+Late Fusion,AI-Agent,Validation,pr_auc,0.717351,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+Late Fusion,Human-guided,Validation,brier,0.075352,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+Late Fusion,AI-Agent,Validation,brier,0.089724,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+Late Fusion,Human-guided,Validation,ece_10_equal_width,,Human-guided final result artifact: not recorded in the weight-search artefact
+Late Fusion,AI-Agent,Validation,ece_10_equal_width,0.131177,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+Clinical LR,Human-guided,Validation,roc_auc,0.896131,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+Clinical LR,AI-Agent,Validation,roc_auc,0.895072,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+Clinical LR,Human-guided,Validation,pr_auc,0.600921,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+Clinical LR,AI-Agent,Validation,pr_auc,0.634584,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+Clinical LR,Human-guided,Validation,brier,0.079211,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+Clinical LR,AI-Agent,Validation,brier,0.116927,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+Clinical LR,Human-guided,Validation,ece_10_equal_width,,Human-guided final result artifact: not recorded in the weight-search artefact
+Clinical LR,AI-Agent,Validation,ece_10_equal_width,0.168053,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+CXR ResNet18,Human-guided,Validation,roc_auc,0.848967,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+CXR ResNet18,AI-Agent,Validation,roc_auc,0.871754,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+CXR ResNet18,Human-guided,Validation,pr_auc,0.560622,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+CXR ResNet18,AI-Agent,Validation,pr_auc,0.562283,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+CXR ResNet18,Human-guided,Validation,brier,0.126565,Human-guided final result artifact: 03_TaskC_マルチモーダル/TaskC_LateFusion_Validation重み探索結果.csv
+CXR ResNet18,AI-Agent,Validation,brier,0.096479,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+CXR ResNet18,Human-guided,Validation,ece_10_equal_width,,Human-guided final result artifact: not recorded in the weight-search artefact
+CXR ResNet18,AI-Agent,Validation,ece_10_equal_width,0.085898,AI-Agent frozen Task C result: results/taskC/validation/validation_metrics_taskC.json
+Late Fusion,Human-guided,Test,roc_auc_ci_low_harmonized,0.881823,Harmonized recomputation from the saved patient-level Test predictions
+Late Fusion,Human-guided,Test,roc_auc_ci_high_harmonized,0.986751,Harmonized recomputation from the saved patient-level Test predictions
+Late Fusion,AI-Agent,Test,roc_auc_ci_low_harmonized,0.892422,Harmonized recomputation from the saved patient-level Test predictions
+Late Fusion,AI-Agent,Test,roc_auc_ci_high_harmonized,0.983042,Harmonized recomputation from the saved patient-level Test predictions
+Clinical LR,Human-guided,Test,roc_auc_ci_low_harmonized,0.885533,Harmonized recomputation from the saved patient-level Test predictions
+Clinical LR,Human-guided,Test,roc_auc_ci_high_harmonized,0.981452,Harmonized recomputation from the saved patient-level Test predictions
+Clinical LR,AI-Agent,Test,roc_auc_ci_low_harmonized,0.895601,Harmonized recomputation from the saved patient-level Test predictions
+Clinical LR,AI-Agent,Test,roc_auc_ci_high_harmonized,0.984632,Harmonized recomputation from the saved patient-level Test predictions
+CXR ResNet18,Human-guided,Test,roc_auc_ci_low_harmonized,0.840964,Harmonized recomputation from the saved patient-level Test predictions
+CXR ResNet18,Human-guided,Test,roc_auc_ci_high_harmonized,0.964507,Harmonized recomputation from the saved patient-level Test predictions
+CXR ResNet18,AI-Agent,Test,roc_auc_ci_low_harmonized,0.725477,Harmonized recomputation from the saved patient-level Test predictions
+CXR ResNet18,AI-Agent,Test,roc_auc_ci_high_harmonized,0.923172,Harmonized recomputation from the saved patient-level Test predictions
