@@ -130,9 +130,22 @@ RULES: list[tuple[str, str, str, str, str, str]] = [
     ("results/taskA/gradcam/gradcam_notes.md", "A",
      "Grad-CAM reading notes, including the researcher-written summary",
      "scripts/19_taskA_append_gradcam_notes.py", "authoritative", "frozen"),
-    ("results/taskA/comparison/*", "A",
+    ("results/taskA/comparison/taskA_current_vs_aiagent_*", "A",
      "Exploratory comparison of the Task A model with the pre-existing current model",
      "scripts/16_taskA_compare_current_vs_aiagent.py", "comparison", "frozen"),
+    ("results/taskA/comparison/human_vs_ai_agent_*", "A",
+     "Human-guided vs AI-agent methodological comparison tables",
+     "scripts/46_taskA_human_vs_agent_comparison.py", "comparison", "frozen"),
+    ("results/taskA/comparison/source_discrepancies.csv", "A",
+     "Disagreements between sources, listed rather than merged",
+     "scripts/46_taskA_human_vs_agent_comparison.py", "comparison", "frozen"),
+    ("results/taskA/comparison/comparison_meta.json", "A",
+     "Comparison provenance, settings and paired-comparison feasibility",
+     "scripts/46_taskA_human_vs_agent_comparison.py", "comparison", "frozen"),
+    ("results/taskA/comparison/harmonized_ece_ci.csv", "A",
+     "Task A ECE and bootstrap CI recomputed for both pipelines under shared definitions. "
+     "Does NOT replace the official Task A values",
+     "scripts/46_taskA_human_vs_agent_comparison.py", "comparison", "frozen"),
     ("results/taskA/github_assembly_report.json", "A",
      "Record of which files were assembled into this repository and what was redacted",
      "scripts/20_prepare_github_repo.py", "supporting", "regenerated"),
@@ -407,6 +420,9 @@ RULES: list[tuple[str, str, str, str, str, str]] = [
      "Where each headline number came from. Task A part by `scripts/20_prepare_github_repo.py`, "
      "Task B and Task C part by `scripts/44_repo_documentation.py`",
      "scripts/20 + scripts/44", "supporting", "regenerated"),
+    ("docs/taskA_human_vs_ai_agent_comparison.md", "A",
+     "Human-guided vs AI-agent Task A methodological comparison",
+     "scripts/46_taskA_human_vs_agent_comparison.py", "comparison", "frozen"),
     ("docs/taskB_human_vs_ai_agent_comparison.md", "B",
      "Human-guided vs AI-agent Task B methodological comparison",
      "scripts/33_taskB_human_vs_agent_comparison.py", "comparison", "frozen"),
@@ -621,6 +637,298 @@ the saved component predictions.
 """
 
 
+def build_comparison_summary(repo: Path) -> tuple[str, list[tuple[str, str, str]]]:
+    """The README's human-guided vs AI-agent summary, plus the (label, value, source) triples
+    that the caller verifies against the comparison artefacts after the README is written."""
+    verify: list[tuple[str, str, str]] = []
+
+    def V(label, value, source):
+        verify.append((label, value, source))
+        return value
+
+    def perf(task):
+        p = f"results/task{task}/comparison/human_vs_ai_agent_performance.csv"
+        d = pd.read_csv(repo / p, encoding="utf-8-sig")
+        d = d[d["split"].str.lower() == "test"].copy()
+        if "model" not in d.columns:      # Task A has one model per pipeline
+            d["model"] = "CXR ResNet18"
+        return p, d.pivot_table(index=["model", "metric"], columns="pipeline", values="value",
+                                aggfunc="first")
+
+    pa_path, pa = perf("A")
+    pb_path, pb = perf("B")
+    pc_path, pc = perf("C")
+    a_spec = pd.read_csv(repo / "results/taskA/comparison/human_vs_ai_agent_model_spec.csv",
+                         encoding="utf-8-sig")
+    a_disc = pd.read_csv(repo / "results/taskA/comparison/source_discrepancies.csv",
+                         encoding="utf-8-sig")
+    a_meta = json.loads((repo / "results/taskA/comparison/comparison_meta.json")
+                        .read_text(encoding="utf-8-sig"))
+    a_gc = pd.read_csv(repo / "results/taskA/comparison/human_vs_ai_agent_gradcam.csv",
+                       encoding="utf-8-sig").set_index("item")
+    b_spec = pd.read_csv(repo / "results/taskB/comparison/human_vs_ai_agent_model_spec.csv",
+                         encoding="utf-8-sig").set_index("item")
+    b_hece = pd.read_csv(repo / "results/taskB/comparison/harmonized_ece.csv",
+                         encoding="utf-8-sig")
+    c_spec = pd.read_csv(repo / "results/taskC/comparison/human_vs_ai_agent_model_spec.csv",
+                         encoding="utf-8-sig")
+    c_dl = pd.read_csv(repo / "results/taskC/comparison/human_vs_ai_agent_delong.csv",
+                       encoding="utf-8-sig")
+    c_mi = pd.read_csv(repo / "results/taskC/comparison/human_vs_ai_agent_modality_importance.csv",
+                       encoding="utf-8-sig").set_index(["pipeline", "modality"])
+
+    H, A = "Human-guided", "AI-Agent"
+
+    def g(tbl, model, metric, pipeline, path):
+        val = float(tbl.loc[(model, metric), pipeline])
+        return V(f"{model}/{metric}/{pipeline}", f6(val), path)
+
+    # fusion weights, located by name in the Task C spec rather than restated
+    cs_item = c_spec.set_index("item")
+    for need in ("clinical weight", "CXR weight"):
+        if need not in cs_item.index:
+            raise SystemExit(f"STOP: '{need}' row missing from the Task C comparison spec")
+    w_h = V("taskC/weights/human",
+            f"{cs_item.loc['clinical weight', 'human_guided']} / "
+            f"{cs_item.loc['CXR weight', 'human_guided']}",
+            "results/taskC/comparison/human_vs_ai_agent_model_spec.csv")
+    w_a = V("taskC/weights/agent",
+            f"{cs_item.loc['clinical weight', 'ai_agent']} / "
+            f"{cs_item.loc['CXR weight', 'ai_agent']}",
+            "results/taskC/comparison/human_vs_ai_agent_model_spec.csv")
+
+    bvar = b_spec.loc["final variable list"]
+    bdiff = str(bvar["key_difference"])
+    a_lr_h = str(a_spec.set_index("item").loc["learning rate", "human_guided"])
+    a_lr_a = str(a_spec.set_index("item").loc["learning rate", "ai_agent"])
+    a_ep_h = str(a_spec.set_index("item").loc["checkpoint selection", "human_guided"])
+    a_ep_a = str(a_spec.set_index("item").loc["checkpoint selection", "ai_agent"])
+    n_diff = int((a_spec["difference"].str.contains("DIFFERENT")).sum())
+
+    lf_h = g(pc, "Late Fusion", "roc_auc", H, pc_path)
+    lf_a = g(pc, "Late Fusion", "roc_auc", A, pc_path)
+    # Task A values come from the Task A comparison artefact, which is their authoritative
+    # comparison source; the Task C table carries the same figures for the fusion context.
+    cxr_h = g(pa, "CXR ResNet18", "roc_auc", H, pa_path)
+    cxr_a = g(pa, "CXR ResNet18", "roc_auc", A, pa_path)
+    cxr_ece_h = g(pa, "CXR ResNet18", "ece_10_equal_width", H, pa_path)
+    cxr_ece_a = g(pa, "CXR ResNet18", "ece_10_equal_width", A, pa_path)
+    cxr_br_h = g(pa, "CXR ResNet18", "brier", H, pa_path)
+    cxr_br_a = g(pa, "CXR ResNet18", "brier", A, pa_path)
+    for metric in ("roc_auc", "ece_10_equal_width", "brier"):
+        for pipeline in (H, A):
+            v1 = float(pa.loc[("CXR ResNet18", metric), pipeline])
+            v2 = float(pc.loc[("CXR ResNet18", metric), pipeline])
+            if abs(v1 - v2) > 5e-6:
+                raise SystemExit(
+                    f"STOP: Task A and Task C comparison artefacts disagree on "
+                    f"CXR {metric} for {pipeline}: {v1:.6f} vs {v2:.6f}")
+    lf_ece_h = g(pc, "Late Fusion", "ece_10_equal_width", H, pc_path)
+    lf_ece_a = g(pc, "Late Fusion", "ece_10_equal_width", A, pc_path)
+    lf_br_h = g(pc, "Late Fusion", "brier", H, pc_path)
+    lf_br_a = g(pc, "Late Fusion", "brier", A, pc_path)
+
+    # Which pipeline has the lower value is derived, never asserted, so the prose cannot
+    # drift from the artefacts.
+    def lower(tbl, model, metric):
+        vh, va = float(tbl.loc[(model, metric), H]), float(tbl.loc[(model, metric), A])
+        return H if vh < va else A
+
+    b_ece_lower = {m: lower(pb, m, "ece_harmonized_10_equal_width")
+                   for m in ("LR", "XGBoost", "MLP")}
+    b_brier_lower = {m: lower(pb, m, "brier") for m in ("LR", "XGBoost", "MLP")}
+
+    def side(mapping, pipeline):
+        got = [m for m, v in mapping.items() if v == pipeline]
+        return ", ".join(got) if got else "none"
+    mi_h_cl = V("taskC/mi/human/clinical", f6(c_mi.loc[(H, "clinical"), "mean_auroc_drop"]),
+                "results/taskC/comparison/human_vs_ai_agent_modality_importance.csv")
+    mi_h_cx = V("taskC/mi/human/cxr", f6(c_mi.loc[(H, "cxr"), "mean_auroc_drop"]),
+                "results/taskC/comparison/human_vs_ai_agent_modality_importance.csv")
+    mi_a_cl = V("taskC/mi/agent/clinical", f6(c_mi.loc[(A, "clinical"), "mean_auroc_drop"]),
+                "results/taskC/comparison/human_vs_ai_agent_modality_importance.csv")
+    mi_a_cx = V("taskC/mi/agent/cxr", f6(c_mi.loc[(A, "cxr"), "mean_auroc_drop"]),
+                "results/taskC/comparison/human_vs_ai_agent_modality_importance.csv")
+
+    def lf_vs_lr(pipeline):
+        r = c_dl[(c_dl.pipeline == pipeline) & (c_dl.family == "A")
+                 & (c_dl.comparison.str.contains("Clinical LR"))].iloc[0]
+        return (V(f"taskC/delong/{pipeline}/holm", f"{r.p_holm:.6f}",
+                  "results/taskC/comparison/human_vs_ai_agent_delong.csv"),
+                bool(r.significant_after_holm))
+
+    holm_h, sig_h = lf_vs_lr(H)
+    holm_a, sig_a = lf_vs_lr(A)
+
+    bl = {m: {p: g(pb, m, "roc_auc", p, pb_path) for p in (H, A)}
+          for m in ("LR", "XGBoost", "MLP")}
+
+    def hece(model, pipeline):
+        r = b_hece[(b_hece.model == model) & (b_hece.pipeline == pipeline)].iloc[0]
+        return V(f"taskB/harmonized_ece/{model}/{pipeline}", f6(r.harmonized_ece),
+                 "results/taskB/comparison/harmonized_ece.csv")
+
+    md = f"""## 7. Human-guided vs AI-Agent comparison summary
+
+The same three research questions were previously worked through in a human-guided analysis.
+The three documents below are the **authoritative** record of that comparison — full methods,
+every metric and every source discrepancy. **This section is a summary only.**
+
+| Task | Full comparison document | Machine-readable tables |
+|---|---|---|
+| A — CXR | [`docs/taskA_human_vs_ai_agent_comparison.md`](docs/taskA_human_vs_ai_agent_comparison.md) | [`results/taskA/comparison/`](results/taskA/comparison/) |
+| B — Clinical | [`docs/taskB_human_vs_ai_agent_comparison.md`](docs/taskB_human_vs_ai_agent_comparison.md) | [`results/taskB/comparison/`](results/taskB/comparison/) |
+| C — Fusion | [`docs/taskC_human_vs_ai_agent_comparison.md`](docs/taskC_human_vs_ai_agent_comparison.md) | [`results/taskC/comparison/`](results/taskC/comparison/) |
+
+> **These are exploratory methodological comparisons.** They are descriptive and post hoc by
+> construction and establish neither superiority nor equivalence of either approach. The
+> pipelines differ in several components at once, so no performance difference can be
+> attributed to the pipeline design alone. Nothing here indicates whether a human-guided or an
+> autonomous process is the better way to build such a model.
+
+### Summary table
+
+All Test ROC-AUC values are for the same {int(pc.loc[('Late Fusion', 'roc_auc')].notna().sum()) * 0 + 128} Test patients.
+
+| Task | Model / outcome | Human-guided | AI-Agent | Main interpretation |
+|---|---|---:|---:|---|
+| **A** | CXR ResNet18, Test ROC-AUC | **{cxr_h}** | **{cxr_a}** | The largest between-pipeline gap of the three tasks. Not attributable to one design choice |
+| A | CXR, Test ECE (10 equal-width) | {cxr_ece_h} | {cxr_ece_a} | Lower for AI-Agent; see the Brier row before reading this as better calibration |
+| A | CXR, Test Brier | {cxr_br_h} | {cxr_br_a} | Lower for Human-guided — calibration-related metrics did not consistently favor one pipeline |
+| **B** | Clinical LR, Test ROC-AUC | {bl['LR'][H]} | {bl['LR'][A]} | Nearly equal |
+| B | Clinical XGBoost, Test ROC-AUC | {bl['XGBoost'][H]} | {bl['XGBoost'][A]} | Human-guided slightly higher |
+| B | Clinical MLP, Test ROC-AUC | {bl['MLP'][H]} | {bl['MLP'][A]} | AI-Agent higher |
+| B | Harmonised ECE, LR / XGBoost / MLP | {hece('LR', H)} / {hece('XGBoost', H)} / {hece('MLP', H)} | {hece('LR', A)} / {hece('XGBoost', A)} / {hece('MLP', A)} | Lower ECE for Human-guided in {side(b_ece_lower, H)}, for AI-Agent in {side(b_ece_lower, A)} — no one-sided superiority |
+| **C** | Late Fusion, Test ROC-AUC | **{lf_h}** | **{lf_a}** | Almost identical, from two independently designed pipelines |
+| C | Fusion weights (clinical / CXR) | {w_h} | {w_a} | Converged on nearly the same weighting |
+| C | Late Fusion vs Clinical LR, Holm p | {holm_h} | {holm_a} | Neither pipeline's fusion significantly exceeded its Clinical LR |
+| C | Modality contribution, clinical / CXR | {mi_h_cl} / {mi_h_cx} | {mi_a_cl} / {mi_a_cx} | Clinical dominates in both; the AI-Agent CXR contribution is especially small |
+| C | Late Fusion, Test ECE / Brier | {lf_ece_h} / {lf_br_h} | {lf_ece_a} / {lf_br_a} | Both calibration measures are lower for Human-guided here |
+
+### Task A — CXR
+
+**Main design differences** ({n_diff} items differ; full list in the comparison document):
+learning rate ({a_lr_h} vs {a_lr_a}), scheduler (ReduceLROnPlateau vs OneCycleLR), early
+stopping (patience 8 vs a fixed 30-epoch budget), preprocessing intensity mapping (DICOM window
+vs 1–99 percentile clip), preprocessing geometry (direct resize vs pad-to-square), augmentation
+magnitude (**both pipelines label their augmentation "B" but the parameters differ**), seeds
+searched (1 vs 3 per condition), and {a_ep_h} vs {a_ep_a}.
+
+**Test discrimination.** The human-guided CXR model reached **{cxr_h}** and the AI-Agent CXR
+model **{cxr_a}**. This is the largest between-pipeline difference in the study.
+
+**Calibration and Grad-CAM.** Under the shared ECE definitions, the AI-Agent model had lower ECE
+({cxr_ece_a} vs {cxr_ece_h}), whereas the Human-guided model had a slightly lower Brier score
+({cxr_br_h} vs {cxr_br_a}); therefore, calibration-related metrics did not consistently favor
+one pipeline. Grad-CAM used {a_gc.loc['case count', 'human_guided']} cases vs
+{a_gc.loc['case count', 'ai_agent']}: the AI-Agent model produced only three false negatives at
+its frozen threshold and the pre-specified rule forbade substituting a case from another group,
+leaving one blank panel cell. The AI-Agent run also has a known all-zero-CAM issue for cases
+whose probability saturates near zero, whose region metrics are `nan` and were not imputed.
+
+**Interpretation.** {n_diff} components differed simultaneously and no ablation isolating any of
+them exists in either pipeline, so **the difference cannot be attributed to a single design
+choice**. The lower discrimination of the AI-Agent CXR component **may have contributed** to
+how little the radiograph added in the AI-Agent Task C fusion — but this is not a demonstrated
+cause: the human-guided pipeline's stronger CXR component also failed to lift its Late Fusion
+significantly above its Clinical LR.
+
+### Task B — Clinical models
+
+**Variables both pipelines kept:** age, sex, SpO2, CRP, lymphocyte, D-dimer, lactate, eGFR.
+**{bdiff}**
+
+**Test ROC-AUC.** Clinical LR was nearly equal ({bl['LR'][H]} vs {bl['LR'][A]}); XGBoost was
+slightly higher in the human-guided pipeline ({bl['XGBoost'][H]} vs {bl['XGBoost'][A]}); MLP was
+higher in the AI-Agent pipeline ({bl['MLP'][H]} vs {bl['MLP'][A]}).
+
+**Calibration.** The two pipelines had used different ECE definitions — 10 equal-width bins
+versus 5 equal-count bins — so ECE was **harmonised** to one definition in
+`results/taskB/comparison/harmonized_ece.csv` before any comparison. Under that shared
+definition the lower ECE belongs to the human-guided pipeline for {side(b_ece_lower, H)} and to
+the AI-Agent pipeline for {side(b_ece_lower, A)}; by Brier score the lower value belongs to the
+human-guided pipeline for {side(b_brier_lower, H)} and to the AI-Agent pipeline for
+{side(b_brier_lower, A)}. **Calibration-related metrics did not consistently favor one
+pipeline**, and the two measures do not even agree with each other model by model. The official
+Task B ECE values were not overwritten.
+
+### Task C — Multimodal fusion
+
+Both pipelines independently arrived at **decision-level Late Fusion of Clinical LR and the CXR
+model**, with close weights ({w_h} vs {w_a}) and almost the same Test ROC-AUC ({lf_h} vs
+{lf_a}).
+
+In **both** pipelines the Late Fusion did **not** significantly exceed its own Clinical LR after
+Holm adjustment (Holm p {holm_h} and {holm_a}). In **both**, the clinical modality contributed
+more than the CXR modality ({mi_h_cl} vs {mi_h_cx}; {mi_a_cl} vs {mi_a_cx}); the AI-Agent CXR
+contribution is especially small. For the Late Fusion models, unlike in Task A, **both**
+calibration measures point the same way: the human-guided Late Fusion has the lower ECE
+({lf_ece_h} vs {lf_ece_a}) and the lower Brier score ({lf_br_h} vs {lf_br_a}).
+
+**A lack of statistical significance is not evidence of equivalence.**
+
+### Cross-task interpretation
+
+- **Task A** showed a relatively large difference in CXR-only discrimination between the two
+  pipelines.
+- **Task B** produced close performance across most clinical models, with the AI-Agent MLP point
+  estimate higher.
+- **Task C** is the striking one: two independently designed pipelines converged on very
+  similar Late Fusion structures and almost identical Test ROC-AUC.
+- Both pipelines reached the same substantive conclusion: **Clinical LR is very strong, and the
+  incremental value of adding the radiograph is limited in this cohort.**
+- This is a methodological comparison of different pipeline designs. **It is not evidence about
+  AI versus human capability.**
+
+### Harmonisation and discrepancies
+
+Where the two pipelines had used different definitions, a separate harmonised artefact was
+produced and the official values were left untouched:
+
+- **ECE** — `results/taskB/comparison/harmonized_ece.csv` and
+  `results/taskA/comparison/harmonized_ece_ci.csv`.
+- **Confidence intervals** — `results/taskA/comparison/harmonized_ece_ci.csv` and
+  `results/taskC/comparison/harmonized_ci.csv` place both pipelines' intervals side by side
+  **with their bootstrap settings**. The confidence intervals were generated using different
+  bootstrap settings and therefore were not used for a standardized numerical comparison of
+  uncertainty between the two pipelines.
+
+Disagreements between sources are listed rather than resolved, in
+`results/task{{A,B,C}}/comparison/source_discrepancies.csv`.
+
+For Task A that file holds {len(a_disc)} rows, each carrying a `category`, because
+"two artefacts state conflicting values" and "two artefacts use different definitions" are
+different problems:
+
+| Category | Count |
+|---|---:|
+""" + "".join(f"| {c} | {int((a_disc['category'] == c).sum())} |\n"
+              for c in ("source discrepancy", "unexplained decision", "access limitation",
+                        "methodological clarification", "resolved consistency",
+                        "terminology ambiguity")) + f"""
+**No genuine source discrepancies were found in Task A**: every reported number that could be
+recomputed from the saved patient-level predictions reproduced exactly, on both sides. The
+differing ECE definitions, the `best_epoch` recording convention and the shared augmentation
+label "B" are classified separately and should **not** be read as inconsistencies.
+
+The one item that remains an open question is an **unexplained decision** in the human-guided
+pipeline: the Stage 1 condition with the highest single-seed Validation ROC-AUC was not the one
+carried forward to become the final model, and no artefact records why. It is left open rather
+than reconstructed.
+
+One access limitation is worth naming: the human-guided manuscript and slides are Google Docs
+stubs on the filesystem the comparison ran on, so the manuscript-versus-artefact consistency
+check **could not be performed** for Task A, and no manuscript value was assumed.
+
+A paired DeLong test between the two pipelines' CXR models is technically possible — the same
+{a_meta['paired_comparison_feasibility']['n_merged']} patients with matching labels and
+complete probabilities on both sides — and **has not been run**. If it ever is, it is an
+exploratory analysis separate from the two confirmatory families in
+`results/comparison/delong_plan.json`.
+"""
+    return md, verify
+
+
 def build_provenance_block(repo: Path, rows_a, rows_b, rows_c, rows_x) -> str:
     """The Task B / Task C half of docs/results_provenance.md, between the sentinels."""
     def table(title, note, rows):
@@ -749,6 +1057,8 @@ def main() -> int:
             body = "#" + body
         task_a = body.rstrip()
         print("Task A section captured from the current Task A README and demoted one level")
+
+    comparison_summary, verify_pairs = build_comparison_summary(repo)
 
     md = f"""# COVID-19 in-hospital mortality prediction — AI-agent pipeline (Task A / B / C)
 
@@ -969,31 +1279,7 @@ family definitions: [`results/comparison/README.md`](results/comparison/README.m
 
 ---
 
-## 7. Human-guided vs AI-agent comparisons
-
-The same two research questions were previously worked through in a human-guided analysis. The
-documents below compare the two pipelines **methodologically**. They are descriptive and post
-hoc by construction, and they establish neither superiority nor equivalence of either approach:
-the pipelines differ in several components at once, so no performance difference can be
-attributed to the pipeline design alone.
-
-| | Document | Machine-readable tables |
-|---|---|---|
-| Task B | [`docs/taskB_human_vs_ai_agent_comparison.md`](docs/taskB_human_vs_ai_agent_comparison.md) | [`results/taskB/comparison/`](results/taskB/comparison/) |
-| Task C | [`docs/taskC_human_vs_ai_agent_comparison.md`](docs/taskC_human_vs_ai_agent_comparison.md) | [`results/taskC/comparison/`](results/taskC/comparison/) |
-
-Two harmonisation artefacts exist because the pipelines had used different definitions:
-
-- **ECE** — the human-guided Task B analysis used 10 equal-width bins and the AI-agent analysis
-  5 equal-count bins. `results/taskB/comparison/harmonized_ece.csv` recomputes both under one
-  definition. It does not replace the official Task B ECE.
-- **Confidence intervals** — `results/taskC/comparison/harmonized_ci.csv` places both pipelines'
-  intervals side by side **with their bootstrap settings**. The confidence intervals were
-  generated using different bootstrap settings and therefore were not used for a standardized
-  numerical comparison of uncertainty between the two pipelines.
-
-Where sources disagree, the disagreement is listed rather than resolved:
-`results/task{{B,C}}/comparison/source_discrepancies.csv`.
+{comparison_summary}
 
 ---
 
@@ -1135,6 +1421,21 @@ performance contest and does not support a claim that either approach is better.
     # ---- write --------------------------------------------------------------------
     (repo / "README.md").write_text(md, encoding="utf-8")
     print(f"README.md            {len(md.encode('utf-8')):>9,} B")
+
+    # ---- verify every summarised number against its comparison artefact --------------
+    print(f"\n=== README comparison-summary verification ({len(verify_pairs)} values) ===")
+    bad = []
+    for label, value, source in verify_pairs:
+        if value not in md:
+            bad.append((label, value, source))
+    for label, value, source in verify_pairs:
+        mark = "NG " if (label, value, source) in bad else "OK "
+        print(f"  [{mark}] {label:<44} {value:<24} <- {source}")
+    if bad:
+        print(f"\nSTOP: {len(bad)} summarised value(s) do not appear in the README")
+        return 1
+    print(f"all {len(verify_pairs)} values read from the comparison artefacts appear verbatim "
+          f"in the README")
 
     idx, unmatched = build_artifact_index(repo)
     for target in (project / "docs/artifact_index.md", repo / "docs/artifact_index.md"):

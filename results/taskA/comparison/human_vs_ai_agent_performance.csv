@@ -1,0 +1,66 @@
+﻿pipeline,split,metric,value,source
+Human-guided,validation,roc_auc,0.848966613672496,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,validation,pr_auc,0.5606217053146204,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,validation,loss,0.857040524482727,Human-guided final result artifact: 01_TaskA_CXR/04_Training/TaskA_CXR_最終学習条件サマリー.csv
+Human-guided,validation,brier,,not recorded in the artefacts read
+Human-guided,validation,ece,,not recorded in the artefacts read
+Human-guided,validation,threshold_youden,0.5699251294136047,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,validation,sensitivity_at_threshold,0.7058823529411765,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,validation,specificity_at_threshold,0.8648648648648649,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,validation,youden_index,0.5707472178060413,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+AI-Agent,validation,roc_auc,0.8717541070482246,AI-Agent frozen: final_selection.json primary_analysis.validation_metrics
+AI-Agent,validation,pr_auc,0.5622825725468731,AI-Agent frozen: final_selection.json
+AI-Agent,validation,loss,,not recorded in the artefacts read
+AI-Agent,validation,brier,0.09647866414663282,AI-Agent frozen: final_selection.json
+AI-Agent,validation,ece,,not recorded in the artefacts read
+AI-Agent,validation,threshold_youden,0.008507705,AI-Agent frozen: final_selection.json
+AI-Agent,validation,sensitivity_at_threshold,1.0,AI-Agent frozen: final_selection.json
+AI-Agent,validation,specificity_at_threshold,0.6396396396396397,AI-Agent frozen: final_selection.json
+AI-Agent,validation,youden_index,0.6396396396396398,Derived from final_selection.json sensitivity + specificity − 1
+Human-guided,test,roc_auc,0.9072602013778484,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,roc_auc_ci_low,0.8357180710121888,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,roc_auc_ci_high,0.9629040805511394,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,pr_auc,0.6229264898057557,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,brier,0.1017317513245678,Human-guided final result artifact: 04_全モデル比較・統計解析/全5モデル_最終Test評価比較.csv
+Human-guided,test,ece_10_equal_width,0.152335665828125,Human-guided final result artifact: 04_全モデル比較・統計解析/全5モデル_最終Test評価比較.csv
+Human-guided,test,threshold,0.5699251294136047,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,sensitivity,0.7058823529411765,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,specificity,0.9369369369369368,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,accuracy,0.90625,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,ppv,0.631578947368421,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,npv,0.9541284403669725,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+Human-guided,test,tp,12.0,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,fp,7.0,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,tn,104.0,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+Human-guided,test,fn,5.0,Human-guided final result artifact: 01_TaskA_CXR/05_Evaluation/TaskA_CXR_最終評価サマリー.csv
+AI-Agent,test,roc_auc,0.834658187599364,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,roc_auc_ci_low,0.7344727080021197,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,roc_auc_ci_high,0.9231717011128775,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,pr_auc,0.4575616003173064,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,brier,0.10580814877417963,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,ece_5_equal_count,0.051146888844755274,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,ece_10_equal_width,0.097227,AI-Agent frozen Task C table: results/taskC/evaluation/test_metrics_table.csv
+AI-Agent,test,threshold,0.008507705,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,sensitivity,0.8235294117647058,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,specificity,0.6936936936936937,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,ppv,0.2916666666666667,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,npv,0.9625,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,accuracy,0.7109375,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,tp,14.0,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,fp,34.0,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,tn,77.0,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+AI-Agent,test,fn,3.0,AI-Agent frozen Task A result: results/taskA/evaluation/test_metrics_primary.json
+Human-guided,test,harmonized_ece_10_equal_width,0.152335665828125,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+Human-guided,test,harmonized_ece_5_equal_count,0.14260261567187496,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+Human-guided,test,harmonized_ci_low_10000_seed42,0.8357180710121888,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+Human-guided,test,harmonized_ci_high_10000_seed42,0.9629040805511394,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+Human-guided,test,harmonized_ci_low_2000_seed12345,0.8409644939056704,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+Human-guided,test,harmonized_ci_high_2000_seed12345,0.9645071542130366,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+Human-guided,test,recomputed_roc_auc,0.9072602013778485,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+AI-Agent,test,harmonized_ece_10_equal_width,0.09722679070522267,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+AI-Agent,test,harmonized_ece_5_equal_count,0.051146887296339864,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+AI-Agent,test,harmonized_ci_low_10000_seed42,0.730259671436142,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+AI-Agent,test,harmonized_ci_high_10000_seed42,0.9236883942766295,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+AI-Agent,test,harmonized_ci_low_2000_seed12345,0.7344727080021197,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+AI-Agent,test,harmonized_ci_high_2000_seed12345,0.9231717011128775,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv
+AI-Agent,test,recomputed_roc_auc,0.8346581875993642,Harmonized recomputation from the saved patient-level Test predictions: results/taskA/comparison/harmonized_ece_ci.csv

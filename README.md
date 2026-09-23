@@ -210,31 +210,167 @@ family definitions: [`results/comparison/README.md`](results/comparison/README.m
 
 ---
 
-## 7. Human-guided vs AI-agent comparisons
+## 7. Human-guided vs AI-Agent comparison summary
 
-The same two research questions were previously worked through in a human-guided analysis. The
-documents below compare the two pipelines **methodologically**. They are descriptive and post
-hoc by construction, and they establish neither superiority nor equivalence of either approach:
-the pipelines differ in several components at once, so no performance difference can be
-attributed to the pipeline design alone.
+The same three research questions were previously worked through in a human-guided analysis.
+The three documents below are the **authoritative** record of that comparison — full methods,
+every metric and every source discrepancy. **This section is a summary only.**
 
-| | Document | Machine-readable tables |
+| Task | Full comparison document | Machine-readable tables |
 |---|---|---|
-| Task B | [`docs/taskB_human_vs_ai_agent_comparison.md`](docs/taskB_human_vs_ai_agent_comparison.md) | [`results/taskB/comparison/`](results/taskB/comparison/) |
-| Task C | [`docs/taskC_human_vs_ai_agent_comparison.md`](docs/taskC_human_vs_ai_agent_comparison.md) | [`results/taskC/comparison/`](results/taskC/comparison/) |
+| A — CXR | [`docs/taskA_human_vs_ai_agent_comparison.md`](docs/taskA_human_vs_ai_agent_comparison.md) | [`results/taskA/comparison/`](results/taskA/comparison/) |
+| B — Clinical | [`docs/taskB_human_vs_ai_agent_comparison.md`](docs/taskB_human_vs_ai_agent_comparison.md) | [`results/taskB/comparison/`](results/taskB/comparison/) |
+| C — Fusion | [`docs/taskC_human_vs_ai_agent_comparison.md`](docs/taskC_human_vs_ai_agent_comparison.md) | [`results/taskC/comparison/`](results/taskC/comparison/) |
 
-Two harmonisation artefacts exist because the pipelines had used different definitions:
+> **These are exploratory methodological comparisons.** They are descriptive and post hoc by
+> construction and establish neither superiority nor equivalence of either approach. The
+> pipelines differ in several components at once, so no performance difference can be
+> attributed to the pipeline design alone. Nothing here indicates whether a human-guided or an
+> autonomous process is the better way to build such a model.
 
-- **ECE** — the human-guided Task B analysis used 10 equal-width bins and the AI-agent analysis
-  5 equal-count bins. `results/taskB/comparison/harmonized_ece.csv` recomputes both under one
-  definition. It does not replace the official Task B ECE.
-- **Confidence intervals** — `results/taskC/comparison/harmonized_ci.csv` places both pipelines'
-  intervals side by side **with their bootstrap settings**. The confidence intervals were
-  generated using different bootstrap settings and therefore were not used for a standardized
-  numerical comparison of uncertainty between the two pipelines.
+### Summary table
 
-Where sources disagree, the disagreement is listed rather than resolved:
-`results/task{B,C}/comparison/source_discrepancies.csv`.
+All Test ROC-AUC values are for the same 128 Test patients.
+
+| Task | Model / outcome | Human-guided | AI-Agent | Main interpretation |
+|---|---|---:|---:|---|
+| **A** | CXR ResNet18, Test ROC-AUC | **0.907260** | **0.834658** | The largest between-pipeline gap of the three tasks. Not attributable to one design choice |
+| A | CXR, Test ECE (10 equal-width) | 0.152336 | 0.097227 | Lower for AI-Agent; see the Brier row before reading this as better calibration |
+| A | CXR, Test Brier | 0.101732 | 0.105808 | Lower for Human-guided — calibration-related metrics did not consistently favor one pipeline |
+| **B** | Clinical LR, Test ROC-AUC | 0.941176 | 0.946476 | Nearly equal |
+| B | Clinical XGBoost, Test ROC-AUC | 0.935877 | 0.928988 | Human-guided slightly higher |
+| B | Clinical MLP, Test ROC-AUC | 0.879703 | 0.924218 | AI-Agent higher |
+| B | Harmonised ECE, LR / XGBoost / MLP | 0.041302 / 0.090264 / 0.308812 | 0.161595 / 0.074899 / 0.300495 | Lower ECE for Human-guided in LR, for AI-Agent in XGBoost, MLP — no one-sided superiority |
+| **C** | Late Fusion, Test ROC-AUC | **0.944356** | **0.944886** | Almost identical, from two independently designed pipelines |
+| C | Fusion weights (clinical / CXR) | 0.72 / 0.28 | 0.75 / 0.25 | Converged on nearly the same weighting |
+| C | Late Fusion vs Clinical LR, Holm p | 0.949950 | 0.769705 | Neither pipeline's fusion significantly exceeded its Clinical LR |
+| C | Modality contribution, clinical / CXR | 0.169060 / 0.044672 | 0.350539 / 0.003551 | Clinical dominates in both; the AI-Agent CXR contribution is especially small |
+| C | Late Fusion, Test ECE / Brier | 0.064514 / 0.059210 | 0.128711 / 0.078034 | Both calibration measures are lower for Human-guided here |
+
+### Task A — CXR
+
+**Main design differences** (20 items differ; full list in the comparison document):
+learning rate (1e-05 vs 0.0003), scheduler (ReduceLROnPlateau vs OneCycleLR), early
+stopping (patience 8 vs a fixed 30-epoch budget), preprocessing intensity mapping (DICOM window
+vs 1–99 percentile clip), preprocessing geometry (direct resize vs pad-to-square), augmentation
+magnitude (**both pipelines label their augmentation "B" but the parameters differ**), seeds
+searched (1 vs 3 per condition), and best epoch 12 by Validation ROC-AUC vs best epoch 9 by Validation ROC-AUC.
+
+**Test discrimination.** The human-guided CXR model reached **0.907260** and the AI-Agent CXR
+model **0.834658**. This is the largest between-pipeline difference in the study.
+
+**Calibration and Grad-CAM.** Under the shared ECE definitions, the AI-Agent model had lower ECE
+(0.097227 vs 0.152336), whereas the Human-guided model had a slightly lower Brier score
+(0.101732 vs 0.105808); therefore, calibration-related metrics did not consistently favor
+one pipeline. Grad-CAM used 16 cases vs
+15: the AI-Agent model produced only three false negatives at
+its frozen threshold and the pre-specified rule forbade substituting a case from another group,
+leaving one blank panel cell. The AI-Agent run also has a known all-zero-CAM issue for cases
+whose probability saturates near zero, whose region metrics are `nan` and were not imputed.
+
+**Interpretation.** 20 components differed simultaneously and no ablation isolating any of
+them exists in either pipeline, so **the difference cannot be attributed to a single design
+choice**. The lower discrimination of the AI-Agent CXR component **may have contributed** to
+how little the radiograph added in the AI-Agent Task C fusion — but this is not a demonstrated
+cause: the human-guided pipeline's stronger CXR component also failed to lift its Late Fusion
+significantly above its Clinical LR.
+
+### Task B — Clinical models
+
+**Variables both pipelines kept:** age, sex, SpO2, CRP, lymphocyte, D-dimer, lactate, eGFR.
+**human-guided only: heart failure. AI-agent only: SBP, troponin detectable, lymph_missing**
+
+**Test ROC-AUC.** Clinical LR was nearly equal (0.941176 vs 0.946476); XGBoost was
+slightly higher in the human-guided pipeline (0.935877 vs 0.928988); MLP was
+higher in the AI-Agent pipeline (0.879703 vs 0.924218).
+
+**Calibration.** The two pipelines had used different ECE definitions — 10 equal-width bins
+versus 5 equal-count bins — so ECE was **harmonised** to one definition in
+`results/taskB/comparison/harmonized_ece.csv` before any comparison. Under that shared
+definition the lower ECE belongs to the human-guided pipeline for LR and to
+the AI-Agent pipeline for XGBoost, MLP; by Brier score the lower value belongs to the
+human-guided pipeline for LR, XGBoost and to the AI-Agent pipeline for
+MLP. **Calibration-related metrics did not consistently favor one
+pipeline**, and the two measures do not even agree with each other model by model. The official
+Task B ECE values were not overwritten.
+
+### Task C — Multimodal fusion
+
+Both pipelines independently arrived at **decision-level Late Fusion of Clinical LR and the CXR
+model**, with close weights (0.72 / 0.28 vs 0.75 / 0.25) and almost the same Test ROC-AUC (0.944356 vs
+0.944886).
+
+In **both** pipelines the Late Fusion did **not** significantly exceed its own Clinical LR after
+Holm adjustment (Holm p 0.949950 and 0.769705). In **both**, the clinical modality contributed
+more than the CXR modality (0.169060 vs 0.044672; 0.350539 vs 0.003551); the AI-Agent CXR
+contribution is especially small. For the Late Fusion models, unlike in Task A, **both**
+calibration measures point the same way: the human-guided Late Fusion has the lower ECE
+(0.064514 vs 0.128711) and the lower Brier score (0.059210 vs 0.078034).
+
+**A lack of statistical significance is not evidence of equivalence.**
+
+### Cross-task interpretation
+
+- **Task A** showed a relatively large difference in CXR-only discrimination between the two
+  pipelines.
+- **Task B** produced close performance across most clinical models, with the AI-Agent MLP point
+  estimate higher.
+- **Task C** is the striking one: two independently designed pipelines converged on very
+  similar Late Fusion structures and almost identical Test ROC-AUC.
+- Both pipelines reached the same substantive conclusion: **Clinical LR is very strong, and the
+  incremental value of adding the radiograph is limited in this cohort.**
+- This is a methodological comparison of different pipeline designs. **It is not evidence about
+  AI versus human capability.**
+
+### Harmonisation and discrepancies
+
+Where the two pipelines had used different definitions, a separate harmonised artefact was
+produced and the official values were left untouched:
+
+- **ECE** — `results/taskB/comparison/harmonized_ece.csv` and
+  `results/taskA/comparison/harmonized_ece_ci.csv`.
+- **Confidence intervals** — `results/taskA/comparison/harmonized_ece_ci.csv` and
+  `results/taskC/comparison/harmonized_ci.csv` place both pipelines' intervals side by side
+  **with their bootstrap settings**. The confidence intervals were generated using different
+  bootstrap settings and therefore were not used for a standardized numerical comparison of
+  uncertainty between the two pipelines.
+
+Disagreements between sources are listed rather than resolved, in
+`results/task{A,B,C}/comparison/source_discrepancies.csv`.
+
+For Task A that file holds 6 rows, each carrying a `category`, because
+"two artefacts state conflicting values" and "two artefacts use different definitions" are
+different problems:
+
+| Category | Count |
+|---|---:|
+| source discrepancy | 0 |
+| unexplained decision | 1 |
+| access limitation | 1 |
+| methodological clarification | 1 |
+| resolved consistency | 2 |
+| terminology ambiguity | 1 |
+
+**No genuine source discrepancies were found in Task A**: every reported number that could be
+recomputed from the saved patient-level predictions reproduced exactly, on both sides. The
+differing ECE definitions, the `best_epoch` recording convention and the shared augmentation
+label "B" are classified separately and should **not** be read as inconsistencies.
+
+The one item that remains an open question is an **unexplained decision** in the human-guided
+pipeline: the Stage 1 condition with the highest single-seed Validation ROC-AUC was not the one
+carried forward to become the final model, and no artefact records why. It is left open rather
+than reconstructed.
+
+One access limitation is worth naming: the human-guided manuscript and slides are Google Docs
+stubs on the filesystem the comparison ran on, so the manuscript-versus-artefact consistency
+check **could not be performed** for Task A, and no manuscript value was assumed.
+
+A paired DeLong test between the two pipelines' CXR models is technically possible — the same
+128 patients with matching labels and
+complete probabilities on both sides — and **has not been run**. If it ever is, it is an
+exploratory analysis separate from the two confirmatory families in
+`results/comparison/delong_plan.json`.
+
 
 ---
 

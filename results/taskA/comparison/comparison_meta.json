@@ -1,0 +1,82 @@
+{
+  "generated": "2026-09-23T12:50:47+09:00",
+  "script": "46_taskA_human_vs_agent_comparison.py",
+  "task": "A",
+  "role": "exploratory methodological comparison",
+  "non_superiority_statement": "This comparison is descriptive and post hoc by construction. It establishes neither superiority nor equivalence of either pipeline. The two pipelines differ in preprocessing geometry, learning rate, scheduler, early stopping, augmentation magnitude, number of seeds and selection rule simultaneously, so no performance difference can be attributed to any single design choice.",
+  "source_priority": "Human-guided: the current final artefacts under 気合のCOVID19. Files beginning with 旧 were not read. The manuscript and slides are Google Docs stubs on this filesystem and could not be read. AI-agent: the frozen Task A artefacts in this repository, plus final_selection.json read from Drive only after its SHA256 matched the repository record.",
+  "sources_used": {
+    "human_final_training_config": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\TaskA_CXR_最終学習条件サマリー.csv (sha256 d40ac65ac6fe655b…)",
+    "human_final_evaluation_summary": "<DRIVE_ROOT>\\01_TaskA_CXR\\05_Evaluation\\TaskA_CXR_最終評価サマリー.csv (sha256 6ab9ca6dd4709127…)",
+    "human_stage1_conditions": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\TaskA_CXR_Stage1_seed42_6条件比較.csv (sha256 98cfeb0df3001cf9…)",
+    "human_stage2_class_weight": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\TaskA_CXR_Stage2_classweight比較.csv (sha256 06433119fbe4625f…)",
+    "human_test_predictions": "<DRIVE_ROOT>\\01_TaskA_CXR\\05_Evaluation\\TaskA_CXR_Test患者別予測結果.csv (sha256 611e87102d15b79a…)",
+    "human_validation_predictions": "<DRIVE_ROOT>\\01_TaskA_CXR\\05_Evaluation\\TaskA_CXR_Validation患者別予測結果.csv (sha256 3e3e5fe442fd0096…)",
+    "human_gradcam_selection": "<DRIVE_ROOT>\\01_TaskA_CXR\\06_GradCAM\\TaskA_CXR_GradCAM_16症例選定一覧.csv (sha256 1730ee5baba1c3a0…)",
+    "human_gradcam_qualitative": "<DRIVE_ROOT>\\01_TaskA_CXR\\06_GradCAM\\TaskA_CXR_GradCAM_定性的所見まとめ.csv (sha256 318b8f1a126908b7…)",
+    "human_bootstrap_draws": "<DRIVE_ROOT>\\01_TaskA_CXR\\05_Evaluation\\TaskA_CXR_ROCAUC_bootstrap_10000.csv (sha256 eed192feedd590dc…)",
+    "human_five_model_test_table": "<DRIVE_ROOT>\\04_全モデル比較・統計解析\\全5モデル_最終Test評価比較.csv (sha256 52f1df93674f669b…)",
+    "agent_test_metrics_primary": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\evaluation\\test_metrics_primary.json (sha256 0cefce9420bafe0c…)",
+    "agent_test_metrics_table": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\evaluation\\test_metrics_table.csv (sha256 14fb82344e5ed9c4…)",
+    "agent_condition_comparison": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\training\\condition_comparison.csv (sha256 2ad369d9c4f39227…)",
+    "agent_condition_selection_decision": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\training\\condition_selection_decision.json (sha256 364d2c32a7d395d9…)",
+    "agent_run_env_note": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\evaluation\\test_run_env_note.json (sha256 de7909b6f522a27d…)",
+    "agent_gradcam_run_meta": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\gradcam\\gradcam_run_meta.json (sha256 e82b07f0f2adcb74…)",
+    "agent_gradcam_selection": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\gradcam\\gradcam_selection.csv (sha256 e588259584ea01ca…)",
+    "agent_preprocess_summary": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\preprocessing\\preprocess_summary.json (sha256 cb6f1433030610ed…)",
+    "agent_dataset_qc": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\training\\dataset_qc.json (sha256 3f4018017c90572f…)",
+    "agent_test_predictions": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\evaluation\\test_predictions_primary.csv (sha256 76dae650320f9e20…)",
+    "agent_test_run_meta": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\evaluation\\test_run_meta.json (sha256 f8027a206eeae246…)",
+    "agent_taskC_five_model_table": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskC\\evaluation\\test_metrics_table.csv (sha256 d275746982a96423…)",
+    "agent_test_access_log": "<LOCAL_PATH> - 公立大学法人大阪\\COVID19_AI_Agent\\github_repo\\results\\taskA\\evaluation\\test_access_log.jsonl (sha256 73782f28225eef4e…)",
+    "agent_final_selection (hash-verified)": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\final_selection.json (sha256 fd93d6fe83c0a6a0…)"
+  },
+  "official_artifacts_modified": [],
+  "harmonization": {
+    "ece": "Both pipelines' Test ECE recomputed from the saved patient-level predictions under 10 equal-width bins and under 5 equal-count bins. Written to harmonized_ece_ci.csv. Official ECE values are not overwritten.",
+    "ci": "Both pipelines' Test ROC-AUC CI recomputed under both bootstrap settings (10,000/seed 42 and 2,000/seed 12345), stratified, percentile. The confidence intervals in the official artefacts were generated using different bootstrap settings and therefore were not used for a standardized numerical comparison of uncertainty between the two pipelines."
+  },
+  "paired_comparison_feasibility": {
+    "human_rows": 128,
+    "agent_rows": 128,
+    "identical_patient_sets": true,
+    "n_merged": 128,
+    "labels_agree": 128,
+    "same_row_order": false,
+    "human_deaths": 17,
+    "agent_deaths": 17,
+    "probability_column_human": "prob_death",
+    "probability_column_agent": "prob",
+    "probabilities_complete": true,
+    "paired_delong_technically_possible": true,
+    "executed": false,
+    "status": "NOT executed. If it is ever run it is an exploratory methodological analysis and is separate from the confirmatory DeLong families defined in results/comparison/delong_plan.json."
+  },
+  "finding_categories": {
+    "definitions": {
+      "source discrepancy": "Two sources state genuinely conflicting values for the same quantity under the same definition. Requires resolution.",
+      "unexplained decision": "The artefacts record what was done but not why, and the reason cannot be recovered from them. Not a numerical conflict, but it leaves a design choice unjustified.",
+      "access limitation": "A source that should have been checked could not be read, so the check was not performed. Nothing is known to be wrong.",
+      "methodological clarification": "Two different, explicitly named definitions of the same quantity. Both values are correct under their own definition. Not a conflict.",
+      "resolved consistency": "Sources agree once the recording convention is understood. Recorded so the agreement is auditable, not because anything is in doubt.",
+      "terminology ambiguity": "Two pipelines use the same name for different things. The values are not in conflict; the label is."
+    },
+    "counts": {
+      "source discrepancy": 0,
+      "unexplained decision": 1,
+      "access limitation": 1,
+      "methodological clarification": 1,
+      "resolved consistency": 2,
+      "terminology ambiguity": 1
+    },
+    "note": "Only the `source discrepancy` rows are genuine conflicts between sources. Differing metric definitions, recording conventions and shared labels are classified separately so they are not miscounted as inconsistencies."
+  },
+  "counts": {
+    "model_spec_rows": 57,
+    "performance_rows": 65,
+    "gradcam_rows": 14,
+    "finding_rows": 6,
+    "genuine_source_discrepancies": 0,
+    "unexplained_decisions": 1
+  }
+}

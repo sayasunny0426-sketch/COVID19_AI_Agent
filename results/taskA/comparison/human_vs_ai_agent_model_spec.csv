@@ -1,0 +1,58 @@
+﻿domain,item,human_guided,ai_agent,difference,source_or_note
+Cohort,total patients,"1,277","1,277",same,both read COVID19_固定患者split_1277.csv; the AI-agent copy is results/taskA/preprocessing/fixed_split_1277.csv
+Cohort,Train / Validation / Test,"1,021 / 128 / 128","1,021 / 128 / 128",same,AI-agent side verified in results/taskA/training/dataset_qc.json
+Cohort,deaths per split,135 / 17 / 17,135 / 17 / 17,same,"human-guided Validation n=128 deaths=17, Test n=128 deaths=17"
+Cohort,same patient split,yes,yes,same,identical split file; the AI-agent pipeline additionally recorded its SHA256 (626061a5…) in final_selection.json
+Cohort,endpoint,in-hospital death,in-hospital death,same,"binary, same label column"
+Cohort,T0,visit_start_datetime,visit_start_datetime,same,shared cohort definition
+Image selection,CXR eligibility window,T0−2 days to T0,T0−2 days to T0,same,AI-agent side: results/taskA/preprocessing/index_cxr_selection_flow.json
+Image selection,view,frontal AP/PA,frontal AP/PA,same,shared upstream selection (CXR_最終選定画像一覧.csv)
+Image selection,images per patient,1,1,same,AI-agent dataset_qc.json one_image_per_patient: {'distinct_SOPInstanceUID': 1277}
+Image selection,index image identity,shared upstream selection,shared upstream selection,same,both pipelines start from the same selected-image list; the AI-agent pipeline records index_cxr_manifest_sha256 e8c07db7…
+Preprocessing,DICOM pixel handling,"RescaleSlope / RescaleIntercept applied, then fixed windowing from WindowCenter / WindowWidth, then np.clip to the window","percentile 1–99 clip, then scale to [0,1]",DIFFERENT,human: TaskA_02 notebook cell 7; agent: preprocess_summary.json pipeline (window_center_width_used = False)
+Preprocessing,MONOCHROME handling,"MONOCHROME1 inverted; all 1,277 images are MONOCHROME2 so no inversion occurred",MONOCHROME2 for all 1277 images; inverted_count = 0,same outcome,both handled inversion and neither needed it
+Preprocessing,geometry,"direct resize to 224×224, no aspect-ratio preservation, no crop","zero pad to square on the long side, then 512×512, then 224×224",DIFFERENT,"human: TaskA_02 cell 8 (cv2.resize to 224×224 direct); agent: preprocess_summary.json pad = 'zero, square on long side', median pad fraction 0.1675"
+Preprocessing,cache format,224×224 8-bit PNG,"512×512 16-bit PNG (I;16), exact round-trip verified: True",DIFFERENT,the human-guided cache is already at model resolution; the AI-agent cache keeps 512×512 16 bit and resizes at load time
+Preprocessing,channel conversion,PIL convert('L') then Grayscale(num_output_channels=3),single channel replicated to 3,same concept,human: TaskA_03 cells 2–3; agent: preprocess pipeline '→ 3ch'
+Preprocessing,normalisation,"ImageNet mean [0.485, 0.456, 0.406] std [0.229, 0.224, 0.225]","ImageNet mean [0.485, 0.456, 0.406] std [0.229, 0.224, 0.225]",same,identical constants
+Preprocessing,invalid images,the preprocessing audit log records the per-image outcome,"failures = 0, degenerate_count = 0, image_read_errors = 0",same outcome,neither pipeline had to drop an image at this stage
+Architecture,backbone,ImageNet-1K pretrained ResNet18,ImageNet-1K pretrained ResNet18,same,human: TaskA_04 cell 8 uses ResNet18_Weights.IMAGENET1K_V1
+Architecture,classifier head,"nn.Linear(512, 1), single logit","single logit head, in 512 → out 1",same,agent: results/taskA/training/model_smoke_check.json head_is_single_logit
+Architecture,layer freezing,"full fine-tuning, all parameters trainable",full fine-tuning for the selected condition; staged unfreezing was searched as Stage 2 and not selected,"DIFFERENT SEARCH, same final model",agent: condition_comparison.csv unfreeze_schedule is empty for lr3e-4_aug_b
+Architecture,input resolution,224×224,224×224,same,both 224
+Optimisation,optimizer,AdamW,AdamW,same,
+Optimisation,learning rate,1e-05,0.0003,DIFFERENT,"human 1e-5, agent 3e-4: a 30-fold difference in the selected condition"
+Optimisation,weight decay,0.0001,1e-4,same,agent value from the Task A README training table; not recorded as a field in final_selection.json
+Optimisation,batch size,32,32,same,
+Optimisation,max epochs,30,30,same,
+Optimisation,scheduler,"ReduceLROnPlateau (factor 0.5, patience 3, min_lr 1e-06)",OneCycleLR (warm-up 1 epoch then cosine),DIFFERENT,human: ReduceLROnPlateau (TaskA_04 cell 11); agent: Task A README §12 training table
+Optimisation,early stopping,"on Validation ROC-AUC, patience 8, min improvement 0.001",best-epoch checkpoint on Validation AUROC over a fixed 30-epoch budget,DIFFERENT,the human-guided run could stop early; the AI-agent run always ran the full budget and kept the best epoch
+Class imbalance,loss,BCEWithLogitsLoss,BCEWithLogitsLoss,same,
+Class imbalance,pos_weight,6.562963,6.562963,same,both = 886/135 computed from the Training set; agreement to 6 decimals
+Augmentation,selected condition,Augmentation B,aug_b,same label,the labels match but the parameters do not — see the next row
+Augmentation,parameters,translation ±2%; scale 0.98-1.02; brightness 0.95-1.05; contrast 0.95-1.05; rotation ±5°; no flip,translate ±5%; scale 0.95-1.05; rotation ±7°; brightness 0.1; contrast 0.1; no flip,DIFFERENT,"human: TaskA_03 cell 3 train_transform_B; agent: dataset_qc.json config.augmentations.aug_b. Same name 'B'/'aug_b', different magnitudes"
+Augmentation,horizontal flip,not used,not used,same,
+Seeds,seed of the final model,42,42,same,both seed 42
+Seeds,number of seeds trained,1 (seed 42 only),"3 per condition ([42, 43, 44])",DIFFERENT,human: every comparison CSV is labelled seed42; agent: condition_comparison.csv n_seeds = 3 for every condition
+Selection,conditions compared,"6 learning-rate × augmentation conditions, then 2 class-weight conditions",10 conditions over 30 runs,DIFFERENT,human: TaskA_CXR_Stage1_seed42_6条件比較.csv + Stage2 class-weight comparison; agent: condition_comparison.csv
+Selection,selection metric,Validation ROC-AUC (single seed),"mean Validation ROC-AUC over 3 seeds, with a pre-registered parsimony margin of 0.005",DIFFERENT,"agent rule: D-054; reason recorded as: best alternative improves mean Validation AUROC by -0.002826, which is below the pre-registered practical tolerance / parsimony margin of 0.005; the s"
+Selection,checkpoint selection,best epoch 12 by Validation ROC-AUC,best epoch 9 by Validation ROC-AUC,same rule,different resulting epoch
+Selection,final checkpoint,AugB_LR1e-5_seed42_weighted_best.pth,lr3e-4_aug_b/seed42 best.pt (sha256 26d6ed95844e5ff6…),DIFFERENT,different trained weights
+Threshold,rule,Youden index,maximum Youden index J on Validation,same,
+Threshold,value,0.569925,0.008507705,DIFFERENT,"human 0.569925, agent 0.008508: the two models' probability scales differ by two orders of magnitude, so the thresholds are not comparable as numbers"
+Threshold,data used,Validation only,Validation only,same,agent recomputed_on_test = False
+CI,bootstrap resamples,10000,2000,DIFFERENT,"10,000 vs 2,000"
+CI,stratified,yes (cases and controls resampled separately),True,same,
+CI,seed,42,12345,DIFFERENT,42 vs 12345
+CI,method,Stratified bootstrap percentile,stratified bootstrap percentile,same,
+Calibration,ECE definition (as officially reported),"10 equal-width bins over [0,1]",5 equal-count bins (test_calibration_bins.csv),DIFFERENT,"human: TaskD_01 cell 6 expected_calibration_error(n_bins=10, np.linspace); agent Task A official file uses equal-count quintiles. A 10-equal-width value for the AI-agent CXR model also exists in results/taskC/evaluation/test_metrics_table.csv"
+Calibration,Brier,sklearn brier_score_loss,same definition,same,
+Grad-CAM,target layer,model.layer4[-1].conv2,resnet18.layer4[-1],DIFFERENT (possibly),human names the final conv inside the last block; the agent records the block. Whether the hooked tensor is the same could not be established from the artefacts read
+Grad-CAM,method,"gradient-weighted CAM, channel-mean gradient weights, ReLU, min-max normalised per image",Selvaraju et al. 2017 (gradient-weighted class activation mapping),same concept,
+Grad-CAM,cases,16 (TP 4 / TN 4 / FP 4 / FN 4),15 (TP 4 / FP 4 / TN 4 / FN 3),DIFFERENT,the AI-agent model produced only 3 FN at its frozen threshold and the pre-specified rule forbade substituting from another group
+Governance,Test used for model selection,no,no,same,human: the final evaluation notebook loads the checkpoint chosen on Validation; agent: final_selection.json test_set.used_so_far = False
+Governance,Test access log,not recorded in the artefacts read,"present, 1 entry(ies)",DIFFERENT,results/taskA/evaluation/test_access_log.jsonl
+Reproducibility,frozen configuration file,not recorded in the artefacts read,"final_selection.json, sha256 fd93d6fe83c0a6a0…",DIFFERENT,the human-guided pipeline records the chosen configuration in summary CSVs rather than a single hash-verified frozen file
+Reproducibility,package versions,not recorded in the artefacts read,"python 3.13.15, torch 2.11.0+cu128; numpy / pandas / sklearn not recorded in the artefacts read",partially recorded on the AI-agent side,results/taskA/evaluation/test_run_env_note.json
+Reproducibility,checkpoint published,no,no,same,"neither pipeline publishes the trained weights; both record the checkpoint name, and the AI-agent side also records its SHA256"
+Reproducibility,patient-level Test predictions,"yes, 128 rows","yes, 128 rows",same,both saved

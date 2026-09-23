@@ -1,0 +1,15 @@
+﻿item,human_guided,ai_agent,note
+implementation,"custom GradCAM class, forward and full-backward hooks",Selvaraju et al. 2017 (gradient-weighted class activation mapping),"same concept, independent implementations"
+target layer,model.layer4[-1].conv2,resnet18.layer4[-1],recorded at different granularity; whether the hooked tensor is identical is not established from the artefacts read
+gradient weighting,channel-mean of the gradient of the raw mortality logit,gradient-weighted class activation mapping (Selvaraju et al. 2017),same concept
+post-processing,ReLU then min-max normalisation per image,per-image normalisation; region metrics recorded in gradcam_selection.csv,same concept
+upsampling,"cv2.resize to 224×224, INTER_LINEAR",not recorded in the artefacts read,not established from the artefacts read
+case count,16,15,16 vs 15
+cases per group,TP 4 / TN 4 / FP 4 / FN 4,TP 4 / TN 4 / FP 4 / FN 3,"the AI-agent model had only 3 FN at its frozen threshold and the pre-specified rule forbade substitution, leaving one blank panel cell"
+selection rule,4 per group by extreme probability,"TP/FP: highest probability, 4; TN: lowest probability, 4; FN: lowest probability, min(4, available); tie-break Subject ID ascending","same concept, rule written down explicitly on the AI-agent side"
+published output,per-case images saved to 06_GradCAM,one 4×4 panel; per-case images withheld with their SHA256 recorded,DIFFERENT publication policy
+qualitative findings recorded,4 group-level findings with interpretation and caution columns,per-case notes plus a researcher-written reading summary in gradcam_notes.md,both record findings; the human-guided version is structured by group
+known issue,not recorded in the artefacts read,CAM is all-zero for cases whose predicted probability saturates near 0 (region metrics are nan and were NOT imputed); 0 of 15 rows have nan region metrics. Recorded as open question Q-E3,AI-agent side only
+metadata issue,not recorded in the artefacts read,"delta_days_from_T0 is empty for all rows of gradcam_selection.csv, a metadata propagation issue; values were NOT guessed. Recorded as open question Q-E6",AI-agent side only
+reproducibility,notebook TaskA_06_CXR_GradCAM.ipynb,"scripts/18_taskA_gradcam_primary_test.py (sha256 8808b68841378b8a…), input image SHA256 recorded per case",the AI-agent run records input hashes
+interpretive status,explanatory visualisation; the artefact itself states that Grad-CAM is a coarse localisation method and not lesion segmentation,explanatory visualisation only,same
