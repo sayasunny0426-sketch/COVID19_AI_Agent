@@ -1,0 +1,62 @@
+{
+  "generated": "2026-09-23T10:49:08+09:00",
+  "n": 128,
+  "deaths": 17,
+  "primary_strategy": "weighted_average_probability",
+  "clinical_component": "lr",
+  "w_clinical": 0.75,
+  "fused": {
+    "auroc": 0.9205087440381559,
+    "auprc": 0.7173510262610608,
+    "brier": 0.08972431927123424,
+    "ece": 0.1311771582388888
+  },
+  "components": {
+    "cxr": {
+      "auroc": 0.8717541070482246,
+      "auprc": 0.5622825725468731,
+      "brier": 0.09647866414663282,
+      "ece": 0.08589844412307032
+    },
+    "lr": {
+      "auroc": 0.8950715421303657,
+      "auprc": 0.6345837894540489,
+      "brier": 0.11692715357638986,
+      "ece": 0.1680527221273883
+    },
+    "xgb": {
+      "auroc": 0.8807631160572337,
+      "auprc": 0.549403652897866,
+      "brier": 0.08587610016455441,
+      "ece": 0.05865000131640624
+    },
+    "mlp": {
+      "auroc": 0.8648648648648649,
+      "auprc": 0.6475549054402989,
+      "brier": 0.16861320132034946,
+      "ece": 0.29611326875
+    }
+  },
+  "thresholds": {
+    "youden": 0.32592158196659415,
+    "sensitivity80": 0.450705416080375,
+    "rule": "Validation Youden maximum, tie-break lowest; frozen for Test"
+  },
+  "operating_point_youden": {
+    "threshold": 0.32592158196659415,
+    "tp": 16.0,
+    "tn": 90.0,
+    "fp": 21.0,
+    "fn": 1.0,
+    "sensitivity": 0.9411764705882353,
+    "specificity": 0.8108108108108109,
+    "ppv": 0.43243243243243246,
+    "npv": 0.989010989010989,
+    "accuracy": 0.828125
+  },
+  "calibration_definition": {
+    "ece_bins": 10,
+    "ece_scheme": "equal_width"
+  },
+  "test_used": false
+}

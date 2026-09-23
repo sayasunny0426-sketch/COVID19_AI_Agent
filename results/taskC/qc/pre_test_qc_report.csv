@@ -1,0 +1,42 @@
+﻿check,result,detail
+split manifest: subject id uniqueness,PASS,1277 unique of 1277
+split manifest: no patient in two splits,PASS,0
+split manifest: cohort sizes unchanged,PASS,
+Test patients held out and untouched,PASS,ids only; no Test outcome or prediction was read
+input unchanged since the freeze: taskA_frozen_selection,PASS,fd93d6fe83c0a6a0…
+input unchanged since the freeze: taskA_val_predictions,PASS,76e5f995d19cada2…
+input unchanged since the freeze: taskA_test_predictions,PASS,76dae650320f9e20…
+input unchanged since the freeze: taskB_frozen_selection,PASS,27bfa7dccd34318f…
+input unchanged since the freeze: taskB_val_predictions,PASS,179e7324f011566f…
+input unchanged since the freeze: taskB_test_predictions,PASS,347c88cc911ee722…
+input unchanged since the freeze: split_manifest,PASS,626061a532ab7fa0…
+input unchanged since the freeze: taskC_selected_weight,PASS,f8908bc716178a36…
+input unchanged since the freeze: taskC_validation_metrics,PASS,b2260783d2ae2d98…
+Task A model was not retrained for Task C,PASS,
+Task B model was not retrained for Task C,PASS,
+Task B clinical artefact hash matches its own frozen record,PASS,model_lr.joblib
+Validation: Task A and Task B ids aligned to the manifest,PASS,128 patients
+Validation: labels aligned between Task A and Task B,PASS,load_split raises if they disagree
+Validation: no duplicate ids,PASS,
+Validation: no missing predictions,PASS,
+Validation: no NaN / Inf,PASS,
+"Validation: probabilities in [0,1]",PASS,
+Validation: prediction count correct,PASS,128
+Validation: death count correct,PASS,17
+saved Validation fusion reproduces from the frozen weight,PASS,max |difference| 1.11e-16
+Validation fusion row order matches the manifest,PASS,
+frozen: fusion strategy and weights,PASS,
+frozen: threshold,PASS,
+frozen: calibration definition,PASS,
+frozen: bootstrap settings,PASS,
+frozen: output schema,PASS,
+frozen: modality importance method,PASS,
+frozen: DeLong plan,PASS,
+frozen: ECE bin count and scheme are explicit,PASS,"ECE with 10 equal-width bins over [0,1]"
+frozen: threshold is not recomputed on Test,PASS,
+frozen: weight was selected on Validation only,PASS,
+frozen: the primary strategy was fixed before the search,PASS,
+frozen: records that Test predictions do not exist,PASS,
+no Task C Test prediction file exists,PASS,Test predictions have not been generated
+no combined all-model prediction file exists,PASS,
+no DeLong results exist,PASS,

@@ -1,0 +1,241 @@
+{
+  "frozen": "2026-09-23T10:49:53+09:00",
+  "script": "37_taskC_freeze.py",
+  "seed": 42,
+  "task": "Task C -- multimodal Late Fusion of the frozen Task A CXR model and a frozen Task B clinical model",
+  "cohort": {
+    "n": 1277,
+    "train": 1021,
+    "val": 128,
+    "test": 128,
+    "deaths": {
+      "train": 135,
+      "val": 17,
+      "test": 17
+    },
+    "split": "identical to Task A and Task B"
+  },
+  "cxr_component": {
+    "source": "Task A frozen primary model",
+    "condition": "lr3e-4_aug_b",
+    "seed": 42,
+    "best_epoch": 9,
+    "retrained_for_taskC": false,
+    "used_via": "the predictions Task A already saved; the checkpoint is not reloaded",
+    "validation_auroc": 0.8717541070482246
+  },
+  "clinical_component": {
+    "source": "Task B frozen model",
+    "model": "lr",
+    "condition": "C=1.0_cw=balanced",
+    "artefact": "model_lr.joblib",
+    "artefact_sha256": "308e4d705e3c4f1eccdf8f5978409e3e195b278f1a9f1adb4c21060f4b900af4",
+    "retrained_for_taskC": false,
+    "selection_rule": "best Training cross-validated ROC-AUC among the Task B clinical models; fixed before any fusion was computed",
+    "dataset_used_for_selection": "Training cross-validation",
+    "validation_auroc": 0.8950715421303657
+  },
+  "fusion": {
+    "primary_strategy": "weighted_average_probability",
+    "formula": "p_fused = w * p_clinical + (1 - w) * p_cxr",
+    "w_clinical": 0.75,
+    "w_cxr": 0.25,
+    "search": {
+      "metric": "Validation ROC-AUC",
+      "tie_break": [
+        "Validation PR-AUC",
+        "Validation Brier",
+        "w closest to 0.5"
+      ],
+      "grid": {
+        "low": 0.0,
+        "high": 1.0,
+        "step": 0.05,
+        "n_points": 21
+      },
+      "dataset_used": "Validation only",
+      "test_used": false
+    },
+    "n_rows_tied": 1,
+    "weight_curve_flatness": {
+      "best_auroc": 0.920509,
+      "n_weights_within_0.005_auroc": 6,
+      "w_range_within_0.005_auroc": [
+        0.55,
+        0.8
+      ],
+      "auroc_at_w0_cxr_only": 0.871754,
+      "auroc_at_w1_clinical_only": 0.895072,
+      "auroc_at_w0.5_simple_average": 0.915209
+    },
+    "strategy_fixed_before_search": true,
+    "secondary_not_competing": [
+      "logit-space weighted average",
+      "logistic stacking",
+      "probability-space weighted average with the XGBoost or MLP component"
+    ],
+    "note": "secondary strategies scored higher on Validation than the primary one. The primary strategy was fixed before the search and is not changed on that basis; the secondary results are reported, not adopted."
+  },
+  "threshold": {
+    "primary": 0.32592158196659415,
+    "rule": "Validation Youden maximum, tie-break lowest; frozen for Test",
+    "secondary_exploratory": 0.450705416080375,
+    "recomputed_on_test": false
+  },
+  "calibration_definition": {
+    "brier": "standard Brier score",
+    "ece_bins": 10,
+    "ece_scheme": "equal_width",
+    "statement": "ECE with 10 equal-width bins over [0,1]",
+    "implementation": "src/covid_mortality/evaluation/metrics.py :: expected_calibration_error(y, p, n_bins, scheme)",
+    "same_on_validation_and_test": true
+  },
+  "bootstrap": {
+    "n_resamples": 2000,
+    "stratified": true,
+    "seed": 12345
+  },
+  "bootstrap_note": "identical to Task A and Task B. The human-guided pipeline used 10,000 resamples with seed 42; any cross-pipeline CI comparison needs a separate harmonised artefact",
+  "validation_results": {
+    "fused": {
+      "auroc": 0.9205087440381559,
+      "auprc": 0.7173510262610608,
+      "brier": 0.08972431927123424,
+      "ece": 0.1311771582388888
+    },
+    "components": {
+      "cxr": {
+        "auroc": 0.8717541070482246,
+        "auprc": 0.5622825725468731,
+        "brier": 0.09647866414663282,
+        "ece": 0.08589844412307032
+      },
+      "lr": {
+        "auroc": 0.8950715421303657,
+        "auprc": 0.6345837894540489,
+        "brier": 0.11692715357638986,
+        "ece": 0.1680527221273883
+      },
+      "xgb": {
+        "auroc": 0.8807631160572337,
+        "auprc": 0.549403652897866,
+        "brier": 0.08587610016455441,
+        "ece": 0.05865000131640624
+      },
+      "mlp": {
+        "auroc": 0.8648648648648649,
+        "auprc": 0.6475549054402989,
+        "brier": 0.16861320132034946,
+        "ece": 0.29611326875
+      }
+    },
+    "operating_point_youden": {
+      "threshold": 0.32592158196659415,
+      "tp": 16.0,
+      "tn": 90.0,
+      "fp": 21.0,
+      "fn": 1.0,
+      "sensitivity": 0.9411764705882353,
+      "specificity": 0.8108108108108109,
+      "ppv": 0.43243243243243246,
+      "npv": 0.989010989010989,
+      "accuracy": 0.828125
+    }
+  },
+  "modality_importance_plan": {
+    "method": "modality-level permutation importance",
+    "n_repeats": 30,
+    "seed": 42,
+    "metric": "ROC-AUC decrease",
+    "validation": "done (results/taskC/validation/modality_importance_validation.csv)",
+    "test": "post hoc descriptive only; may not change any specification"
+  },
+  "prediction_schema": {
+    "taskC_file": "results/taskC/evaluation/test_predictions_taskC.csv",
+    "primary_fusion_column": "prob_late_fusion",
+    "combined_file": "results/comparison/test_predictions_all_models.csv",
+    "combined_required_columns": [
+      "subject_id",
+      "true_label",
+      "prob_cxr",
+      "prob_clinical_lr",
+      "prob_clinical_xgboost",
+      "prob_clinical_mlp",
+      "prob_late_fusion"
+    ],
+    "join_key": "subject_id",
+    "id_dtype": "str",
+    "patient_order": "fixed split manifest order, filtered to split == 'test'",
+    "patient_order_sha256": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8",
+    "constraints": [
+      "128 patients",
+      "unique subject_id",
+      "no missing probability",
+      "probabilities in [0,1]",
+      "labels verified against the fixed split",
+      "deterministic merge on subject_id"
+    ]
+  },
+  "delong_plan": {
+    "A_late_fusion_vs_clinical_models": {
+      "comparisons": [
+        "late_fusion vs clinical_lr",
+        "late_fusion vs clinical_xgboost",
+        "late_fusion vs clinical_mlp"
+      ],
+      "n_comparisons": 3,
+      "correction": "Holm, within Family A only",
+      "question": "does multimodal Late Fusion improve on each clinical tabular model"
+    },
+    "B_late_fusion_vs_reference_models": {
+      "comparisons": [
+        "late_fusion vs clinical_lr",
+        "late_fusion vs cxr"
+      ],
+      "n_comparisons": 2,
+      "correction": "Holm, within Family B only",
+      "question": "does multimodal Late Fusion improve on the two single-modality reference models (the clinical reference and the imaging model)"
+    }
+  },
+  "delong_plan_file": "results/comparison/delong_plan.json",
+  "input_sha256": {
+    "taskA_frozen_selection": {
+      "path": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\final_selection.json",
+      "sha256": "fd93d6fe83c0a6a023398bf3d6950f2fd70459a4927677b7c7f5939ef36397da"
+    },
+    "taskA_val_predictions": {
+      "path": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\lr3e-4_aug_b\\seed42\\val_predictions.csv",
+      "sha256": "76e5f995d19cada22f82b49787195782c8619cce34d0405b1f9835ddee08f4e5"
+    },
+    "taskA_test_predictions": {
+      "path": "github_repo\\results\\taskA\\evaluation\\test_predictions_primary.csv",
+      "sha256": "76dae650320f9e203d70d932082ee9442401a606f89317ef7a5e309e29006190"
+    },
+    "taskB_frozen_selection": {
+      "path": "results\\taskB\\modeling\\final_selection_taskB.json",
+      "sha256": "27bfa7dccd34318f2c5e76ef8f0775e1687cef94320a8c372e181e5b43b803aa"
+    },
+    "taskB_val_predictions": {
+      "path": "results\\taskB\\modeling\\validation_predictions.csv",
+      "sha256": "179e7324f011566f7878b689ae77ecaea491a4503d253141c482621618058a83"
+    },
+    "taskB_test_predictions": {
+      "path": "results\\taskB\\evaluation\\test_predictions_taskB.csv",
+      "sha256": "347c88cc911ee72251217dffb0dae1fd0d7294785b569a8e4c650033135b5292"
+    },
+    "split_manifest": {
+      "path": "data\\splits\\COVID19_固定患者split_1277.csv",
+      "sha256": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8"
+    },
+    "taskC_selected_weight": {
+      "path": "results\\taskC\\fusion\\selected_weight.json",
+      "sha256": "f8908bc716178a36c29fa994435f56f1ab23beab00f7805cfede20910f7aec37"
+    },
+    "taskC_validation_metrics": {
+      "path": "results\\taskC\\validation\\validation_metrics_taskC.json",
+      "sha256": "b2260783d2ae2d9830b92da57e26fd61ee4dbab788518150c1abb15337b239a8"
+    }
+  },
+  "test_status": "Test predictions and Test performance metrics have not been generated for Task C. The Task A and Task B Test files exist and were hashed, but no Task C design decision used them.",
+  "test_predictions_generated": false
+}

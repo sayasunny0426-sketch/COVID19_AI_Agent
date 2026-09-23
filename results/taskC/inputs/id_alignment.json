@@ -1,0 +1,80 @@
+{
+  "validation": {
+    "n": 128,
+    "deaths": 17,
+    "taskA_ids_match_manifest": true,
+    "taskB_ids_match_manifest": true,
+    "labels_agree": 128,
+    "duplicate_ids": 0,
+    "missing_predictions": 0,
+    "row_order_identical_in_source_files": false,
+    "merge_key": "subject_id",
+    "row_order_used": "split manifest order",
+    "probability_ranges": {
+      "prob_cxr": [
+        1e-05,
+        0.999928
+      ],
+      "prob_lr": [
+        0.005297,
+        0.982948
+      ],
+      "prob_xgb": [
+        0.002893,
+        0.807977
+      ],
+      "prob_mlp": [
+        0.096287,
+        0.946159
+      ],
+      "prob_xgb_native": [
+        0.005118,
+        0.783411
+      ]
+    }
+  },
+  "test_ids_only": {
+    "n_manifest": 128,
+    "taskA_ids_match_manifest": true,
+    "taskB_ids_match_manifest": true,
+    "row_order_identical": false,
+    "note": "only ids were compared here; Test outcomes and Test predictions are not used for any Task C design decision"
+  },
+  "spearman_correlation_validation": {
+    "prob_cxr": {
+      "prob_cxr": 1.0,
+      "prob_lr": 0.604,
+      "prob_xgb": 0.5267,
+      "prob_mlp": 0.5005,
+      "prob_xgb_native": 0.5539
+    },
+    "prob_lr": {
+      "prob_cxr": 0.604,
+      "prob_lr": 1.0,
+      "prob_xgb": 0.917,
+      "prob_mlp": 0.8545,
+      "prob_xgb_native": 0.9142
+    },
+    "prob_xgb": {
+      "prob_cxr": 0.5267,
+      "prob_lr": 0.917,
+      "prob_xgb": 1.0,
+      "prob_mlp": 0.8169,
+      "prob_xgb_native": 0.9687
+    },
+    "prob_mlp": {
+      "prob_cxr": 0.5005,
+      "prob_lr": 0.8545,
+      "prob_xgb": 0.8169,
+      "prob_mlp": 1.0,
+      "prob_xgb_native": 0.8169
+    },
+    "prob_xgb_native": {
+      "prob_cxr": 0.5539,
+      "prob_lr": 0.9142,
+      "prob_xgb": 0.9687,
+      "prob_mlp": 0.8169,
+      "prob_xgb_native": 1.0
+    }
+  }
+}

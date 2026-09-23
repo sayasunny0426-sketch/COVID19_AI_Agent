@@ -1,0 +1,3 @@
+﻿modality,mean_auroc_drop,sd_auroc_drop,n_repeats,seed,dataset,baseline_auroc
+clinical,0.281981981981982,0.054926020200054465,30,42,Validation,0.9205087440381559
+cxr,0.03762586115527299,0.008023698593957367,30,42,Validation,0.9205087440381559

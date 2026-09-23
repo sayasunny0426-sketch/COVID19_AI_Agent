@@ -1,0 +1,356 @@
+{
+  "generated": "2026-09-23T10:47:28+09:00",
+  "script": "35_taskC_preflight_audit.py",
+  "cohort": {
+    "n": 1277,
+    "train": 1021,
+    "val": 128,
+    "test": 128,
+    "deaths": {
+      "train": 135,
+      "val": 17,
+      "test": 17
+    },
+    "split": "identical to Task A and Task B; never regenerated"
+  },
+  "test_knowledge_declaration": "The agent had already seen the Task A, Task B and human-guided Test results before Task C began, from the earlier Task B comparison work. Those values are recorded as reference only. No Task C design decision uses them; every decision below cites Training cross-validation or Validation as its dataset.",
+  "constraint_no_training_predictions": {
+    "finding": "neither Task A nor Task B saved Training-set predictions, and neither can produce out-of-fold Training predictions without retraining a frozen model",
+    "consequence": "a combiner can only be fitted on the Validation set: 128 patients, 17 deaths. That is what limits the primary strategy to a single free parameter.",
+    "evidence_source": "data (inventory of the frozen Task A / Task B artefacts)"
+  },
+  "candidate_strategies": [
+    {
+      "strategy": "probability-space weighted average",
+      "free_parameters": 1,
+      "status": "PRIMARY"
+    },
+    {
+      "strategy": "logit-space weighted average",
+      "free_parameters": 1,
+      "status": "secondary / exploratory",
+      "note": "not competed against the primary strategy on Validation"
+    },
+    {
+      "strategy": "simple average (w = 0.5)",
+      "free_parameters": 0,
+      "status": "reference point"
+    },
+    {
+      "strategy": "logistic stacking",
+      "free_parameters": 3,
+      "status": "secondary / exploratory",
+      "note": "3 parameters on 17 Validation events; reported, never primary"
+    },
+    {
+      "strategy": "early fusion (512-dim CXR embedding + 12 clinical features)",
+      "free_parameters": "thousands",
+      "status": "NOT IMPLEMENTED",
+      "reason": "524 inputs against 135 Training events, and no valid out-of-fold embeddings can be produced without retraining the frozen CXR model"
+    }
+  ],
+  "clinical_component_rule": {
+    "rule": "the clinical model with the best Training cross-validated ROC-AUC",
+    "selected": "lr",
+    "rationale": "Training CV rests on 135 events while Validation has 17, so CV is the more stable basis for choosing between components. Choosing the component by fused Validation performance would spend the Validation set twice.",
+    "secondary": [
+      "xgb",
+      "mlp"
+    ],
+    "dataset_used": "Training cross-validation (component choice), Validation (reported)",
+    "note": "the resulting combination resembles the known human-guided solution; that solution was not used as a target and played no part in this rule"
+  },
+  "fusion_weight_search": {
+    "space": "w in [0, 1], clinical weight; CXR weight is 1 - w",
+    "step": 0.05,
+    "n_points": 21,
+    "endpoints": "w = 0 is CXR alone, w = 1 is the clinical model alone",
+    "primary_selection_metric": "Validation ROC-AUC",
+    "tie_break": [
+      "Validation PR-AUC",
+      "Validation Brier score",
+      "the w closest to 0.5"
+    ],
+    "dataset_used": "Validation only",
+    "test_used": false
+  },
+  "calibration_definition": {
+    "brier": "standard Brier score",
+    "ece_bins": 10,
+    "ece_scheme": "equal_width",
+    "ece_statement": "ECE with 10 equal-width bins over [0,1]",
+    "implementation": "src/covid_mortality/evaluation/metrics.py, expected_calibration_error(y, p, n_bins, scheme) -- both arguments are explicit, no implicit default",
+    "same_definition_on_validation_and_test": true
+  },
+  "bootstrap": {
+    "n_resamples": 2000,
+    "stratified": true,
+    "seed": 12345
+  },
+  "bootstrap_note": "identical to Task A and Task B. The human-guided pipeline used 10,000 resamples with seed 42; a harmonised-CI artefact will be produced separately for the cross-pipeline comparison rather than overwriting any official metric",
+  "modality_contribution_plan": {
+    "validation": [
+      "Spearman correlation between component probabilities",
+      "ablation: each component alone versus the fused model",
+      "modality-level permutation importance"
+    ],
+    "test": "modality-level permutation importance, as post hoc descriptive analysis only; it may not change any specification"
+  },
+  "delong_plan": "results/comparison/delong_plan.json (two families, Holm within each)",
+  "threshold_rule": "Validation Youden maximum, tie-break the lowest threshold, frozen before Test and never recomputed on Test",
+  "unresolved": [
+    {
+      "id": "Q-C1",
+      "issue": "no Training predictions exist, so any combiner is fitted on 17 Validation events",
+      "status": "structural limitation"
+    },
+    {
+      "id": "Q-C2",
+      "issue": "probability-space versus logit-space averaging",
+      "status": "resolved by instruction: probability space is primary, logit space is secondary and does not compete"
+    },
+    {
+      "id": "Q-C3",
+      "issue": "clinical component chosen by Training CV rather than by fused Validation performance",
+      "status": "fixed"
+    },
+    {
+      "id": "Q-C4",
+      "issue": "weight selection on 17 events is unstable; the flatness of the weight curve will be reported",
+      "status": "open"
+    },
+    {
+      "id": "Q-C5",
+      "issue": "comparison with the human-guided Task C is exploratory and happens after Task C is complete",
+      "status": "planned"
+    }
+  ],
+  "outputs_plan": {
+    "results/taskC/preflight/": "this audit and the Validation baselines",
+    "results/taskC/inputs/": "input inventory with SHA256, id alignment evidence",
+    "results/taskC/fusion/": "weight search results and the weight-performance curve",
+    "results/taskC/validation/": "Validation predictions, metrics, calibration, ablation",
+    "results/taskC/modeling/": "final_selection_taskC.json",
+    "results/taskC/qc/": "pre-Test QC, post-Test QC, Test access log",
+    "results/taskC/evaluation/": "(after approval) Test predictions and metrics",
+    "results/comparison/": "test_predictions_all_models.csv, delong_results.{csv,json}"
+  },
+  "input_artifacts": [
+    {
+      "role": "taskA_frozen_selection",
+      "path": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\final_selection.json",
+      "exists": true,
+      "bytes": 7396,
+      "sha256": "fd93d6fe83c0a6a023398bf3d6950f2fd70459a4927677b7c7f5939ef36397da",
+      "used_for_taskC_design": true,
+      "note": ""
+    },
+    {
+      "role": "taskA_val_predictions",
+      "path": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\lr3e-4_aug_b\\seed42\\val_predictions.csv",
+      "exists": true,
+      "bytes": 5225,
+      "sha256": "76e5f995d19cada22f82b49787195782c8619cce34d0405b1f9835ddee08f4e5",
+      "used_for_taskC_design": true,
+      "note": ""
+    },
+    {
+      "role": "taskA_val_predictions_seed43",
+      "path": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\lr3e-4_aug_b\\seed43\\val_predictions.csv",
+      "exists": true,
+      "bytes": 5160,
+      "sha256": "e90ca37a63ae8cab24bbaebdae072d7527fc139393300308c56215ca8d4942d6",
+      "used_for_taskC_design": false,
+      "note": ""
+    },
+    {
+      "role": "taskA_val_predictions_seed44",
+      "path": "<DRIVE_ROOT>\\01_TaskA_CXR\\04_Training\\AIagent_taskA_runs\\lr3e-4_aug_b\\seed44\\val_predictions.csv",
+      "exists": true,
+      "bytes": 5377,
+      "sha256": "34c5431269dde615a82ab402b2beaaf35d18657f20a9a69fe1b0a38c5d39166a",
+      "used_for_taskC_design": false,
+      "note": ""
+    },
+    {
+      "role": "taskA_test_predictions",
+      "path": "github_repo\\results\\taskA\\evaluation\\test_predictions_primary.csv",
+      "exists": true,
+      "bytes": 7683,
+      "sha256": "76dae650320f9e203d70d932082ee9442401a606f89317ef7a5e309e29006190",
+      "used_for_taskC_design": false,
+      "note": "Test predictions: loaded only after the Test evaluation is approved; not used for any Task C design decision"
+    },
+    {
+      "role": "taskB_frozen_selection",
+      "path": "results\\taskB\\modeling\\final_selection_taskB.json",
+      "exists": true,
+      "bytes": 12254,
+      "sha256": "27bfa7dccd34318f2c5e76ef8f0775e1687cef94320a8c372e181e5b43b803aa",
+      "used_for_taskC_design": true,
+      "note": ""
+    },
+    {
+      "role": "taskB_val_predictions",
+      "path": "results\\taskB\\modeling\\validation_predictions.csv",
+      "exists": true,
+      "bytes": 8300,
+      "sha256": "179e7324f011566f7878b689ae77ecaea491a4503d253141c482621618058a83",
+      "used_for_taskC_design": true,
+      "note": ""
+    },
+    {
+      "role": "taskB_val_comparison",
+      "path": "results\\taskB\\modeling\\validation_comparison.csv",
+      "exists": true,
+      "bytes": 1083,
+      "sha256": "0da94e3e5305e17fcc32d5f5a9b76808fb5f5c8b98acba315ecc4ead5cac9bb0",
+      "used_for_taskC_design": true,
+      "note": ""
+    },
+    {
+      "role": "taskB_test_predictions",
+      "path": "results\\taskB\\evaluation\\test_predictions_taskB.csv",
+      "exists": true,
+      "bytes": 9347,
+      "sha256": "347c88cc911ee72251217dffb0dae1fd0d7294785b569a8e4c650033135b5292",
+      "used_for_taskC_design": false,
+      "note": "Test predictions: loaded only after the Test evaluation is approved; not used for any Task C design decision"
+    },
+    {
+      "role": "split_manifest",
+      "path": "data\\splits\\COVID19_固定患者split_1277.csv",
+      "exists": true,
+      "bytes": 44030,
+      "sha256": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8",
+      "used_for_taskC_design": true,
+      "note": ""
+    }
+  ],
+  "alignment": {
+    "validation": {
+      "n": 128,
+      "deaths": 17,
+      "taskA_ids_match_manifest": true,
+      "taskB_ids_match_manifest": true,
+      "labels_agree": 128,
+      "duplicate_ids": 0,
+      "missing_predictions": 0,
+      "row_order_identical_in_source_files": false,
+      "merge_key": "subject_id",
+      "row_order_used": "split manifest order",
+      "probability_ranges": {
+        "prob_cxr": [
+          1e-05,
+          0.999928
+        ],
+        "prob_lr": [
+          0.005297,
+          0.982948
+        ],
+        "prob_xgb": [
+          0.002893,
+          0.807977
+        ],
+        "prob_mlp": [
+          0.096287,
+          0.946159
+        ],
+        "prob_xgb_native": [
+          0.005118,
+          0.783411
+        ]
+      }
+    },
+    "test_ids_only": {
+      "n_manifest": 128,
+      "taskA_ids_match_manifest": true,
+      "taskB_ids_match_manifest": true,
+      "row_order_identical": false,
+      "note": "only ids were compared here; Test outcomes and Test predictions are not used for any Task C design decision"
+    },
+    "spearman_correlation_validation": {
+      "prob_cxr": {
+        "prob_cxr": 1.0,
+        "prob_lr": 0.604,
+        "prob_xgb": 0.5267,
+        "prob_mlp": 0.5005,
+        "prob_xgb_native": 0.5539
+      },
+      "prob_lr": {
+        "prob_cxr": 0.604,
+        "prob_lr": 1.0,
+        "prob_xgb": 0.917,
+        "prob_mlp": 0.8545,
+        "prob_xgb_native": 0.9142
+      },
+      "prob_xgb": {
+        "prob_cxr": 0.5267,
+        "prob_lr": 0.917,
+        "prob_xgb": 1.0,
+        "prob_mlp": 0.8169,
+        "prob_xgb_native": 0.9687
+      },
+      "prob_mlp": {
+        "prob_cxr": 0.5005,
+        "prob_lr": 0.8545,
+        "prob_xgb": 0.8169,
+        "prob_mlp": 1.0,
+        "prob_xgb_native": 0.8169
+      },
+      "prob_xgb_native": {
+        "prob_cxr": 0.5539,
+        "prob_lr": 0.9142,
+        "prob_xgb": 0.9687,
+        "prob_mlp": 0.8169,
+        "prob_xgb_native": 1.0
+      }
+    }
+  },
+  "validation_baselines": [
+    {
+      "component": "cxr",
+      "label": "CXR ResNet18 (Task A, lr3e-4_aug_b/seed42)",
+      "train_cv_auroc": NaN,
+      "train_cv_sd": NaN,
+      "val_auroc": 0.871754,
+      "val_auprc": 0.562283,
+      "val_brier": 0.096479,
+      "val_ece_10_equal_width": 0.085898,
+      "spearman_with_cxr": NaN
+    },
+    {
+      "component": "lr",
+      "label": "Clinical LR",
+      "train_cv_auroc": 0.889049,
+      "train_cv_sd": 0.037311,
+      "val_auroc": 0.895072,
+      "val_auprc": 0.634584,
+      "val_brier": 0.116927,
+      "val_ece_10_equal_width": 0.168053,
+      "spearman_with_cxr": 0.604
+    },
+    {
+      "component": "xgb",
+      "label": "Clinical XGBoost",
+      "train_cv_auroc": 0.884746,
+      "train_cv_sd": 0.039294,
+      "val_auroc": 0.880763,
+      "val_auprc": 0.549404,
+      "val_brier": 0.085876,
+      "val_ece_10_equal_width": 0.05865,
+      "spearman_with_cxr": 0.5267
+    },
+    {
+      "component": "mlp",
+      "label": "Clinical MLP",
+      "train_cv_auroc": 0.879615,
+      "train_cv_sd": 0.044333,
+      "val_auroc": 0.864865,
+      "val_auprc": 0.647555,
+      "val_brier": 0.168613,
+      "val_ece_10_equal_width": 0.296113,
+      "spearman_with_cxr": 0.5005
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "role": "exploratory; never a candidate for the primary strategy",
+  "fitted_on": "Validation (the only data with both components' predictions)",
+  "models": {
+    "lr": {
+      "intercept": -0.916513622780614,
+      "coef_logit_clinical": 0.8112859603723414,
+      "coef_logit_cxr": 0.294639829077304,
+      "validation_metrics": {
+        "auroc": 0.926338102808691,
+        "auprc": 0.731660753814454,
+        "brier": 0.06483069089054602,
+        "ece": 0.051155031485471736
+      },
+      "caveat": "3 parameters fitted on 128 Validation patients with 17 events, on the same data used to report the metric; these numbers are optimistic and exploratory only"
+    },
+    "xgb": {
+      "intercept": 0.6407596920408257,
+      "coef_logit_clinical": 0.7405745498281475,
+      "coef_logit_cxr": 0.30979607744893617,
+      "validation_metrics": {
+        "auroc": 0.9178590355060944,
+        "auprc": 0.7047614133372646,
+        "brier": 0.06673609669334903,
+        "ece": 0.03879583740589386
+      },
+      "caveat": "3 parameters fitted on 128 Validation patients with 17 events, on the same data used to report the metric; these numbers are optimistic and exploratory only"
+    },
+    "mlp": {
+      "intercept": -1.1810962022558167,
+      "coef_logit_clinical": 1.5905892633318366,
+      "coef_logit_cxr": 0.3000474627213722,
+      "validation_metrics": {
+        "auroc": 0.9141494435612083,
+        "auprc": 0.738116659381508,
+        "brier": 0.06351310580147539,
+        "ece": 0.03880700476574101
+      },
+      "caveat": "3 parameters fitted on 128 Validation patients with 17 events, on the same data used to report the metric; these numbers are optimistic and exploratory only"
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "generated": "2026-09-23T10:50:38+09:00",
+  "script": "38_taskC_pre_test_qc.py",
+  "scope": "Validation and the split manifest only. No Test outcome, prediction or clinical value was read; the Task A / Task B Test files were hashed, not opened.",
+  "deferred_to_post_test_qc": [
+    "Test transform / merge produces the frozen columns in the frozen order",
+    "Test prediction count equals the Test patient count",
+    "Test predictions aligned with subject_id and with the fixed labels",
+    "no NaN / Inf in the Test fused predictions",
+    "combined all-model file contains 128 patients with every probability column"
+  ],
+  "frozen_sha256": "210be0f4ba16ace028c14cfdc2167efa55fdbb80ad86d3829291216710da2db8",
+  "n_checks": 41,
+  "n_failed": 0,
+  "checks": [
+    {
+      "check": "split manifest: subject id uniqueness",
+      "result": "PASS",
+      "detail": "1277 unique of 1277"
+    },
+    {
+      "check": "split manifest: no patient in two splits",
+      "result": "PASS",
+      "detail": "0"
+    },
+    {
+      "check": "split manifest: cohort sizes unchanged",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Test patients held out and untouched",
+      "result": "PASS",
+      "detail": "ids only; no Test outcome or prediction was read"
+    },
+    {
+      "check": "input unchanged since the freeze: taskA_frozen_selection",
+      "result": "PASS",
+      "detail": "fd93d6fe83c0a6a0…"
+    },
+    {
+      "check": "input unchanged since the freeze: taskA_val_predictions",
+      "result": "PASS",
+      "detail": "76e5f995d19cada2…"
+    },
+    {
+      "check": "input unchanged since the freeze: taskA_test_predictions",
+      "result": "PASS",
+      "detail": "76dae650320f9e20…"
+    },
+    {
+      "check": "input unchanged since the freeze: taskB_frozen_selection",
+      "result": "PASS",
+      "detail": "27bfa7dccd34318f…"
+    },
+    {
+      "check": "input unchanged since the freeze: taskB_val_predictions",
+      "result": "PASS",
+      "detail": "179e7324f011566f…"
+    },
+    {
+      "check": "input unchanged since the freeze: taskB_test_predictions",
+      "result": "PASS",
+      "detail": "347c88cc911ee722…"
+    },
+    {
+      "check": "input unchanged since the freeze: split_manifest",
+      "result": "PASS",
+      "detail": "626061a532ab7fa0…"
+    },
+    {
+      "check": "input unchanged since the freeze: taskC_selected_weight",
+      "result": "PASS",
+      "detail": "f8908bc716178a36…"
+    },
+    {
+      "check": "input unchanged since the freeze: taskC_validation_metrics",
+      "result": "PASS",
+      "detail": "b2260783d2ae2d98…"
+    },
+    {
+      "check": "Task A model was not retrained for Task C",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task B model was not retrained for Task C",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Task B clinical artefact hash matches its own frozen record",
+      "result": "PASS",
+      "detail": "model_lr.joblib"
+    },
+    {
+      "check": "Validation: Task A and Task B ids aligned to the manifest",
+      "result": "PASS",
+      "detail": "128 patients"
+    },
+    {
+      "check": "Validation: labels aligned between Task A and Task B",
+      "result": "PASS",
+      "detail": "load_split raises if they disagree"
+    },
+    {
+      "check": "Validation: no duplicate ids",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Validation: no missing predictions",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Validation: no NaN / Inf",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Validation: probabilities in [0,1]",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Validation: prediction count correct",
+      "result": "PASS",
+      "detail": "128"
+    },
+    {
+      "check": "Validation: death count correct",
+      "result": "PASS",
+      "detail": "17"
+    },
+    {
+      "check": "saved Validation fusion reproduces from the frozen weight",
+      "result": "PASS",
+      "detail": "max |difference| 1.11e-16"
+    },
+    {
+      "check": "Validation fusion row order matches the manifest",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: fusion strategy and weights",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: threshold",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: calibration definition",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: bootstrap settings",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: output schema",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: modality importance method",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: DeLong plan",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: ECE bin count and scheme are explicit",
+      "result": "PASS",
+      "detail": "ECE with 10 equal-width bins over [0,1]"
+    },
+    {
+      "check": "frozen: threshold is not recomputed on Test",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: weight was selected on Validation only",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: the primary strategy was fixed before the search",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "frozen: records that Test predictions do not exist",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no Task C Test prediction file exists",
+      "result": "PASS",
+      "detail": "Test predictions have not been generated"
+    },
+    {
+      "check": "no combined all-model prediction file exists",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no DeLong results exist",
+      "result": "PASS",
+      "detail": ""
+    }
+  ]
+}

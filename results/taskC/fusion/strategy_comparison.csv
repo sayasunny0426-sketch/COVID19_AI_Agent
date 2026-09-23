@@ -1,0 +1,10 @@
+﻿strategy,clinical_component,role,best_w_clinical,val_auroc,val_auprc,val_brier,val_ece
+weighted_average_probability,lr,PRIMARY,0.75,0.920509,0.717351,0.089724,0.131177
+logistic_stacking,lr,exploratory,,0.926338102808691,0.731660753814454,0.06483069089054602,0.051155031485471736
+logistic_stacking,xgb,exploratory,,0.9178590355060944,0.7047614133372646,0.06673609669334903,0.03879583740589386
+logistic_stacking,mlp,exploratory,,0.9141494435612083,0.738116659381508,0.06351310580147539,0.03880700476574101
+weighted_average_logit,lr,secondary,0.7,0.929518,0.741576,0.074631,0.081447
+weighted_average_logit,xgb,secondary,0.7,0.917859,0.704761,0.071173,0.045431
+weighted_average_logit,mlp,secondary,0.7,0.917329,0.687025,0.079952,0.103257
+weighted_average_probability,xgb,secondary,0.7,0.903551,0.667122,0.075685,0.040912
+weighted_average_probability,mlp,secondary,0.75,0.890302,0.709221,0.121428,0.231392

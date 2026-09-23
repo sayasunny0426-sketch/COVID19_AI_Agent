@@ -1,0 +1,5 @@
+﻿component,label,train_cv_auroc,train_cv_sd,val_auroc,val_auprc,val_brier,val_ece_10_equal_width,spearman_with_cxr
+cxr,"CXR ResNet18 (Task A, lr3e-4_aug_b/seed42)",,,0.871754,0.562283,0.096479,0.085898,
+lr,Clinical LR,0.889049,0.037311,0.895072,0.634584,0.116927,0.168053,0.604
+xgb,Clinical XGBoost,0.884746,0.039294,0.880763,0.549404,0.085876,0.05865,0.5267
+mlp,Clinical MLP,0.879615,0.044333,0.864865,0.647555,0.168613,0.296113,0.5005
