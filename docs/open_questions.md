@@ -96,3 +96,10 @@
 | Q-F4 | 性別の欠測（Training 19 例中 18 例が死亡）の機序 | data dictionary に de-identification で一部削除される旨の記載があるが、**本欠測がその処理に起因することは未確認**。非臨床的な欠測機序を反映している可能性がある（D-072）。Task A・C で臨床変数を使う場合にも該当 | 研究者・データ提供元 | |
 | Q-F5 | CRP の単位が data dictionary に明記されていない | Training の中央値 8.4、最大 51。mg/dL とすれば臨床的に妥当な範囲だが確認が取れていない。単調変換のためモデル性能には影響しないが、係数の臨床的解釈には影響する | 研究者・データ提供元 | |
 | Q-F6 | SpO2 に酸素投与の有無の情報がなく、同じ値でも臨床的意味が異なる | 4C・NEWS2 は室内気での SpO2 を想定している。本データでは補正できないため limitation として記載する方針 | 教員 | |
+
+## G. リポジトリ全体監査（2026-09-23）
+
+| # | 質問 | 背景 | 確認先 | 回答 |
+|---|---|---|---|---|
+| Q-G1 | `results/taskA/preprocessing/cxr_dicom_audit_summary.json` の `duplicate_candidates.examples` に、実在の TCIA **SeriesInstanceUID が 10 件**（5 例 × 2 series、SeriesNumber・AcquisitionTime を伴う）残っている。伏字化するか、このまま維持するか | 2026-09-23 のリポジトリ全体監査で検出。**従来の UID 検査は `.csv` のみを対象としており、`.json` を走査していなかったため見逃していた**。Q-E1 / D-065 で決めた「DICOM UID は現時点では除外状態を維持する」方針に抵触する。一方、修正は Task A official artifact の変更にあたり、当該ファイルは初回コミット `c5afc93` で既に push 済みのため履歴にも残る。repository は PRIVATE で外部公開はされていない | 研究者・データ提供元（TCIA 再配布条件） | **2026-09-23 保留（研究者判断）**。今回の documentation コミットでは対応せず、別件として保留する。Task A official artifact は変更していない。対応を決める際は、伏字化・履歴の書き換え・TCIA 再配布条件の確認の 3 点を併せて検討する |
+| Q-G2 | 安全監査の UID 検査を `.json` / `.jsonl` / `.md` まで広げた恒久的なチェックを、`scripts/31` / `scripts/39` の prepare_commit 監査に組み込むか | 現在の prepare_commit スクリプトは secrets・local path・checkpoint・大容量ファイル・患者画像は全テキスト形式で検査しているが、UID 検査は独立した検査項目として実装されていない。Q-G1 は監査スクリプトの外側（手動監査）で初めて検出された | 研究者 | |

@@ -63,3 +63,109 @@ README に載せた数値はすべて実ファイルから読み出したもの�
 | `01_TaskA_CXR/06_GradCAM/AIagent_taskA_primary_test/gradcam_run_meta.json` | `results/taskA/gradcam/gradcam_run_meta.json` | 収録 | モデル・閾値・入力 SHA256・選択規則 | 4753 | `f4544e9801ce6ff6…` | 加工のため不一致（伏字化／列削除） |
 | `01_TaskA_CXR/06_GradCAM/AIagent_taskA_primary_test/panels/gradcam_panel_4x4.png` | `results/taskA/gradcam/gradcam_panel_4x4.png` | 収録 | 15 症例すべてを 1 枚に収めた代表図（1 セル空欄） | 1206376 | `f37f3be4c7ac6320…` | ✓ 正本と同一 |
 | `01_TaskA_CXR/06_GradCAM/AIagent_taskA_primary_test/(individual|panels)/*.png` | — | 除外 | 個別 19 枚は 4x4 パネルと同一症例の高解像度版（計 2.3 MB）。SHA256 のみ収録 |  | `—` | — |
+
+<!-- TASKBC_PROVENANCE_BEGIN (scripts/44_repo_documentation.py) -->
+
+---
+
+# Task A / B / C 主要数値の authoritative artifact 対応
+
+
+
+以下は `scripts/44_repo_documentation.py` が生成します（上の Task A 部分は `scripts/20_prepare_github_repo.py` が生成）。**表の値はすべて実行時に artifact から読み出したもので、記憶や推測によるものはありません。**
+
+
+
+「読み出した場所」列は、ファイル内のどのキー・どの行から取ったかを示します。
+
+### Task A
+
+凍結モデルの仕様は `test_run_env_note.json` に集約してあります（`test_run_meta.json` は凍結 artifact のため変更していません）。
+
+| 数値 | 値 | authoritative artifact | 読み出した場所 |
+|---|---|---|---|
+| 凍結条件 / seed / best epoch | lr3e-4_aug_b / 42 / 9 | `results/taskA/evaluation/test_run_env_note.json` | `frozen_model.condition, random_seeds.model_seed_primary, frozen_model.best_epoch` |
+| checkpoint SHA256 | 26d6ed95844e5ff6… | `results/taskA/evaluation/test_run_env_note.json` | `frozen_model.checkpoint_sha256` |
+| Test ROC-AUC (95% CI) | 0.834658 (0.734473–0.923172) | `results/taskA/evaluation/test_metrics_primary.json` | `auroc.point / ci_low / ci_high` |
+| Test PR-AUC | 0.457562 | `results/taskA/evaluation/test_metrics_primary.json` | `auprc.point` |
+| Test Brier | 0.105808 | `results/taskA/evaluation/test_metrics_primary.json` | `brier` |
+| Test ECE（5 equal-count bin） | 0.051147 | `results/taskA/evaluation/test_metrics_primary.json` | `ece` |
+| Test ECE（10 equal-width bin） | 0.097227 | `results/taskC/evaluation/test_metrics_table.csv` | `model=cxr の ece_10_equal_width 列` |
+| 操作点の閾値 | 0.008507705 | `results/taskA/evaluation/test_metrics_primary.json` | `operating_point_youden.threshold` |
+| bootstrap 設定 | 2,000 resample / stratified / seed 12345 | `results/taskA/evaluation/test_metrics_primary.json` | `auroc.n_boot / stratified / seed` |
+| Grad-CAM 症例構成 | TP 4 / FP 4 / TN 4 / FN 3 = 15 | `results/taskA/gradcam/gradcam_run_meta.json` | `cases_used_per_group, n_cases` |
+
+### Task B
+
+**ECE の定義に注意**：Task B の公式表は 5 equal-count bin です。同じモデルを 10 equal-width bin で評価した値は Task C の表にあります。
+
+| 数値 | 値 | authoritative artifact | 読み出した場所 |
+|---|---|---|---|
+| 最終変数 / 係数数 / EPV | 10 / 12 / 11.25 | `results/taskB/variable_selection/final_variables.json` | `primary.variables / n_features / events_per_parameter` |
+| 変数選択規則 | backward AIC subject to <= 13 coefficients | `results/taskB/variable_selection/final_variables.json` | `primary.rule` |
+| LR 条件 | C=1.0_cw=balanced | `results/taskB/modeling/final_selection_taskB.json` | `models.lr.condition` |
+| LR Test ROC-AUC (95% CI) | 0.946476 (0.895601–0.984632) | `results/taskB/evaluation/test_metrics_table.csv` | `model=lr の auroc / auroc_ci_low / auroc_ci_high` |
+| LR Test PR-AUC / Brier / ECE(5 equal-count) | 0.770898 / 0.097765 / 0.161595 | `results/taskB/evaluation/test_metrics_table.csv` | `model=lr の auprc / brier / ece_5bin` |
+| XGBoost Test ROC-AUC (95% CI) | 0.928988 (0.873847–0.970866) | `results/taskB/evaluation/test_metrics_table.csv` | `model=xgb の auroc / auroc_ci_low / auroc_ci_high` |
+| XGBoost Test PR-AUC / Brier / ECE(5 equal-count) | 0.657762 / 0.073210 / 0.022064 | `results/taskB/evaluation/test_metrics_table.csv` | `model=xgb の auprc / brier / ece_5bin` |
+| MLP Test ROC-AUC (95% CI) | 0.924218 (0.859565–0.977213) | `results/taskB/evaluation/test_metrics_table.csv` | `model=mlp の auroc / auroc_ci_low / auroc_ci_high` |
+| MLP Test PR-AUC / Brier / ECE(5 equal-count) | 0.747650 / 0.160305 / 0.296720 | `results/taskB/evaluation/test_metrics_table.csv` | `model=mlp の auprc / brier / ece_5bin` |
+| XGBoost native missing（secondary） Test ROC-AUC (95% CI) | 0.924218 (0.857446–0.973516) | `results/taskB/evaluation/test_metrics_table.csv` | `model=xgb_native の auroc / auroc_ci_low / auroc_ci_high` |
+| XGBoost native missing（secondary） Test PR-AUC / Brier / ECE(5 equal-count) | 0.682196 / 0.069241 / 0.027144 | `results/taskB/evaluation/test_metrics_table.csv` | `model=xgb_native の auprc / brier / ece_5bin` |
+| 実行環境（package versions） | numpy 2.5.1 / pandas 3.0.3 / sklearn 1.9.1 / torch 2.14.0+cpu / xgboost 3.4.1 | `results/taskB/evaluation/test_run_meta.json` | `packages` |
+
+### Task C
+
+閾値は Validation 由来で、Test では再計算していません。
+
+| 数値 | 値 | authoritative artifact | 読み出した場所 |
+|---|---|---|---|
+| 融合式 | p_fused = w * p_clinical + (1 - w) * p_cxr | `results/taskC/modeling/final_selection_taskC.json` | `fusion.formula` |
+| 重み（clinical / CXR） | 0.75 / 0.25 | `results/taskC/modeling/final_selection_taskC.json` | `fusion.w_clinical / fusion.w_cxr` |
+| frozen spec SHA256 | 2abebc28d4e4e87e… | `results/taskC/modeling/final_selection_taskC.json` | `（ファイル全体のハッシュ）` |
+| Validation ROC-AUC（fused） | 0.920509 | `results/taskC/validation/validation_metrics_taskC.json` | `fused.auroc` |
+| Test ROC-AUC (95% CI) | 0.944886 (0.892422–0.983042) | `results/taskC/evaluation/test_metrics_taskC.json` | `auroc.point / ci_low / ci_high` |
+| Test PR-AUC | 0.780516 | `results/taskC/evaluation/test_metrics_taskC.json` | `auprc.point` |
+| Test Brier | 0.078034 | `results/taskC/evaluation/test_metrics_taskC.json` | `brier` |
+| Test ECE（10 equal_width bin） | 0.128711 | `results/taskC/evaluation/test_metrics_taskC.json` | `ece / calibration_definition` |
+| 閾値（Validation 由来・Test 再計算なし） | 0.32592158196659415（recomputed_on_test = False） | `results/taskC/evaluation/test_metrics_taskC.json` | `threshold.value / recomputed_on_test` |
+| 感度 / 特異度 | 0.882353 / 0.810811 | `results/taskC/evaluation/test_metrics_taskC.json` | `operating_point.sensitivity / specificity` |
+| TP / FP / TN / FN | 15 / 21 / 90 / 2 | `results/taskC/evaluation/test_metrics_taskC.json` | `operating_point.tp / fp / tn / fn` |
+| modality importance（clinical / CXR、post hoc） | 0.350539 / 0.003551 | `results/taskC/evaluation/modality_importance_test.csv` | `mean_auroc_drop` |
+| secondary（logit空間 / stacking、探索的） | 0.932697 / 0.935877 | `results/taskC/evaluation/secondary_exploratory_test.json` | `models.*.auroc` |
+| 実行環境（package versions） | numpy 2.5.1 / pandas 3.0.3 / sklearn 1.9.1 / torch 2.14.0+cpu / xgboost 3.4.1 | `results/taskC/evaluation/test_run_meta.json` | `packages` |
+
+### 横断比較・統計
+
+paired DeLong は 2 family 構成で、family ごとに Holm 補正を行っています。`Late Fusion vs Clinical LR` は両 family に属するため、unadjusted p は 1 つ、Holm 調整済み p は 2 つあります。
+
+| 数値 | 値 | authoritative artifact | 読み出した場所 |
+|---|---|---|---|
+| 全5モデル Test 指標（単一定義） | ECE = 10 equal-width bin、n=128 / deaths=17 | `results/taskC/evaluation/test_metrics_table.csv` | `全行` |
+| 患者単位 全モデル予測 | 128 行 × 7 列 | `results/comparison/test_predictions_all_models.csv` | `subject_id, true_label, prob_cxr, prob_clinical_lr, prob_clinical_xgboost, prob_clinical_mlp, prob_late_fusion` |
+| DeLong Family A: Late Fusion vs Clinical LR | ΔAUC -0.001590 / p(unadj) 0.769705 / Holm 0.769705 | `results/comparison/delong_results.csv` | `family=A, model_2=clinical_lr` |
+| DeLong Family A: Late Fusion vs Clinical XGBoost | ΔAUC +0.015898 / p(unadj) 0.227127 / Holm 0.539785 | `results/comparison/delong_results.csv` | `family=A, model_2=clinical_xgboost` |
+| DeLong Family A: Late Fusion vs Clinical MLP | ΔAUC +0.020668 / p(unadj) 0.179928 / Holm 0.539785 | `results/comparison/delong_results.csv` | `family=A, model_2=clinical_mlp` |
+| DeLong Family B: Late Fusion vs Clinical LR | ΔAUC -0.001590 / p(unadj) 0.769705 / Holm 0.769705 | `results/comparison/delong_results.csv` | `family=B, model_2=clinical_lr` |
+| DeLong Family B: Late Fusion vs CXR ResNet18 | ΔAUC +0.110228 / p(unadj) 0.002079 / Holm 0.004158 | `results/comparison/delong_results.csv` | `family=B, model_2=cxr` |
+| DeLong の事前規定（2 family + Holm） | Test を開く前に固定 | `results/comparison/delong_plan.json` | `（全体）` |
+
+### 正本が競合しないことの確認
+
+
+
+| 確認項目 | 結果 |
+
+|---|---|
+
+| comparison artifact が official Test metrics を上書きしていないか | 上書きなし。`results/task{B,C}/comparison/` は `pipeline` 列と `source` 列を持ち、AI-Agent 行は official artifact の再掲であることを明示している |
+
+| harmonized 値が official 値を置き換えていないか | 置き換えていない。`harmonized_ece.csv` / `harmonized_ci.csv` は比較専用で、official 表は未変更 |
+
+| 同一数値が複数ファイルにある場合の正本 | `docs/artifact_index.md` 末尾の「Which file is the source of truth for a given number?」表に明記 |
+
+
+
+Task A / Task B / Task C の official artifact は、本ドキュメントの作成により一切変更していません。
+
+<!-- TASKBC_PROVENANCE_END -->

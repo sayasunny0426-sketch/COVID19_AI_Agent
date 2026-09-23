@@ -1,0 +1,248 @@
+{
+  "purpose": "Environment and provenance facts that results/taskA/evaluation/test_run_meta.json does not record. This file adds information; it does not restate, override or correct any frozen Task A artefact.",
+  "generated": "2026-09-23T11:50:06+09:00",
+  "generated_by": "scripts/45_taskA_env_note.py",
+  "rule": "Nothing here is inferred. Each field carries a status of `confirmed`, `documented` or `not recorded`, and a `source`. Fields nobody wrote down are null with status `not recorded`.",
+  "status_legend": {
+    "confirmed": "read from the named artefact",
+    "documented": "not stored as a machine-readable field, but stated in the named document inside this repository",
+    "not recorded": "not written down anywhere that could be checked; value is null"
+  },
+  "frozen_selection_file": {
+    "available": true,
+    "sha256": "fd93d6fe83c0a6a023398bf3d6950f2fd70459a4927677b7c7f5939ef36397da",
+    "sha256_matches_repository_record": true,
+    "recorded_in": "results/taskA/evaluation/test_run_meta.json",
+    "location": "Google Drive (not published in this repository)"
+  },
+  "package_versions": {
+    "python": {
+      "value": "3.13.15",
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_run_meta.json.python"
+    },
+    "torch": {
+      "value": "2.11.0+cu128",
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_run_meta.json.torch"
+    },
+    "torchvision": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "no Task A artefact records the torchvision version"
+    },
+    "numpy": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "no Task A artefact records the numpy version"
+    },
+    "pandas": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "no Task A artefact records the pandas version"
+    },
+    "scikit-learn": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "no Task A artefact records the scikit-learn version"
+    },
+    "pillow": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "no Task A artefact records the pillow version"
+    },
+    "pydicom": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "no Task A artefact records the pydicom version"
+    },
+    "cuda_toolkit": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "only the CUDA suffix of the torch build string is recorded (2.11.0+cu128); the toolkit version itself was not recorded"
+    }
+  },
+  "platform": {
+    "os": {
+      "value": "Linux-6.6.122+-x86_64-with-glibc2.39",
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_run_meta.json.platform"
+    },
+    "device": {
+      "value": "cuda",
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_run_meta.json.device"
+    },
+    "gpu": {
+      "value": "Tesla T4",
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_run_meta.json.gpu"
+    },
+    "python_at_freeze_time": {
+      "value": "3.13.15",
+      "status": "confirmed",
+      "source": "final_selection.json.environment.python"
+    },
+    "platform_at_freeze_time": {
+      "value": "Linux-6.6.122+-x86_64-with-glibc2.39",
+      "status": "confirmed",
+      "source": "final_selection.json.environment.platform"
+    }
+  },
+  "random_seeds": {
+    "model_seed_primary": {
+      "value": 42,
+      "status": "confirmed",
+      "source": "final_selection.json.runs.42.seed"
+    },
+    "model_seeds_all_runs": {
+      "value": [
+        42,
+        43,
+        44
+      ],
+      "status": "confirmed",
+      "source": "final_selection.json.runs"
+    },
+    "bootstrap_seed": {
+      "value": 12345,
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_metrics_primary.json.auroc.seed"
+    },
+    "bootstrap_n_resamples": {
+      "value": 2000,
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_metrics_primary.json.auroc.n_boot"
+    },
+    "bootstrap_stratified": {
+      "value": true,
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_metrics_primary.json.auroc.stratified"
+    },
+    "dataloader_shuffle_seed": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "not recorded separately from the model seed"
+    }
+  },
+  "frozen_model": {
+    "condition": {
+      "value": "lr3e-4_aug_b",
+      "status": "confirmed",
+      "source": "results/taskA/training/condition_selection_decision.json.decision.selected_condition"
+    },
+    "model": {
+      "value": "lr3e-4_aug_b/seed42",
+      "status": "confirmed",
+      "source": "results/taskA/gradcam/gradcam_run_meta.json.model"
+    },
+    "best_epoch": {
+      "value": 9,
+      "status": "confirmed",
+      "source": "final_selection.json.runs.42.best_epoch"
+    },
+    "learning_rate": {
+      "value": 0.0003,
+      "status": "confirmed",
+      "source": "final_selection.json.runs.42.lr"
+    },
+    "augmentation": {
+      "value": "aug_b",
+      "status": "confirmed",
+      "source": "final_selection.json.runs.42.augment"
+    },
+    "pos_weight": {
+      "value": 6.562962962962963,
+      "status": "confirmed",
+      "source": "final_selection.json.runs.42.pos_weight"
+    },
+    "unfreeze_schedule": {
+      "value": null,
+      "status": "confirmed",
+      "source": "final_selection.json.runs.42.unfreeze_schedule"
+    },
+    "validation_auroc_at_best_epoch": {
+      "value": 0.8717541070482246,
+      "status": "confirmed",
+      "source": "final_selection.json.runs.42.val_auroc_at_best"
+    },
+    "checkpoint_sha256": {
+      "value": "26d6ed95844e5ff6cfb90e71bd1f78b343ab53cffde2783226f0bc58226e3125",
+      "status": "confirmed",
+      "source": "results/taskA/gradcam/gradcam_run_meta.json.checkpoint_sha256"
+    },
+    "frozen_selection_sha256": {
+      "value": "fd93d6fe83c0a6a023398bf3d6950f2fd70459a4927677b7c7f5939ef36397da",
+      "status": "confirmed",
+      "source": "results/taskA/evaluation/test_run_meta.json.frozen_sha256"
+    }
+  },
+  "input_hashes": {
+    "split_manifest_sha256": {
+      "value": "626061a532ab7fa05eeb0198019222e8919d04e5e4df720230538149389599f8",
+      "status": "confirmed",
+      "source": "final_selection.json.inputs.split_manifest_sha256"
+    },
+    "index_cxr_manifest_sha256": {
+      "value": "e8c07db7b7caac8d8e04960b6c80ca83b47adf16d5f426f0f786ba2f40f0743b",
+      "status": "confirmed",
+      "source": "final_selection.json.inputs.index_cxr_manifest_sha256"
+    },
+    "run_config_sha256": {
+      "value": "30539710ff0b419a5ca44e6fd45c1afab0cfce12b2038af04254981569ebec1a",
+      "status": "confirmed",
+      "source": "final_selection.json.runs.42.config_sha256"
+    }
+  },
+  "generating_scripts": {
+    "preprocessing_cache": {
+      "value": "scripts/06_taskA_preprocess_cache.py",
+      "status": "documented",
+      "source": "README.md section 12 (the Task A README), reproduction-steps table"
+    },
+    "training": {
+      "value": "scripts/09_taskA_run_training.py",
+      "status": "documented",
+      "source": "README.md section 12 (the Task A README), reproduction-steps table"
+    },
+    "freeze": {
+      "value": "scripts/14_taskA_freeze_selection.py",
+      "status": "documented",
+      "source": "README.md section 12 (the Task A README), reproduction-steps table"
+    },
+    "test_evaluation": {
+      "value": "scripts/15_taskA_test_evaluation.py",
+      "status": "documented",
+      "source": "README.md section 12 (the Task A README), reproduction-steps table; the `outputs` list in results/taskA/evaluation/test_run_meta.json matches the files this script writes"
+    },
+    "gradcam": {
+      "value": "18_taskA_gradcam_primary_test.py",
+      "status": "confirmed",
+      "source": "results/taskA/gradcam/gradcam_run_meta.json.script"
+    },
+    "gradcam_script_sha256": {
+      "value": "8808b68841378b8a46b362f7600ff528d276cc96e457bef30efcaa6311008341",
+      "status": "confirmed",
+      "source": "results/taskA/gradcam/gradcam_run_meta.json.script_sha256"
+    },
+    "test_evaluation_script_sha256": {
+      "value": null,
+      "status": "not recorded",
+      "source": null,
+      "note": "scripts/15_taskA_test_evaluation.py was not hashed at run time; only the Grad-CAM script recorded its own hash"
+    }
+  },
+  "caveats": [
+    "Task A ran on Google Colab, Task B and Task C ran locally. The package versions in results/task{B,C}/evaluation/test_run_meta.json describe the local environment and must not be read as Task A's.",
+    "The Task A model checkpoint is not published. Training and Grad-CAM cannot be re-run from this repository alone; every downstream result can be, from the saved Test predictions.",
+    "This note adds information only. Where it and a frozen artefact both state a value, the frozen artefact is authoritative."
+  ]
+}

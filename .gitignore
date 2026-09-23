@@ -7,7 +7,11 @@ results/**/images/
 *.nii
 *.nii.gz
 *.png
+# The approved Grad-CAM panel is the only patient imaging that is published.
 !results/taskA/gradcam/*.png
+# Task B distribution plots are aggregate Training summaries, not patient data, and they are
+# the visual evidence for the log1p / transform decisions recorded in preprocess_spec.json.
+!results/taskB/preprocessing/figures/*.png
 
 # model artefacts
 checkpoints/
